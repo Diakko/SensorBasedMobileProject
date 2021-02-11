@@ -7,9 +7,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface WikiApiService {
+interface FineliApiService {
 
-    @GET("api.php")
+    @GET("foods")
     fun hitCountCheck(@Query("action") action: String,
                       @Query("format") format: String,
                       @Query("list") list: String,
@@ -17,17 +17,17 @@ interface WikiApiService {
             Observable<FineliApiResponseModel.Result>
 
     companion object {
-        fun create(): WikiApiService {
+        fun create(): FineliApiService {
 
             val retrofit = Retrofit.Builder()
                 .addCallAdapterFactory(
                     RxJava2CallAdapterFactory.create())
                 .addConverterFactory(
                     GsonConverterFactory.create())
-                .baseUrl("https://fineli.fi/fineli/api/v1/foods")
+                .baseUrl("https://fineli.fi/fineli/api/v1/")
                 .build()
 
-            return retrofit.create(WikiApiService::class.java)
+            return retrofit.create(FineliApiService::class.java)
         }
     }
 }
