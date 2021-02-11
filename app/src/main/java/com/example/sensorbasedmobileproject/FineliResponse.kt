@@ -1,6 +1,6 @@
 package com.example.sensorbasedmobileproject
 
-object Model {
+object FineliResponse {
 
     data class FineliResponse(
         val data: List<Food>,

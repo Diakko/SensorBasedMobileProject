@@ -1,5 +1,9 @@
 package com.example.sensorbasedmobileproject
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -26,7 +30,10 @@ class MainActivity : AppCompatActivity() {
 
         btnSearchFineli.setOnClickListener {
             Log.d("DBG", "button press")
-            beginSearch("banaani") }
+            if (isNetworkAvailable(this)) {
+                beginSearch("banaani") }
+
+            }
     }
 
     // do search
@@ -35,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                { result -> "${q}: ${result} found".also {
+                { result -> "${q}: ${result.data} found".also {
                     Log.d("DBG", "RESULT: $it")
                     searchResult.text = it
                 } },
@@ -47,5 +54,25 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         disposable?.dispose()
+    }
+
+    fun isNetworkAvailable(context: Context?): Boolean {
+        val connectivityManager =
+            context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+// checking for the version
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val network = connectivityManager.activeNetwork ?: return false
+            val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
+
+            return when {
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+                else -> false
+            }
+        } else {
+            val networkInfo = connectivityManager.activeNetworkInfo
+            return networkInfo != null && networkInfo.isConnectedOrConnecting
+        }
     }
 }
