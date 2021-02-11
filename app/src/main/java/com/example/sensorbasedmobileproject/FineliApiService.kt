@@ -1,16 +1,16 @@
 package com.example.sensorbasedmobileproject
 
+import io.reactivex.Observable
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
-import java.util.*
 
 interface FineliApiService {
 
     @GET("foods")
-    fun getFineliData(@Query("q") q: String): Observable<Model.InfoResponse>
+    fun getFineliData(@Query("q") q: String): Observable<Model.FineliResponse>
 
     companion object {
         fun create(): FineliApiService {

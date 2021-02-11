@@ -3,25 +3,25 @@ package com.example.sensorbasedmobileproject
 object Model {
 
     data class FineliResponse(
-        val data: List<InfoResponse>
+        val data: List<Food>,
     )
 
-    data class InfoResponse(
+    data class Food(
         val id: Int,
-        val type: TypeResponse,
-        val name: NameResponse,
-        val energyKcal: Double
+        val type: Type,
+        val name: Name,
+        val energyKcal: Double,
     )
 
-    data class TypeResponse(
-        val code: String
+    data class Type(
+        val code: String,
     )
 
-    data class NameResponse(
+    data class Name(
         val fi: String,
         val sv: String,
         val en: String,
-        val la: String
+        val la: String,
     )
 
 }
