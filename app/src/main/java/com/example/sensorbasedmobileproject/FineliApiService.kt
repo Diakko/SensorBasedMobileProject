@@ -20,7 +20,7 @@ interface FineliApiService {
                     RxJava2CallAdapterFactory.create())
                 .addConverterFactory(
                     GsonConverterFactory.create())
-                .baseUrl("https://fineli.fi/fineli/api/v1")
+                .baseUrl("https://www.fineli.fi/fineli/api/v1/")
                 .build()
 
             return retrofit.create(FineliApiService::class.java)
