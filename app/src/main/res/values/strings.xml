@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">SensorBasedMobileProject</string>
+
+    // Button Descriptions
+    <string name="camera_button_description">Scan barcodes with this camera button</string>
+    <string name="home_button_description">Click to get to home view</string>
+    <string name="profile_button_description">Click to get to profile page</string>
+
+    // Button tests
+    <string name="alert_title">Camera button</string>
+    <string name="alert_text">Implemented later with functions!</string>
+    <string name="yes_alert">Very good. Let\'s begin!</string>
+    <string name="no_alert">Hah, you have no choice. Let\'s begin!</string>
+
+    <string name="hello_blank_fragment">Just a placeholder.</string>
+
+
 </resources>
