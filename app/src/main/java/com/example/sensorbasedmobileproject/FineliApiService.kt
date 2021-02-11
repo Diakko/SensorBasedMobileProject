@@ -1,20 +1,16 @@
 package com.example.sensorbasedmobileproject
 
-import io.reactivex.Observable
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
+import java.util.*
 
 interface FineliApiService {
 
     @GET("foods")
-    fun hitCountCheck(@Query("action") action: String,
-                      @Query("format") format: String,
-                      @Query("list") list: String,
-                      @Query("srsearch") srsearch: String):
-            Observable<FineliApiResponseModel.Result>
+    fun getFineliData(@Query("q") q: String): Observable<Model.InfoResponse>
 
     companion object {
         fun create(): FineliApiService {
@@ -23,7 +19,7 @@ interface FineliApiService {
                 .addCallAdapterFactory(
                     RxJava2CallAdapterFactory.create())
                 .addConverterFactory(
-                    GsonConverterFactory.create())
+                    MoshiConverterFactory.create())
                 .baseUrl("https://fineli.fi/fineli/api/v1/")
                 .build()
 

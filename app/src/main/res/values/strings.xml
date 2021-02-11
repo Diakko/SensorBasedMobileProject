@@ -5,4 +5,6 @@
     <string name="name">placeholder</string>
     <string name="start">placeholder</string>
     <string name="stop">placeholder</string>
+    <string name="btn_search_fineli">Searc</string>
+
 </resources>
