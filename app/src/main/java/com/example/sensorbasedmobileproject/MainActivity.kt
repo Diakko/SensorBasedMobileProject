@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     // RETROFIT
     private lateinit var searchResult: TextView
     private lateinit var btnSearchFineli: Button
-    private val fineliApiService by lazy { FineliApiService.create() }
+    private val fineliApiService by lazy { FineliApiService.create(this) }
     private var disposable: Disposable? = null
 
 
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         btnSearchFineli.setOnClickListener {
             Log.d("DBG", "button press")
             if (isNetworkAvailable(this)) {
-                beginSearch("banaani") }
+                beginSearch("omena") }
 
             }
     }

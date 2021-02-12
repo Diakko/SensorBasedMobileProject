@@ -1,0 +1,582 @@
+
+
+
+<!DOCTYPE html>
+<html lang="fi">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <title>Etusivu - Fineli</title>
+        <link href="/fineli/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <link href="/fineli/css/bootstrap-3.3.7.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,600,600italic,700,700italic" />
+    <link href="/fineli/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/fineli/css/fineli.css?v=201910240742" rel="stylesheet">
+    <link href="/fineli/css/fineli-print.css?v=201910240742" rel="stylesheet">
+        <!--[if lt IE 9]>
+    <script src="/fineli/js/html5shiv-3.7.0.min.js"></script>
+    <script src="/fineli/js/respond-1.4.2.min.js"></script>
+        <![endif]-->
+
+		<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-56470845-13', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+        <!-- Matomo -->
+        <script type="text/javascript">
+          var _paq = _paq || [];
+          /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+          _paq.push(['trackPageView']);
+          _paq.push(['enableLinkTracking']);
+          (function() {
+            var u="//thl.innocraft.cloud/";
+            _paq.push(['setTrackerUrl', u+'piwik.php']);
+            _paq.push(['setSiteId', '3']);
+            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+            g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+          })();
+        </script>
+        <!-- End Matomo Code -->
+
+    <script src="/fineli/js/jquery-3.2.1.min.js"></script>
+    <script src="/fineli/js/jquery.mobile.custom.min.js"></script>
+    <script src="/fineli/js/jquery-ui-1.12.1.min.js"></script>
+    <script src="/fineli/js/datepicker-fi.js"></script>
+    <script src="/fineli/js/datepicker-sv.js"></script>
+    <script src="/fineli/js/bootstrap-3.3.7.min.js"></script>
+        <script src="/fineli/fi/fineli.js?v=201910240742"></script>
+    <script src="/fineli/js/fineli.js?v=201910240742"></script>
+        <script src="https://apis.google.com/js/platform.js" async defer>{ lang: 'fi'}</script>
+    </head>
+    <body>
+
+      <div id="fb-root"></div>
+      <script>
+        var csrftoken = '3ae9e65c-1462-4ab8-8297-a27d227478f2';
+        (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/fi_FI/sdk.js#xfbml=1&version=v2.5";
+        fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        window.twttr = (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0],
+            t = window.twttr || {};
+          if (d.getElementById(id)) return t;
+          js = d.createElement(s);
+          js.id = id;
+          js.src = "https://platform.twitter.com/widgets.js";
+          fjs.parentNode.insertBefore(js, fjs);
+
+          t._e = [];
+          t.ready = function(f) {
+            t._e.push(f);
+          };
+
+          return t;
+        }(document, "script", "twitter-wjs"));
+      </script>
+
+
+	<header class="fineli">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-lg-offset-6 col-md-4 col-md-offset-5 col-sm-5 col-sm-offset-4 col-xs-12">
+					<a href="#main-content" class="sr-only">Siirry sisältöön</a>
+					<ul class="lang-selection pull-right">
+						<li class="active"> <a href="/fineli/fi/index?
+
+">Suomeksi</a> </li>
+				   		<li > <a href="/fineli/sv/index?
+
+">På svenska</a> </li>
+				   		<li > <a href="/fineli/en/index?
+
+">In English</a> </li>
+			   		</ul>		
+		    	</div>	
+
+			    <div class="col-lg-3 col-md-3 col-sm-3 hidden-xs">
+					<ul class="sign-up text-right">
+						<li class="anonymous" > <a id="login" href="#"> Kirjaudu</a></li>
+						<li class="anonymous" > <a id="register" href="#"> Luo tunnus</a></li>
+						<li class="authenticated" style="display:none;"> <a id="logout" href="/fineli/fi/logout"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Kirjaudu ulos</a></li>
+					</ul>
+				</div>
+
+				<div class="col-xs-12">
+				</div>
+
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+		  			<h1 class="title"><a href="/fineli/fi/index">Fineli</a></h1>
+	  	  		</div>
+  				
+  				<h2 class="sr-only">Pikavalinnat</h2>
+  				<ul class="quick-links col-lg-6 col-md-6 hidden-sm hidden-xs">
+					<li class="diary ">
+						<a href="/fineli/fi/ruokapaivakirja">Ruokapäiväkirja</a>
+					</li>
+					<li class="favorite ">
+						<a href="/fineli/fi/elintarvikkeet/suosikit">
+							Suosikkini (<span class="favorites-count">0</span>)
+						</a>
+					</li>
+					<li class="compare ">
+						<a href="/fineli/fi/elintarvikkeet/vertaile">
+								Vertaile elintarvikkeita (<span class="comparable-count">0</span>)
+						</a>
+					</li>
+				</ul>
+
+	  	  		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+		  			<a title="thl-name" href="https://thl.fi/" id="thl-logo">
+			    		<img class="img-responsive" src="/fineli/images/thl-logo-fi.png" title="THL" alt="THL">
+		    		</a>
+				</div>
+			</div> 
+		</div> 
+	</header>
+
+		<div class="menu container">
+			<div class="row">
+			<h2 class="sr-only">Valikko</h2>
+				<button type="button" id="menu" class="btn btn-menu navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+					 Valikko <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+				</button>
+
+	    		<!-- Collect the nav links, forms, and other content for toggling -->
+	    		<div class="collapse navbar-collapse" id="navbar-collapse">
+	      			<ul class="nav navbar-nav">
+	                	<li class="active ">
+		        		<a href="/fineli/fi/index">Etusivu</a>
+	                	</li>
+	                	<li class=" ">
+		        		<a href="/fineli/fi/elintarvikkeet">Elintarvikkeet</a>
+	                	</li>
+	                	<li class=" ">
+		        		<a href="/fineli/fi/ravintotekijat">Ravintotekijät</a>
+	                	</li>
+	                	<li class=" ">
+		        		<a href="/fineli/fi/tietoa-palvelusta">Tietoa sivustosta</a>
+	                	</li>
+	                	<li class=" menu-diary">
+		        		<a href="/fineli/fi/ruokapaivakirja">Ruokapäiväkirja</a>
+	                	</li>
+	       				<li class="menu-favorite">
+	       					<a href="/fineli/fi/elintarvikkeet/suosikit">
+	       						Suosikkini (<span class="favorites-count">0</span>)
+	       					</a>
+						</li>
+						<li class="menu-compare">
+							<a href="/fineli/fi/elintarvikkeet/vertaile">
+								Vertaile elintarvikkeita (<span class="comparable-count">0</span>)
+							</a>
+						</li>
+
+						<li>
+							<li class="anonymous" > <a id="menu-login" href="#"> Kirjaudu</a></li>
+							<li class="anonymous" > <a id="menu-register" href="#"> Luo tunnus</a></li>
+							<li class="authenticated" style="display:none;"> <a id="menu-logout" href="/fineli/fi/logout"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Kirjaudu ulos</a></li>
+						</li>
+	      			</ul>
+				</div><!-- /.navbar-collapse -->
+			</div>
+		</div>
+
+	<div id="main-content">
+
+		<div class="jumbotron" style="background-image: url('/fineli/content/image/31');">
+			<div class="container">
+				<div class="row">
+					<div class="jumbotron-search col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+						<p class="lead">Fineli on Terveyden ja hyvinvoinnin laitoksen ylläpitämä elintarvikkeiden kansallinen koostumustietopankki.</p>
+						<a href="/fineli/fi/tietoa-palvelusta" class="ingress">Lisää tietoa</a>
+
+						<form>
+							<div class="main-search search">
+								<div class="form-group">
+									<div class="icon-addon addon-lg">
+										<input id="search-box" type="search" class="form-control" autocomplete="off" placeholder="Hae">
+										<label for="search-box" class="glyphicon" rel="tooltip" title="Hae">
+										   <span class="sr-only">Hae</span>
+										</label>
+										<button class="btn glyphicon glyphicon-search">
+										   <span class="sr-only">Hae</span>
+										</button>
+									</div>
+								</div>
+
+							<div class="form-group buttons">
+									<div class="radio">
+										<label class="radio-inline">
+  <input type="radio" name="searchType" value=any checked="true">Kaikki</input>
+										</label>
+										<label class="radio-inline">
+  <input type="radio" name="searchType" value=foods >Elintarvikkeet</input>
+										</label>
+										<label class="radio-inline">
+  <input type="radio" name="searchType" value=components >Ravintotekijät</input>
+										</label>
+									</div>
+							</div>
+
+							<div id="search-result"></div>
+						</div>
+						</form>
+					</div>
+				</div>
+			</div> 
+		</div> 
+
+		<div class="info container">
+        	<div class="row">
+
+            <div class="col-md-4 col-sm-4">
+            	<a href="/fineli/fi/ruokapaivakirja">
+                <div class="round">
+					             <span class="icon icondiary"></span>
+				        </div>
+              </a>
+                <h2>Ruokapäiväkirja</h2>
+                <p>Ruokapäiväkirjalla voit laskea oman ravinnonsaantisi</p>
+				<a href="/fineli/fi/ruokapaivakirja">Siirry täyttämään ruokapäiväkirjaa</a>
+            </div>
+
+            <div class="col-md-4 col-sm-4">
+            		<a href="/fineli/fi/elintarvikkeet/suosikit">
+                  		<div class="round">
+					            <span class="icon favorite"></span>
+				          </div>
+                </a>
+                <h2>Suosikkini</h2>
+                <p>Lisää elintarvikkeita suosikkilistaasi</p>
+				<a href="/fineli/fi/elintarvikkeet/suosikit">Siirry suosikkeihin</a>
+			</div>
+
+            <div class="col-md-4 col-sm-4">
+            	<a href="/fineli/fi/elintarvikkeet/vertaile">
+                <div class="round">
+					             <span class="icon compare"></span>
+				        </div>
+              </a>
+                <h2>Vertaile elintarvikkeita</h2>
+                <p>Vertaile eri elintarvikkeiden ravintosisältöä toisiinsa</p>
+				<a href="/fineli/fi/elintarvikkeet/vertaile">Siirry vertailemaan</a>
+            </div>
+
+        </div>
+	</div>
+
+	      <hr />
+
+		<div class="news container">
+			<div class="row">
+				<div class="col-xs-5 col-xs-offset-1 news">
+	        			<h2>Ajankohtaista</h2>
+			     </div>
+			     
+			         
+			     <div class="themes col-xs-5">
+		     	  <h2>Teemat</h2>
+		          	  <ul style="padding: 0px;">
+		          	    <li>
+		                   <a href="/fineli/fi/elintarvikkeet?theme=JUSTNOW" title="Pinnalla juuri nyt">Pinnalla</a>
+		                </li>
+		          	    <li>
+		                   <a href="/fineli/fi/elintarvikkeet?theme=SEASON02" title="Sesongin tuoreet herkut">Sesongin parhaat</a>
+		                </li>
+		          	    <li>
+		                   <a href="/fineli/fi/elintarvikkeet?theme=WAREHOUSE02" title="Varastojen parhaat">Varastojen parhaat</a>
+		                </li>
+		          	    <li>
+		                   <a href="/fineli/fi/elintarvikkeet?theme=PROT" title="Uudet proteiinin lähteet">Uudet proteiinin lähteet</a>
+		                </li>
+		              </ul>
+	          	</div>
+				
+				</div> 
+			</div>
+      	</div>
+
+    </div>
+
+	<footer>
+		<div class="mega">
+			<div class="container">
+				<div class="row">
+
+				<div class="col-sm-4">
+					<h1>Fineli</h1>
+						<ul class="link-list">
+							<li >
+								<a href="/fineli/fi/index">Etusivu</a>
+						    </li>
+							<li >
+								<a href="/fineli/fi/elintarvikkeet">Elintarvikkeet</a>
+						    </li>
+							<li >
+								<a href="/fineli/fi/ravintotekijat">Ravintotekijät</a>
+						    </li>
+							<li >
+								<a href="/fineli/fi/tietoa-palvelusta">Tietoa sivustosta</a>
+						    </li>
+							<li >
+								<a href="/fineli/fi/ruokapaivakirja">Ruokapäiväkirja</a>
+						    </li>
+                            <li>
+                              <a href="/fineli/fi/avoin-data">
+                                Avoin data
+                              </a>
+                            </li>
+                            <li>
+                              <a href="/fineli/fi/tietosuojailmoitus">
+                                Tietosuojailmoitus
+                              </a>
+                            </li>
+						</ul>
+				</div>
+
+		 		<div class="col-sm-3 col-sm-offset-1">
+					<h1>Linkit</h1>
+					<ul class="weblink-list">
+						<li class="thlfi"><a href="https://thl.fi">THL.fi</a></li>
+						<li class="facebook"><a href="https://www.facebook.com/thl.fi">Facebook</a></li>
+						<li class="twitter"><a href="https://twitter.com/THLorg">Twitter</a></li>
+						<li class="youtube"><a href="https://www.youtube.com/user/THLfinland">Youtube</a></li>
+					</ul>
+				</div>
+
+				<div class="col-sm-2 col-sm-offset-2">
+					<h1>Yhteystiedot</h1>
+					<ul class="link-list">
+						<li>fineli@thl.fi</li>
+						<li>Terveyden ja hyvinvoinnin laitos, PL 30</li>
+						<li>00271 Helsinki</li>
+					</ul>
+				</div>
+
+			</div> <!-- row loppuu -->
+		</div><!-- container loppuu -->
+	</div> <!-- mega loppuu -->
+
+	<div class="license">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-2 col-lg-offset-0 col-md-3 col-sm-3 col-xs-12">
+					<a title="thl-name" id="logo" href="https://thl.fi/">
+						<img class="img-responsive" src="/fineli/images/thl-logo-fi.png" title="THL" alt="THL">
+					</a>
+				</div>
+
+				<div class="col-lg-8 col-md-9 col-sm-9 col-xs-12 links">
+					<ul class="list-inline">
+						<li><a href="/fineli/fi/palaute">Palaute</a></li>
+						<li><a href="/fineli/fi/tietoa-palvelusta">Tietoa sivustosta</a></li>
+						<li><a href="/fineli/fi/yhteystiedot">Yhteystiedot</a></li>
+						<li><p class="copy">&copy; THL 2021</p></li>
+					</ul>
+				</div>
+
+			</div>
+
+
+		</div> <!-- container loppuu -->
+	</div> <!-- license loppuu -->
+</footer> <!-- footer loppuu -->
+
+
+
+
+	<div class="modal fade" id="login-dialog" role="dialog" aria-labelledby="loginModalTitle" data-keyboard="false">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Sulje"><span aria-hidden="true">&times;</span></button>
+	        <p id="loginModalTitle" class="modal-title">Kirjaudu sisään</p>
+            <div id="login-loader" class="loader">
+	           <img src="/fineli/images/ajax-loader.gif"/>
+	        </div> 
+	      </div>
+	      <div class="modal-body">
+	        <div class="row">
+	           <div class="col-md-12">
+					<form id="login-form" accept-charset="utf-8" class="form-horizontal" role="form">
+					    <input type="hidden" name="_csrf" value="3ae9e65c-1462-4ab8-8297-a27d227478f2"/>
+					    <div class="alert alert-danger" style="display:none;">
+							<p id="login-message"></p>
+						</div>
+					    <div class="form-group">
+							<label class="control-label col-sm-3">Sähköpostiosoite</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="username" id="username">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-3">Salasana</label>
+							<div class="col-sm-5">
+								<input type="password" class="form-control" name="password" id="password" autocomplete="off">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-3 col-sm-9">
+							<button type="submit" class="btn btn-primary">Kirjaudu sisään</button>
+							<a id="reset-password" href="javascript:void(0)">Unohditko salasanasi?</a>
+							</div>
+						</div>
+					</form>
+
+	           </div>
+	        </div>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	<div class="modal fade" id="register-dialog" role="dialog" aria-labelledby="registerModalTitle" data-keyboard="false">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	      <button type="button" class="close" data-dismiss="modal" aria-label="Sulje"><span aria-hidden="true">&times;</span></button>
+	        <p id="registerModalTitle" class="modal-title">Luo tunnus</p>
+	      </div>
+	      <div class="modal-body">
+	        <div class="row">
+	           <div class="col-md-12">
+					<p>Anna salasanaksi vähintään kymmenen (10) merkkiä käyttäen kirjaimia, numeroita ja erikoismerkkejä.</p>	
+					<form id="register-form" accept-charset="utf-8" class="form-horizontal" role="form">
+					    <input type="hidden" name="_csrf" value="3ae9e65c-1462-4ab8-8297-a27d227478f2"/>
+						<div class="alert" style="display:none;">
+							<p id="register-message"></p>
+						</div>
+					    <div class="form-group">
+							<label class="control-label col-sm-3">Sähköpostiosoite</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="email" id="email">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-3">Salasana</label>
+							<div class="col-sm-5">
+								<input type="password" class="form-control" name="password" id="register-password">
+							</div>
+						</div>                   
+						<div class="form-group">
+							<label class="control-label col-sm-3">Vahvista salasana</label>
+							<div class="col-sm-5">
+								<input type="password" class="form-control" id="register-password2">
+							</div>
+						</div>
+						<div class="form-group">
+		                    <div class="g-recaptcha col-sm-offset-3 col-sm-9" id="recaptcha_response" data-sitekey="6LfS3b4UAAAAAPRtkDoNHvRpLlBcJDA56GSp2vQd" data-stoken="8Lm71ChMZIpmY4UNVU6gXgcO8hRfAsP2izPU7Nn-sxyuc1RIkLda0Zbe_vEf3i1L4HxdglZFSyo4WJF1yOsehdPCJVAfcXE_Mw-0HpNSQ_c"></div>
+		                    <noscript>
+		                      <div style="width: 302px; height: 422px;">
+		                        <div style="width: 302px; height: 422px; position: relative;">
+		                           <div style="width: 302px; height: 422px; position: absolute;">
+			                           <iframe src="https://www.google.com/recaptcha/api/fallback?k=6LfS3b4UAAAAAPRtkDoNHvRpLlBcJDA56GSp2vQd"
+			                              frameborder="0" scrolling="no" style="width: 302px; height:422px; border-style: none;">
+			                           </iframe>
+		                           </div>
+		                           <div style="width: 300px; height: 60px; border-style: none;
+		                                 bottom: 12px; left: 25px; margin: 0px; padding: 0px; right: 25px;
+		                                 background: #f9f9f9; border: 1px solid #c1c1c1; border-radius: 3px;">
+		                             <textarea id="g-recaptcha-response" name="g-recaptcha-response"
+		                               class="g-recaptcha-response"
+		                               style="width: 250px; height: 40px; border: 1px solid #c1c1c1;
+		                                  margin: 10px 25px; padding: 0px; resize: none;" >
+		                             </textarea>
+		                           </div>
+		                        </div>
+		                      </div>
+		                    </noscript>				
+	                    </div>		
+						<div class="form-group">
+							<div class="col-sm-offset-3 col-sm-9">
+							<button type="submit" class="btn btn-primary">Luo tunnus</button>
+							</div>
+						</div>
+					</form>
+	           </div>
+	        </div>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	
+	<script src="https://www.google.com/recaptcha/api.js?hl=fi" async defer></script>
+	
+	
+
+
+	<div class="modal fade" id="reset-password-dialog" role="dialog" aria-labelledby="resetPasswordModalTitle" data-keyboard="false">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	      <button type="button" class="close" data-dismiss="modal" aria-label="Sulje"><span aria-hidden="true">&times;</span></button>
+	        <p id="resetPasswordModalTitle" class="modal-title">Vaihda salasana</p>
+	      </div>
+	      <div class="modal-body">
+	        <div class="row">
+	           <div class="col-md-12">
+					<form id="reset-password-form" accept-charset="utf-8" class="form-horizontal" role="form">
+					    <input type="hidden" name="_csrf" value="3ae9e65c-1462-4ab8-8297-a27d227478f2"/>
+					    <div class="alert" style="display:none;">
+							<p id="reset-message"></p>
+						</div>
+					    <div class="form-group">
+							<label class="control-label col-sm-3">Sähköpostiosoite</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="username">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-3 col-sm-9">
+							<button type="submit" class="btn btn-primary">Unohdin salasanani</button>
+							</div>
+						</div>
+					</form>
+
+	           </div>
+	        </div>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	<div class="modal fade" id="session-expiring" role="dialog" aria-labelledby="sessionExpiringModalTitle" data-keyboard="false">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Sulje"><span aria-hidden="true">&times;</span></button>
+	        <p id="sessionExpiringModalTitle" class="modal-title">Istunto vanhenemassa</p>
+         </div>
+	      <div class="modal-body">
+	        <div class="row">
+	           <div class="col-md-12">
+					<p>Istuntosi vanhenee hetken kuluttua. Jatka Finelin käyttöä tai menetät ruokapäiväkirjan ja omien elintarvikkeiden tallentamattomat tiedot.</p>
+	           </div>
+				<div class="form-group">
+					<div class="col-sm-offset-10">
+						<button type="button" data-dismiss="modal" class="btn btn-primary">Sulje</button>
+					</div>
+				</div>
+	        </div>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->        <script>
+  $(document).ready(function() {
+      fineli.onIndexReady();
+  });
+</script>
+
+    </body>
+</html>
