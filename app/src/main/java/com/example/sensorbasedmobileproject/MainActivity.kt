@@ -3,16 +3,11 @@ package com.example.sensorbasedmobileproject
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.os.Message
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -22,20 +17,8 @@ class MainActivity : AppCompatActivity() {
     // RETROFIT
     private lateinit var searchResult: TextView
     private lateinit var btnSearchFineli: Button
-    private val fineliApiService by lazy {
-        FineliApiService.create(
-//        this
-        )
-    }
+    private val fineliApiService by lazy { FineliApiService.create() }
     private var disposable: Disposable? = null
-    private val mHandler: Handler = object : Handler(Looper.getMainLooper()) {
-
-        override fun handleMessage(inputMessage: Message) {
-            if (inputMessage.what == 0) {
-                searchResult.text = inputMessage.obj.toString()
-            }
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,13 +29,7 @@ class MainActivity : AppCompatActivity() {
         btnSearchFineli.setOnClickListener {
             Log.d("DBG", "button press")
             if (isNetworkAvailable(this)) {
-                val myRunnable = Networking(mHandler)
-                val myThread = Thread(myRunnable)
-                Log.i("DBG", "thread created")
-                myThread.start()
-
-            }
-
+                beginSearch("banaani") }
         }
     }
 
@@ -62,12 +39,10 @@ class MainActivity : AppCompatActivity() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                { result ->
-                    "${q}: ${result.data} found".also {
-                        Log.d("DBG", "RESULT: $it")
-                        searchResult.text = it
-                    }
-                },
+                { result -> "${q}: ${result.data} found".also {
+                    Log.d("DBG", "RESULT: $it")
+                    searchResult.text = it
+                } },
                 { error -> (error.message) }
             ).also { disposable = it }
     }
