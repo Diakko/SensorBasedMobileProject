@@ -5,12 +5,18 @@
     <string name="camera_button_description">Scan barcodes with this camera button</string>
     <string name="home_button_description">Click to get to home view</string>
     <string name="profile_button_description">Click to get to profile page</string>
+    <string name="scan_button_description">Push to scan barcode</string>
 
     // Button tests
     <string name="alert_title">Camera button</string>
     <string name="alert_text">Implemented later with functions!</string>
     <string name="yes_alert">Very good. Let\'s begin!</string>
     <string name="no_alert">Hah, you have no choice. Let\'s begin!</string>
+
+    // Menu Items
+    <string name="menu_profile">Profile Menu Item</string>
+    <string name="menu_camera">Camera Menu Item</string>
+    <string name="menu_home">Home Menu Item</string>
 
     <string name="hello_blank_fragment">Just a placeholder.</string>
 
