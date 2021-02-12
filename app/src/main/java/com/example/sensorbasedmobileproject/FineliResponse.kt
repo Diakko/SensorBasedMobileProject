@@ -3,7 +3,7 @@ package com.example.sensorbasedmobileproject
 object FineliResponse {
 
     data class FineliResponse(
-        val data: List<Food>,
+        val data: Any,
     )
 
     data class Food(

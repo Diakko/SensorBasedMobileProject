@@ -3,12 +3,16 @@ package com.example.sensorbasedmobileproject
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.os.Message
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -18,9 +22,20 @@ class MainActivity : AppCompatActivity() {
     // RETROFIT
     private lateinit var searchResult: TextView
     private lateinit var btnSearchFineli: Button
-    private val fineliApiService by lazy { FineliApiService.create(this) }
+    private val fineliApiService by lazy {
+        FineliApiService.create(
+//        this
+        )
+    }
     private var disposable: Disposable? = null
+    private val mHandler: Handler = object : Handler(Looper.getMainLooper()) {
 
+        override fun handleMessage(inputMessage: Message) {
+            if (inputMessage.what == 0) {
+                searchResult.text = inputMessage.obj.toString()
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,9 +46,14 @@ class MainActivity : AppCompatActivity() {
         btnSearchFineli.setOnClickListener {
             Log.d("DBG", "button press")
             if (isNetworkAvailable(this)) {
-                beginSearch("omena") }
+                val myRunnable = Networking(mHandler)
+                val myThread = Thread(myRunnable)
+                Log.i("DBG", "thread created")
+                myThread.start()
 
             }
+
+        }
     }
 
     // do search
@@ -42,10 +62,12 @@ class MainActivity : AppCompatActivity() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                { result -> "${q}: ${result.data} found".also {
-                    Log.d("DBG", "RESULT: $it")
-                    searchResult.text = it
-                } },
+                { result ->
+                    "${q}: ${result.data} found".also {
+                        Log.d("DBG", "RESULT: $it")
+                        searchResult.text = it
+                    }
+                },
                 { error -> (error.message) }
             ).also { disposable = it }
     }
@@ -56,23 +78,17 @@ class MainActivity : AppCompatActivity() {
         disposable?.dispose()
     }
 
-    fun isNetworkAvailable(context: Context?): Boolean {
+    private fun isNetworkAvailable(context: Context?): Boolean {
         val connectivityManager =
             context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-// checking for the version
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val network = connectivityManager.activeNetwork ?: return false
-            val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
+        val network = connectivityManager.activeNetwork ?: return false
+        val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
 
-            return when {
-                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
-                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
-                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
-                else -> false
-            }
-        } else {
-            val networkInfo = connectivityManager.activeNetworkInfo
-            return networkInfo != null && networkInfo.isConnectedOrConnecting
+        return when {
+            activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+            activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+            activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+            else -> false
         }
     }
 }
