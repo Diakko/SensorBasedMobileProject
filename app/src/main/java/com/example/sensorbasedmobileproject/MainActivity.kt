@@ -2,12 +2,13 @@ package com.example.sensorbasedmobileproject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var navigationFragment: Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,13 +16,12 @@ class MainActivity : AppCompatActivity() {
 
 
         // Navigation
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFragment.navController
-        navigationFragment = NavigationFragment(this)
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.bottom_nav_fragment, navigationFragment)
-            replace(R.id.nav_host_fragment, navHostFragment)
-            commit()
-        }
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav_menu)
+        val navController = findNavController(R.id.nav_host_fragment)
+
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.action_home, R.id.action_camera, R.id.action_profile))
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        bottomNavigationView.setupWithNavController(navController)
+
     }
 }

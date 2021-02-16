@@ -18,7 +18,8 @@
     <string name="menu_camera">Camera Menu Item</string>
     <string name="menu_home">Home Menu Item</string>
 
-    <string name="hello_blank_fragment">Just a placeholder.</string>
+    <string name="main_fragment_text">Just a placeholder.</string>
+    <string name="profile_fragment_text">Profile Fragment</string>
 
 
 </resources>
