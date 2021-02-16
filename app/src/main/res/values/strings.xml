@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">SensorBasedMobileProject</string>
+    <string name="search_result">Search result here</string>
+    <string name="button_search">Search</string>
+    <string name="name">placeholder</string>
+    <string name="start">placeholder</string>
+    <string name="stop">placeholder</string>
+    <string name="btn_search_fineli">Search</string>
+
 </resources>
