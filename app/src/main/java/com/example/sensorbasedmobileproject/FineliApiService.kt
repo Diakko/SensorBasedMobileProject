@@ -12,7 +12,7 @@ interface FineliApiService {
 
     @Headers("User-Agent: Fineli-App")
     @GET("foods")
-    fun getFineliData(@Query("q") q: String): Observable<FineliResponse.FineliResponse>
+    fun getFineliData(@Query("q") q: String): Observable <List<FineliResponse.Result>>
 
     companion object {
         fun create(): FineliApiService {
@@ -29,3 +29,5 @@ interface FineliApiService {
         }
     }
 }
+
+

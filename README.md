@@ -1,6 +1,6 @@
 # SensorBasedMobileProject
 
-###GIT WORKFLOW
+### GIT WORKFLOW
 
 1. Git clone the repo
 2. Make a new branch for a new feature
@@ -12,6 +12,6 @@
 8. Merge to master
 9. Repeat from 2. ->
 
-###INGREDIENTS
+### INGREDIENTS
 
 - Retrofit

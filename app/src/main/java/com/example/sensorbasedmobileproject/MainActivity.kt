@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                { result -> "${q}: ${result.data} found".also {
+                { result -> "${q}: ${result} found".also {
                     Log.d("DBG", "RESULT: $it")
                     searchResult.text = it
                 } },
