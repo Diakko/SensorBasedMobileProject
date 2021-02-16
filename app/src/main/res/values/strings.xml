@@ -1,5 +1,24 @@
 <resources>
     <string name="app_name">SensorBasedMobileProject</string>
+
+    // Button Descriptions
+    <string name="camera_button_description">Scan barcodes with this camera button</string>
+    <string name="home_button_description">Click to get to home view</string>
+    <string name="profile_button_description">Click to get to profile page</string>
+    <string name="scan_button_description">Push to scan barcode</string>
+
+
+    // Menu Items
+    <string name="menu_profile">Profile Menu Item</string>
+    <string name="menu_camera">Camera Menu Item</string>
+    <string name="menu_home">Home Menu Item</string>
+
+    <string name="main_fragment_text">Just a placeholder.</string>
+    <string name="profile_fragment_text">Profile Fragment</string>
+
+    // Scanning fragment
+    <string name="scan_barcode">Scan new barcode</string>
+
     <string name="search_result">Search result here</string>
     <string name="button_search">Search</string>
     <string name="name">placeholder</string>
