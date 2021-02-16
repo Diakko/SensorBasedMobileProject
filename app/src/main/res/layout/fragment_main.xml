@@ -11,6 +11,7 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:textColor="@color/design_default_color_on_secondary"
         android:text="@string/main_fragment_text" />
 
 </FrameLayout>
