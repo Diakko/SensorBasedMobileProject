@@ -1,5 +1,6 @@
 package com.example.sensorbasedmobileproject
 
+import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -7,10 +8,15 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.sensorbasedmobileproject.repository.Repository
@@ -18,6 +24,8 @@ import com.example.sensorbasedmobileproject.repository.Repository
 class MainFragment : Fragment() {
 
     private lateinit var searchResult: TextView
+    private lateinit var editText: EditText
+
     private lateinit var btnSearchFineli: Button
     private lateinit var viewModel: MainViewModel
 
@@ -25,17 +33,22 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main, container, false)
+
+        val view: View = inflater.inflate(R.layout.fragment_main, container, false)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val context = requireContext()
-
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
+
+        editText = view.findViewById(R.id.searchable)
+        var editTextValue = editText.text
+
+
         searchResult = view.findViewById(R.id.search_result)
         btnSearchFineli = view.findViewById(R.id.btn_search_fineli)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
@@ -55,7 +68,7 @@ class MainFragment : Fragment() {
 
         btnSearchFineli.setOnClickListener {
             if (isNetworkAvailable(context)) {
-                viewModel.getFood("sitruuna")
+                viewModel.getFood(editTextValue.toString())
 
             }
         }
@@ -77,6 +90,19 @@ class MainFragment : Fragment() {
             activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
             else -> false
         }
+    }
+
+    fun Fragment.hideKeyboard() {
+        view?.let { activity?.hideKeyboard(it) }
+    }
+
+    fun Activity.hideKeyboard() {
+        hideKeyboard(currentFocus ?: View(this))
+    }
+
+    fun Context.hideKeyboard(view: View) {
+        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
 }
