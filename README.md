@@ -15,3 +15,8 @@
 ### INGREDIENTS
 
 - Retrofit
+- Room DB
+- LiveData
+- ViewModel
+- Coroutines
+- Navigation
