@@ -7,12 +7,12 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
 @Dao
-interface FineliForRoomDao {
+interface FineliItemDao {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun addFineliInfo(fineli: FineliForRoom)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    suspend fun addFineliInfo(fineli: FineliItem)
 
     @Query("SELECT * FROM fineli ORDER BY id ASC")
-    fun readAllData(): LiveData<List<FineliForRoom>>
+    fun readAllData(): LiveData<List<FineliItem>>
 
 }

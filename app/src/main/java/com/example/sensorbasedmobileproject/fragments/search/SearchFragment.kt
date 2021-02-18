@@ -20,8 +20,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.sensorbasedmobileproject.MainViewModel
 import com.example.sensorbasedmobileproject.MainViewModelFactory
 import com.example.sensorbasedmobileproject.R
-import com.example.sensorbasedmobileproject.data.FineliForRoom
-import com.example.sensorbasedmobileproject.data.FineliForRoomViewModel
+import com.example.sensorbasedmobileproject.data.FineliItem
+import com.example.sensorbasedmobileproject.data.FineliItemViewModel
 import com.example.sensorbasedmobileproject.model.Fineli
 import com.example.sensorbasedmobileproject.repository.Repository
 import retrofit2.Response
@@ -32,7 +32,7 @@ class SearchFragment : Fragment() {
     private lateinit var editText: EditText
     private lateinit var btnSearchFineli: Button
     private lateinit var viewModel: MainViewModel
-    private lateinit var mFineliViewModel: FineliForRoomViewModel
+    private lateinit var mFineliViewModel: FineliItemViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +40,7 @@ class SearchFragment : Fragment() {
     ): View? {
 
         val view: View = inflater.inflate(R.layout.fragment_search, container, false)
-        mFineliViewModel = ViewModelProvider(this).get(FineliForRoomViewModel::class.java)
+        mFineliViewModel = ViewModelProvider(this).get(FineliItemViewModel::class.java)
         return view
     }
 
@@ -91,7 +91,7 @@ class SearchFragment : Fragment() {
         val salt = response.body()?.get(0)?.salt
 
 
-        val fineli = FineliForRoom(
+        val fineli = FineliItem(
             0,
             fineliId,
             energy,

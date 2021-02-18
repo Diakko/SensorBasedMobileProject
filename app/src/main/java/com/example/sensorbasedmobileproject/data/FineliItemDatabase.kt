@@ -5,16 +5,16 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [FineliForRoom::class], version = 1, exportSchema = false)
-abstract class FineliForRoomDatabase : RoomDatabase() {
+@Database(entities = [FineliItem::class], version = 1, exportSchema = false)
+abstract class FineliItemDatabase : RoomDatabase() {
 
-    abstract fun fineliDao(): FineliForRoomDao
+    abstract fun fineliDao(): FineliItemDao
 
     companion object {
         @Volatile
-        private var INSTANCE: FineliForRoomDatabase? = null
+        private var INSTANCE: FineliItemDatabase? = null
 
-        fun getDatabase(context: Context): FineliForRoomDatabase {
+        fun getDatabase(context: Context): FineliItemDatabase {
             val tempInstance = INSTANCE
             if (tempInstance != null) {
                 return tempInstance
@@ -22,7 +22,7 @@ abstract class FineliForRoomDatabase : RoomDatabase() {
             synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    FineliForRoomDatabase::class.java,
+                    FineliItemDatabase::class.java,
                     "fineli_database"
                 ).build()
                 INSTANCE = instance

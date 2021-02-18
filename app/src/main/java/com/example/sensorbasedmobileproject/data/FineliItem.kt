@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "fineli")
-data class FineliForRoom(
+data class FineliItem(
     // id in our room database
     @PrimaryKey(autoGenerate = true)
     val id: Int,
