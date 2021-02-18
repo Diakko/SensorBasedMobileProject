@@ -6,6 +6,7 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,7 +23,7 @@ class ProfileFragment : Fragment(), SensorEventListener{
     private var running = false
     private var totalSteps = 0f
     private var previousTotalSteps = 0f
-    private var targetSteps = 9000
+    private var targetSteps : Int? = 9000
     private lateinit var stepsTextView: TextView
     private lateinit var stepsTargetTextView: TextView
     private lateinit var stepsTargetEditText: EditText
@@ -90,10 +91,17 @@ class ProfileFragment : Fragment(), SensorEventListener{
         stepsTargetTextView.setOnClickListener {
             Toast.makeText(context, "Long tap to set target, input amount below", Toast.LENGTH_LONG).show()
         }
+
         stepsTargetTextView.setOnLongClickListener {
-            targetSteps = stepsTargetEditText.text.toString().toInt()
-            stepsTargetTextView.text = "/ $targetSteps"
-            saveData()
+
+            if (stepsTargetEditText.text.toString().trim().isEmpty()) {
+                Toast.makeText(context, "Input a valid number", Toast.LENGTH_SHORT).show()
+            }else {
+                targetSteps = stepsTargetEditText.text.toString().toInt()
+                stepsTargetTextView.text = "/ $targetSteps"
+                stepsProgressBar.progressMax = targetSteps!!.toFloat()
+                saveData()
+            }
             true
         }
     }
@@ -101,7 +109,7 @@ class ProfileFragment : Fragment(), SensorEventListener{
     private fun saveData() {
         val sharedPreferences = activity?.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences?.edit()
-        editor?.putInt("StepsTarget", targetSteps)
+        editor?.putInt("StepsTarget", targetSteps!!)
         editor?.putFloat("Steps", previousTotalSteps)
         editor?.apply()
     }

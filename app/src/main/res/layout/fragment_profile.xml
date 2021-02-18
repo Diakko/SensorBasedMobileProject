@@ -20,6 +20,7 @@
         app:cpb_progressbar_color="#3f51b5"
         app:cpb_progressbar_width="10dp"
         app:cpb_round_border="false"/>
+
     <TextView
         android:id="@+id/text_view_steps_taken"
         android:layout_width="wrap_content"
@@ -44,7 +45,7 @@
         android:layout_centerInParent="true"
         android:textAlignment="center"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="number"
         android:hint="@string/steps_target_hint" />
 
 </RelativeLayout>
