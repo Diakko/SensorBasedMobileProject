@@ -11,13 +11,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.TextView.OnEditorActionListener
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.sensorbasedmobileproject.MainViewModel
@@ -32,9 +30,7 @@ import retrofit2.Response
 
 class SearchFragment : Fragment() {
 
-    private lateinit var searchResult: TextView
     private lateinit var editText: EditText
-//    private lateinit var btnSearchFineli: Button
     private lateinit var viewModel: MainViewModel
     private lateinit var mFineliViewModel: FineliItemViewModel
 
@@ -51,28 +47,21 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        val context = requireContext()
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
-
         editText = view.findViewById(R.id.searchable)
         var editTextValue = editText.text
-
-        searchResult = view.findViewById(R.id.search_result)
-//        btnSearchFineli = view.findViewById(R.id.btn_search_fineli)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
         viewModel.myResponse.observe(viewLifecycleOwner, Observer { response ->
             if (response.isSuccessful) {
-
                 insertDataToDatabase(response)
-
-                Log.d("Response", response.body()?.get(0)?.id.toString())
             } else {
                 Log.d("Response", response.errorBody().toString())
             }
         })
 
+        // Listen to editText and on complete do search via viewModels getFood(),
+        // clear editText and hide keyboard
         editText.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 viewModel.getFood(editTextValue.toString())
@@ -82,14 +71,6 @@ class SearchFragment : Fragment() {
             }
             false
         })
-
-//        btnSearchFineli.setOnClickListener {
-//            if (isNetworkAvailable(context)) {
-//                viewModel.getFood(editTextValue.toString())
-//                editText.text.clear()
-//
-//            }
-//        }
     }
 
     private fun insertDataToDatabase(response: Response<ArrayList<Fineli>>) {
