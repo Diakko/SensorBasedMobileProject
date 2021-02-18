@@ -20,3 +20,9 @@
 - ViewModel
 - Coroutines
 - Navigation
+- RecyclerView
+- Fragments
+- API connections: Fineli
+- GPS
+- Camera
+
