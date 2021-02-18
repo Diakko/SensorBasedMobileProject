@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName
 data class FineliForRoom(
     // id in our room database
     @PrimaryKey(autoGenerate = true)
-    val id: Int?,
+    val id: Int,
     // id in the fineli databasé
     @SerializedName("id")
     val fineliId: Int?,

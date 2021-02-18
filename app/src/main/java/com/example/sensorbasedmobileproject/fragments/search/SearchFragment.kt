@@ -30,7 +30,6 @@ class SearchFragment : Fragment() {
 
     private lateinit var searchResult: TextView
     private lateinit var editText: EditText
-
     private lateinit var btnSearchFineli: Button
     private lateinit var viewModel: MainViewModel
     private lateinit var mFineliViewModel: FineliForRoomViewModel
@@ -41,9 +40,7 @@ class SearchFragment : Fragment() {
     ): View? {
 
         val view: View = inflater.inflate(R.layout.fragment_search, container, false)
-
         mFineliViewModel = ViewModelProvider(this).get(FineliForRoomViewModel::class.java)
-
         return view
     }
 
@@ -76,8 +73,6 @@ class SearchFragment : Fragment() {
                 viewModel.getFood(editTextValue.toString())
             }
         }
-
-
     }
 
     private fun insertDataToDatabase(response: Response<ArrayList<Fineli>>) {
