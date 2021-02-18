@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 
 class FineliItemViewModel(application: Application): AndroidViewModel(application) {
 
-    private val readAllData: LiveData<List<FineliItem>>
+    val readAllData: LiveData<List<FineliItem>>
     private val repository: FineliItemRepository
 
     init {
