@@ -20,6 +20,10 @@
     // Scanning fragment
     <string name="scan_barcode">Scan new barcode</string>
 
+    // Pedometer
+    <string name="steps_target_hint">Enter target steps</string>
+
+    // Fineli Search
     <string name="search_result">Search result here</string>
     <string name="button_search">Search</string>
     <string name="name">placeholder</string>
