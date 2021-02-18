@@ -8,10 +8,27 @@
 
 
     <TextView
-        android:gravity="center"
+        android:id="@+id/search_result"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textColor="@color/design_default_color_on_secondary"
-        android:text="@string/main_fragment_text" />
+        android:layout_height="377dp"
+        android:layout_gravity="start|top"
+        android:gravity="center"
+        android:text="@string/main_fragment_text"
+        android:textColor="@color/design_default_color_on_secondary" />
 
+
+    <Button
+        android:id="@+id/btn_search_fineli"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_search"
+        android:layout_gravity="end|bottom"/>
+
+
+<EditText
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:id="@+id/searchable"
+    android:imeOptions="actionDone"
+    />
 </FrameLayout>
