@@ -1,4 +1,4 @@
-package com.example.sensorbasedmobileproject
+package com.example.sensorbasedmobileproject.fragments.search
 
 import android.app.Activity
 import android.content.Context
@@ -8,20 +8,20 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.sensorbasedmobileproject.MainViewModel
+import com.example.sensorbasedmobileproject.MainViewModelFactory
+import com.example.sensorbasedmobileproject.R
 import com.example.sensorbasedmobileproject.repository.Repository
 
-class MainFragment : Fragment() {
+class SearchFragment : Fragment() {
 
     private lateinit var searchResult: TextView
     private lateinit var editText: EditText
@@ -34,7 +34,7 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val view: View = inflater.inflate(R.layout.fragment_main, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_search, container, false)
         return view
     }
 
