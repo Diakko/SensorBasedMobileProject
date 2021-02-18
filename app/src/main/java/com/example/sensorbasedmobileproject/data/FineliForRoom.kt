@@ -8,11 +8,23 @@ import com.google.gson.annotations.SerializedName
 data class FineliForRoom(
     // id in our room database
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    val id: Int?,
     // id in the fineli databasé
     @SerializedName("id")
-    val fineliId: Int,
-//    val type: Type,
+    val fineliId: Int?,
+    val energy: Double?,
+    val energyKcal: Double?,
+    val fat: Double?,
+    val protein: Double?,
+    val carbohydrate: Double?,
+    val alcohol: Double?,
+    val organicAcids: Double?,
+    val sugarAlcohol: Double?,
+    val saturatedFat: Double?,
+    val fiber: Double?,
+    val sugar: Double?,
+    val salt: Double?
+    //    val type: Type,
 //    val name: Name,
 //    val preparationMethod: PreparationMethod,
 //    val ediblePortion: Int,
@@ -21,18 +33,6 @@ data class FineliForRoom(
 //    val units: List<Units>,
 //    val ingredientClass: IngredientClass,
 //    val functionClass: FunctionClass,
-    val energy: Double,
-    val energyKcal: Double,
-    val fat: Double,
-    val protein: Double,
-    val carbohydrate: Double,
-    val alcohol: Int,
-    val organicAcids: Double,
-    val sugarAlcohol: Int,
-    val saturatedFat: Double,
-    val fiber: Double,
-    val sugar: Double,
-    val salt: Double
 )
 //
 //data class Abbreviation(
