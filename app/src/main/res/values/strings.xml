@@ -9,9 +9,10 @@
 
 
     // Menu Items
-    <string name="menu_profile">Profile Menu Item</string>
-    <string name="menu_camera">Camera Menu Item</string>
-    <string name="menu_home">Home Menu Item</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_camera">Camera</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_search">Search</string>
 
     <string name="main_fragment_text">Just a placeholder.</string>
     <string name="profile_fragment_text">Profile Fragment</string>
@@ -27,6 +28,10 @@
     <string name="btn_search_fineli">Search</string>
 
     <string name="search_hint">Food you want to search</string>
+
+    // Home fragment
+    <string name="welcome_text">Welcome</string>
+    <string name="search_fineli_database">Search Fineli database</string>
 
 
 </resources>
