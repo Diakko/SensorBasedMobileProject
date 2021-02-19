@@ -11,6 +11,7 @@
         android:name="com.example.sensorbasedmobileproject.fragments.main.MainFragment"
         android:label="Home"
         tools:layout="@layout/fragment_main" />
+
     <fragment
         android:id="@+id/action_search"
         android:name="com.example.sensorbasedmobileproject.fragments.search.SearchFragment"
@@ -20,16 +21,19 @@
             android:id="@+id/action_action_search_to_listFragment"
             app:destination="@id/listFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/action_camera"
         android:name="com.example.sensorbasedmobileproject.fragments.scan.CameraScanFragment"
         android:label="Scan"
         tools:layout="@layout/fragment_camera_scan" />
+
     <fragment
         android:id="@+id/action_profile"
         android:name="com.example.sensorbasedmobileproject.fragments.profile.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
+
     <fragment
         android:id="@+id/listFragment"
         android:name="com.example.sensorbasedmobileproject.ListFragment"
@@ -39,4 +43,11 @@
             android:id="@+id/action_listFragment_to_action_search"
             app:destination="@id/action_search" />
     </fragment>
+
+    <fragment
+        android:id="@+id/action_map"
+        android:name="com.example.sensorbasedmobileproject.fragments.map.MapFragment"
+        android:label="Map"
+        tools:layout="@layout/fragment_map" />
+
 </navigation>
