@@ -99,6 +99,7 @@ class ProfileFragment : Fragment(), SensorEventListener{
             }else {
                 targetSteps = stepsTargetEditText.text.toString().toInt()
                 stepsTargetTextView.text = "/ $targetSteps"
+                stepsTargetEditText.text.clear()
                 stepsProgressBar.progressMax = targetSteps!!.toFloat()
                 saveData()
             }
