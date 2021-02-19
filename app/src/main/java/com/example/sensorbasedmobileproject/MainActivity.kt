@@ -39,7 +39,8 @@ class MainActivity : AppCompatActivity() {
             setOf(
                 R.id.action_home,
                 R.id.action_camera,
-                R.id.action_profile
+                R.id.action_profile,
+                R.id.action_search
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

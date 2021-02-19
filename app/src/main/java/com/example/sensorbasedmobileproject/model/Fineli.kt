@@ -1,17 +1,20 @@
 package com.example.sensorbasedmobileproject.model
 
+import androidx.room.Embedded
+import com.google.gson.annotations.SerializedName
+
 data class Fineli(
 
     val id: Int,
-    val type: Type,
-    val name: Name,
-    val preparationMethod: PreparationMethod,
+    @Embedded val type: Type,
+    @Embedded val name: Name,
+    @Embedded val preparationMethod: PreparationMethod,
     val ediblePortion: Int,
-    val specialDiets: List<String>,
-    val themes: List<String>,
-    val units: List<Units>,
-    val ingredientClass: IngredientClass,
-    val functionClass: FunctionClass,
+//    val specialDiets: List<String>,
+//    val themes: List<String>,
+//    val units: List<Units>,
+    @Embedded val ingredientClass: IngredientClass,
+    @Embedded val functionClass: FunctionClass,
     val energy: Double,
     val energyKcal: Double,
     val fat: Double,
@@ -28,33 +31,32 @@ data class Fineli(
 
 data class Abbreviation(
 
-    val fi: String,
-    val sv: String,
-    val en: String
+    @SerializedName("fi") val fi_a: String,
+    @SerializedName("sv") val sv_a: String,
+    @SerializedName("en") val en_a: String
 )
 
 
 data class Description(
-
-    val fi: String,
-    val sv: String,
-    val en: String
+    @SerializedName("fi") val fi_d: String,
+    @SerializedName("sv") val sv_d: String,
+    @SerializedName("en") val en_d: String
 )
 
 
 data class FunctionClass(
 
-    val code: String,
-    val description: Description,
-    val abbreviation: Abbreviation
+    @SerializedName("code") val code_fc: String,
+    @Embedded (prefix = "fc")val description: Description,
+    @Embedded (prefix = "fc")val abbreviation: Abbreviation
 )
 
 
 data class IngredientClass(
 
-    val code: String,
-    val description: Description,
-    val abbreviation: Abbreviation
+    @SerializedName("code") val code_ic: String,
+    @Embedded (prefix = "ic")val description: Description,
+    @Embedded (prefix = "ic")val abbreviation: Abbreviation
 )
 
 
@@ -69,23 +71,23 @@ data class Name(
 
 data class PreparationMethod(
 
-    val code: String,
-    val description: Description,
-    val abbreviation: Abbreviation
+    @SerializedName("code") val code_pm: String,
+    @Embedded (prefix = "pm")val description: Description,
+    @Embedded (prefix = "pm")val abbreviation: Abbreviation
 )
 
 
 data class Units(
 
-    val code: String,
-    val description: Description,
-    val abbreviation: Abbreviation,
+    @SerializedName("code") val code_u: String,
+    @Embedded (prefix = "u")val description: Description,
+    @Embedded (prefix = "u")val abbreviation: Abbreviation,
     val mass: Float
 )
 
 data class Type(
 
-    val code: String,
-    val description: Description,
-    val abbreviation: Abbreviation
+    @SerializedName("code") val code_t: String,
+    @Embedded (prefix = "t")val description: Description,
+    @Embedded (prefix = "t")val abbreviation: Abbreviation
 )

@@ -2,8 +2,6 @@ package com.example.sensorbasedmobileproject.fragments.search
 
 import android.app.Activity
 import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -21,8 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sensorbasedmobileproject.MainViewModel
 import com.example.sensorbasedmobileproject.MainViewModelFactory
 import com.example.sensorbasedmobileproject.R
-import com.example.sensorbasedmobileproject.data.FineliItem
-import com.example.sensorbasedmobileproject.data.FineliItemViewModel
+import com.example.sensorbasedmobileproject.data.*
 import com.example.sensorbasedmobileproject.model.Fineli
 import com.example.sensorbasedmobileproject.repository.Repository
 import kotlinx.android.synthetic.main.fragment_search.view.*
@@ -46,14 +43,13 @@ class SearchFragment : Fragment() {
         val adapter = ListAdapter()
         val recyclerView = view.recyclerview
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,true)
 
         // Fineli viewmodel
         mFineliViewModel = ViewModelProvider(this).get(FineliItemViewModel::class.java)
         mFineliViewModel.readAllData.observe(viewLifecycleOwner, Observer { fineli ->
             adapter.setData(fineli)
         })
-
 
         return view
     }
@@ -99,9 +95,14 @@ class SearchFragment : Fragment() {
         val sugarAlcohol = response.body()?.get(0)?.sugarAlcohol
         val saturatedFat = response.body()?.get(0)?.saturatedFat
         val fiber = response.body()?.get(0)?.fiber
+        val ediblePortion = response.body()?.get(0)?.ediblePortion
         val sugar = response.body()?.get(0)?.sugar
         val salt = response.body()?.get(0)?.salt
-
+        val type = response.body()?.get(0)?.type
+        val name = response.body()?.get(0)?.name
+        val preparationMethod = response.body()?.get(0)?.preparationMethod
+        val functionClass = response.body()?.get(0)?.functionClass
+        val ingredientClass = response.body()?.get(0)?.ingredientClass
 
         val fineli = FineliItem(
             0,
@@ -117,7 +118,13 @@ class SearchFragment : Fragment() {
             saturatedFat,
             fiber,
             sugar,
-            salt
+            salt,
+            ediblePortion,
+            type,
+            name,
+            preparationMethod,
+            ingredientClass,
+            functionClass
         )
 
         mFineliViewModel.addFineliData(fineli)
