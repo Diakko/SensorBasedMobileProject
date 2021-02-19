@@ -13,7 +13,11 @@ object RetrofitInstance {
             .build()
     }
 
-    val api: FineliApi by lazy {
+    val fineliApi: FineliApi by lazy {
         retrofit.create(FineliApi::class.java)
+    }
+
+    val openFoodApi: OpenFoodFactsApi by lazy {
+        retrofit.create(OpenFoodFactsApi::class.java)
     }
 }

@@ -7,7 +7,7 @@ import retrofit2.Response
 class Repository {
 
     suspend fun getFood(foodName: String): Response<ArrayList<Fineli>> {
-        return RetrofitInstance.api.getFood(foodName)
+        return RetrofitInstance.fineliApi.getFood(foodName)
     }
 
 }
