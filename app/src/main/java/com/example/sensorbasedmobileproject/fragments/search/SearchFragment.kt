@@ -43,7 +43,7 @@ class SearchFragment : Fragment() {
         val adapter = ListAdapter()
         val recyclerView = view.recyclerview
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,true)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         // Fineli viewmodel
         mFineliViewModel = ViewModelProvider(this).get(FineliItemViewModel::class.java)
@@ -57,16 +57,22 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Set up viewModel stuffs
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+
+        // Set up editText
         editText = view.findViewById(R.id.searchable)
         var editTextValue = editText.text
-        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+
+        // Observe response
         viewModel.myResponse.observe(viewLifecycleOwner, Observer { response ->
-            if (response.isSuccessful) {
+            if (response.isSuccessful && !(response.body()?.isEmpty())!!) {
                 insertDataToDatabase(response)
             } else {
-                Log.d("Response", response.errorBody().toString())
+                Log.d("DBG", response.errorBody().toString())
+                Toast.makeText(requireContext(), "Keyword not found in Fineli API", Toast.LENGTH_LONG).show()
             }
         })
 
