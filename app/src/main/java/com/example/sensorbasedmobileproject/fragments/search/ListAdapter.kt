@@ -24,7 +24,9 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
     override fun onBindViewHolder(holder: ListAdapter.MyViewHolder, position: Int) {
         val currentItem = foodList[position]
         holder.itemView.fineli_id.text = currentItem.fineliId.toString()
-        holder.itemView.fineli_kcal.text = currentItem.energyKcal.toString()
+        holder.itemView.fineli_name.text = currentItem.name?.fi
+        holder.itemView.fineli_description.text = currentItem.ingredientClass?.description?.fi_d
+
     }
 
     override fun getItemCount(): Int {
