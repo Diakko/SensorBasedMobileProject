@@ -109,6 +109,9 @@ class SearchFragment : Fragment() {
         val preparationMethod = response.body()?.get(0)?.preparationMethod
         val functionClass = response.body()?.get(0)?.functionClass
         val ingredientClass = response.body()?.get(0)?.ingredientClass
+        val specialDiets = response.body()?.get(0)?.specialDiets
+        val themes = response.body()?.get(0)?.themes
+        val units = response.body()?.get(0)?.units
 
         val fineli = FineliItem(
             0,
@@ -129,6 +132,9 @@ class SearchFragment : Fragment() {
             type,
             name,
             preparationMethod,
+            specialDiets,
+            themes,
+            units,
             ingredientClass,
             functionClass
         )
