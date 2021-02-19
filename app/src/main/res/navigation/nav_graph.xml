@@ -11,19 +11,23 @@
         android:name="com.example.sensorbasedmobileproject.fragments.main.MainFragment"
         android:label="Home"
         tools:layout="@layout/fragment_main" />
+
     <fragment
         android:id="@+id/action_search"
         android:name="com.example.sensorbasedmobileproject.fragments.search.SearchFragment"
         android:label="Home"
         tools:layout="@layout/fragment_search" />
+
     <fragment
         android:id="@+id/action_camera"
         android:name="com.example.sensorbasedmobileproject.fragments.scan.CameraScanFragment"
         android:label="Scan"
         tools:layout="@layout/fragment_camera_scan" />
+
     <fragment
         android:id="@+id/action_profile"
         android:name="com.example.sensorbasedmobileproject.fragments.profile.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
+
 </navigation>
