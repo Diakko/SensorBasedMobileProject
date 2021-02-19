@@ -43,7 +43,7 @@ class SearchFragment : Fragment() {
         val adapter = ListAdapter()
         val recyclerView = view.recyclerview
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,true)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         // Fineli viewmodel
         mFineliViewModel = ViewModelProvider(this).get(FineliItemViewModel::class.java)
