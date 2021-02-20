@@ -16,12 +16,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.sensorbasedmobileproject.MainViewModel
-import com.example.sensorbasedmobileproject.MainViewModelFactory
+import com.example.sensorbasedmobileproject.ApiViewModel
+import com.example.sensorbasedmobileproject.ApiViewModelFactory
 import com.example.sensorbasedmobileproject.R
 import com.example.sensorbasedmobileproject.data.*
 import com.example.sensorbasedmobileproject.model.Fineli
-import com.example.sensorbasedmobileproject.repository.Repository
+import com.example.sensorbasedmobileproject.repository.ApiRepository
 import kotlinx.android.synthetic.main.fragment_search.view.*
 import retrofit2.Response
 
@@ -29,7 +29,7 @@ import retrofit2.Response
 class SearchFragment : Fragment() {
 
     private lateinit var editText: EditText
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: ApiViewModel
     private lateinit var mFineliViewModel: FineliItemViewModel
 
     override fun onCreateView(
@@ -58,16 +58,16 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Set up viewModel stuffs
-        val repository = Repository()
-        val viewModelFactory = MainViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+        val repository = ApiRepository()
+        val viewModelFactory = ApiViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(ApiViewModel::class.java)
 
         // Set up editText
         editText = view.findViewById(R.id.searchable)
         var editTextValue = editText.text
 
         // Observe response
-        viewModel.myResponse.observe(viewLifecycleOwner, Observer { response ->
+        viewModel.myFineliResponse.observe(viewLifecycleOwner, Observer { response ->
             if (response.isSuccessful && !(response.body()?.isEmpty())!!) {
                 insertDataToDatabase(response)
             } else {
@@ -80,7 +80,7 @@ class SearchFragment : Fragment() {
         // clear editText and hide keyboard
         editText.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                viewModel.getFood(editTextValue.toString())
+                viewModel.getFineliFood(editTextValue.toString())
                 editText.text.clear()
                 hideKeyboard()
                 return@OnEditorActionListener true

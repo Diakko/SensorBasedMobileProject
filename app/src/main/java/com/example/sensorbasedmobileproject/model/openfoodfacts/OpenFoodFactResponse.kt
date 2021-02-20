@@ -1,6 +1,5 @@
 package com.example.sensorbasedmobileproject.model.openfoodfacts
 
-import Product
 import com.google.gson.annotations.SerializedName
 
 /*

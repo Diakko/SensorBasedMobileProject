@@ -1,9 +1,6 @@
 package com.example.sensorbasedmobileproject.model.openfoodfacts
 
-import Origins_of_ingredients
-import Packaging
-import Production_system
-import Threatened_species
+
 import com.google.gson.annotations.SerializedName
 
 /*

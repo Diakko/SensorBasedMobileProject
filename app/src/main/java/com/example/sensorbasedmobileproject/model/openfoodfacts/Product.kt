@@ -1,8 +1,5 @@
 package com.example.sensorbasedmobileproject.model.openfoodfacts
 
-import Selected_images
-import Sources
-import Sources_fields
 import com.google.gson.annotations.SerializedName
 
 /*
