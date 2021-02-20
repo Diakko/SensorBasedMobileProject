@@ -10,4 +10,8 @@ class Repository {
         return RetrofitInstance.fineliApi.getFood(foodName)
     }
 
+    suspend fun getOpenFood(foodName: String): Response<ArrayList<Fineli>> {
+        return RetrofitInstance.openFoodApi.getOpenFood(foodName)
+    }
+
 }
