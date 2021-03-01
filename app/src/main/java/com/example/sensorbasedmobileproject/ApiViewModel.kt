@@ -13,7 +13,7 @@ import retrofit2.Response
 class ApiViewModel(private val apiRepository: ApiRepository): ViewModel() {
 
     val myFineliResponse: MutableLiveData<Response<ArrayList<Fineli>>> = MutableLiveData()
-    val myOpenResponse: MutableLiveData<Response<ArrayList<OpenFoodFactResponse>>> = MutableLiveData()
+    val myOffResponse: MutableLiveData<Response<OpenFoodFactResponse>> = MutableLiveData()
 
 
     fun getFineliFood(foodName: String) {
@@ -24,10 +24,10 @@ class ApiViewModel(private val apiRepository: ApiRepository): ViewModel() {
         }
     }
 
-    fun getOpenFood(foodName: String) {
+    fun getOpenFood(ean: String) {
         viewModelScope.launch {
-            val response: Response<ArrayList<OpenFoodFactResponse>> = apiRepository.getOpenFood(foodName)
-            myOpenResponse.value = response
+            val response: Response<OpenFoodFactResponse> = apiRepository.getOpenFood(ean)
+            myOffResponse.value = response
 
         }
     }

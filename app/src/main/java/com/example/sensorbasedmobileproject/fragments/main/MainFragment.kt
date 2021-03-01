@@ -14,7 +14,7 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val view: View = inflater.inflate(R.layout.fragment_main, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_search_off, container, false)
 
         return view
     }

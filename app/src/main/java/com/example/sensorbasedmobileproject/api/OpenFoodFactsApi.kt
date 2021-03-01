@@ -1,16 +1,24 @@
 
 package com.example.sensorbasedmobileproject.api
 
-import com.example.sensorbasedmobileproject.model.Fineli
 import com.example.sensorbasedmobileproject.model.openfoodfacts.OpenFoodFactResponse
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Headers
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface OpenFoodFactsApi {
 
+    companion object {
+        private const val API_VER = "v0"
+
+        /**
+         * The api prefix URL
+         */
+        private const val API_P = "/api/$API_VER"
+    }
+
     @Headers("User-Agent: Fineli-App")
-    @GET("foods")
-    suspend fun getOpenFood(@Query("q") q: String): Response<ArrayList<OpenFoodFactResponse>>
+    @GET("$API_P/product/{barcode}.json")
+    fun getOpenFood(
+        @Path("barcode") barcode: String): Response<OpenFoodFactResponse>
+
 }

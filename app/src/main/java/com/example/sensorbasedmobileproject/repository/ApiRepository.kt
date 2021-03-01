@@ -11,8 +11,8 @@ class ApiRepository {
         return RetrofitInstance.fineliApi.getFood(foodName)
     }
 
-    suspend fun getOpenFood(foodName: String): Response<ArrayList<OpenFoodFactResponse>> {
-        return RetrofitInstance.openFoodApi.getOpenFood(foodName)
+    suspend fun getOpenFood(ean: String): Response<OpenFoodFactResponse> {
+        return RetrofitInstance.openFoodApi.getOpenFood(ean)
     }
 
 }
