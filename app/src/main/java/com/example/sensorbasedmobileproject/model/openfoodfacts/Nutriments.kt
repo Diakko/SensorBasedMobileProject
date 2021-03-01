@@ -16,7 +16,7 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 data class Nutriments (
 
 	@SerializedName("nova-group") val novaGroup : Int,
-	@SerializedName("carbohydrates_serving") val carbohydratesServing : Int,
+	@SerializedName("carbohydrates_serving") val carbohydratesServing : Double,
 	@SerializedName("fiber_serving") val fiberServing : Double,
 	@SerializedName("cholesterol") val cholesterol : Int,
 	@SerializedName("cholesterol_value") val cholesterolSalue : Int,

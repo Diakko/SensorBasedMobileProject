@@ -94,9 +94,9 @@ class MainFragment : Fragment() {
 
     private fun insertDataToDatabase(response: Response<OpenFoodFactResponse>) {
 
-        val ean = response.body()?.code.toString()
+        val ean = response.body()?.code?.toInt()
 
-        val off = OffItem(0, ean)
+        val off = ean?.let { OffItem(0, it.toLong()) }
 
 //        val fineliId = response.body()?.get(0)?.id
 //        val energy = response.body()?.get(0)?.energy
@@ -147,7 +147,9 @@ class MainFragment : Fragment() {
 //            functionClass
 //        )
 
-        mOffViewModel.addOffData(off)
+        if (off != null) {
+            mOffViewModel.addOffData(off)
+        }
         Toast.makeText(requireContext(), "Successfully added", Toast.LENGTH_LONG).show()
     }
 

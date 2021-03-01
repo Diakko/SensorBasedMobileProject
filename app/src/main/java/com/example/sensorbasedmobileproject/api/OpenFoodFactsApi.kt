@@ -18,7 +18,7 @@ interface OpenFoodFactsApi {
 
     @Headers("User-Agent: Fineli-App")
     @GET("$API_P/product/{barcode}.json")
-    fun getOpenFood(
+    suspend fun getOpenFood(
         @Path("barcode") barcode: String): Response<OpenFoodFactResponse>
 
 }

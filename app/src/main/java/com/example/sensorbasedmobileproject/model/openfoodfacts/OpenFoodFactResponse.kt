@@ -19,5 +19,5 @@ data class OpenFoodFactResponse (
 	@SerializedName("status_verbose") val status_verbose : String,
 	@SerializedName("status") val status : Int,
 	@SerializedName("product") val product : Product,
-	@SerializedName("code") val code : Int
+	@SerializedName("code") val code : Long
 )
