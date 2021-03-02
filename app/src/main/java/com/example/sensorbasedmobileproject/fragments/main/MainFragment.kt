@@ -3,6 +3,7 @@ package com.example.sensorbasedmobileproject.fragments.main
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sensorbasedmobileproject.ApiViewModel
 import com.example.sensorbasedmobileproject.ApiViewModelFactory
@@ -24,6 +26,7 @@ import com.example.sensorbasedmobileproject.data.OffItemViewModel
 import com.example.sensorbasedmobileproject.fragments.search.OffListAdapter
 import com.example.sensorbasedmobileproject.model.openfoodfacts.OpenFoodFactResponse
 import com.example.sensorbasedmobileproject.repository.ApiRepository
+import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_search_off.view.*
 import retrofit2.Response
 
@@ -32,7 +35,7 @@ class MainFragment : Fragment() {
     private lateinit var editText: EditText
     private lateinit var viewModel: ApiViewModel
     private lateinit var mOffViewModel: OffItemViewModel
-
+    private lateinit var editTextValue: Editable
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -65,7 +68,15 @@ class MainFragment : Fragment() {
 
         // Set up editText
         editText = view.findViewById(R.id.ean)
-        var editTextValue = editText.text
+
+        // If arguments, use them
+        if (arguments?.isEmpty == true) {
+            editTextValue = editText.text
+        } else {
+            // If arguments found, do the search
+            val ean = arguments?.getString("ean")
+            viewModel.getOpenFood(ean.toString())
+        }
 
         // Observe response
         viewModel.myOffResponse.observe(viewLifecycleOwner, Observer { response ->

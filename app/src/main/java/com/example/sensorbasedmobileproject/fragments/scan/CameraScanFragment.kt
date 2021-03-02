@@ -8,9 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
-import com.example.sensorbasedmobileproject.MainActivity
+import androidx.navigation.findNavController
 import com.example.sensorbasedmobileproject.R
-import com.example.sensorbasedmobileproject.fragments.main.MainFragment
 import com.google.zxing.integration.android.IntentIntegrator
 
 
@@ -41,10 +40,10 @@ class CameraScanFragment() : Fragment() {
                 Toast.makeText(context, "Cancelled", Toast.LENGTH_LONG).show()
             } else {
                 Toast.makeText(context, "Scanned : " + result.contents, Toast.LENGTH_LONG).show()
-                val transaction = activity?.supportFragmentManager?.beginTransaction()
-                transaction?.replace(R.id.action_home, MainFragment())
-                transaction?.disallowAddToBackStack()
-                transaction?.commit()
+
+                val ean = result.contents.toString()
+                val action = CameraScanFragmentDirections.actionScanToHome(ean)
+                requireView().findNavController().navigate(action)
             }
         }
     }

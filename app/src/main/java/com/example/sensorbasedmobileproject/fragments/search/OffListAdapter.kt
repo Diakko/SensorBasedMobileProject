@@ -45,19 +45,20 @@ class OffListAdapter : RecyclerView.Adapter<OffListAdapter.MyViewHolder>() {
         holder.itemView.product_name.text = currentItem.product_name
         holder.itemView.ingredients_text_debug.text = currentItem.ingredients_text_debug
 
-        val imageView = holder.itemView.findViewById<ImageView>(R.id.product_image)
-        Log.d("DBG", "IMAGE_URL" + currentItem.image_url)
-        val url = URL(currentItem.image_url.toString())
+        if (currentItem.image_url != null) {
+            val imageView = holder.itemView.findViewById<ImageView>(R.id.product_image)
+            val url = URL(currentItem.image_url.toString())
 
+            scope.launch(Dispatchers.IO) {
+                launch {
+                    val bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+                    Handler(Looper.getMainLooper()).post {
+                        imageView.setImageBitmap(bmp)
+                    }
 
-        scope.launch(Dispatchers.IO) {
-            launch {
-                val bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream())
-                Handler(Looper.getMainLooper()).post {
-                    imageView.setImageBitmap(bmp)
                 }
-
             }
+
         }
 
 
