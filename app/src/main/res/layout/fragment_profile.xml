@@ -36,6 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/text_view_steps_taken"
+        android:textColor="@color/design_default_color_on_primary"
         android:layout_centerInParent="true"/>
 
     <EditText
@@ -43,6 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/circular_progress_bar"
+        android:textColor="@color/design_default_color_on_primary"
         android:layout_centerInParent="true"
         android:textAlignment="center"
         android:ems="10"
