@@ -10,7 +10,7 @@ import androidx.room.Query
 interface OffItemDao {
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    suspend fun addOffInfo(off: OffItem)
+    suspend fun addOffItem(off: OffItem)
 
     @Query("SELECT * FROM openfoodfacts ORDER BY id ASC")
     fun readAllData(): LiveData<List<OffItem>>

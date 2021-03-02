@@ -7,6 +7,6 @@ class OffItemRepository(private val offItemDao: OffItemDao) {
     val readAllData: LiveData<List<OffItem>> = offItemDao.readAllData()
 
     suspend fun addOffInfo(offItem: OffItem){
-        offItemDao.addOffInfo(offItem)
+        offItemDao.addOffItem(offItem)
     }
 }

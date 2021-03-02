@@ -69,7 +69,7 @@ class MainFragment : Fragment() {
         // Set up editText
         editText = view.findViewById(R.id.ean)
 
-        // If arguments, use them
+        // If no arguments
         if (arguments?.isEmpty == true) {
             editTextValue = editText.text
         } else {

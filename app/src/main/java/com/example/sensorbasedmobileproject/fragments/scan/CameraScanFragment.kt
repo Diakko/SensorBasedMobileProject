@@ -23,9 +23,9 @@ class CameraScanFragment() : Fragment() {
         val view = inflater.inflate(R.layout.fragment_camera_scan, container, false)
         val integrator = IntentIntegrator.forSupportFragment(this@CameraScanFragment)
 
-        integrator.setOrientationLocked(false)
+        integrator.setOrientationLocked(true)
         integrator.setPrompt("Scan QR code")
-        integrator.setBeepEnabled(false)
+        integrator.setBeepEnabled(true)
         integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES)
 
 
