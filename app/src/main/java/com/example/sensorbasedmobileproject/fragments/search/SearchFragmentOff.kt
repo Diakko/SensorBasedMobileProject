@@ -94,7 +94,7 @@ class SearchFragmentOff : Fragment() {
 
         val ean = response.body()?.code
 
-        val off = ean?.let { OffItem(0, it.toLong()) }
+//        val off = ean?.let { OffItem(0, it.toLong()) }
 
 //        val fineliId = response.body()?.get(0)?.id
 //        val energy = response.body()?.get(0)?.energy
@@ -145,10 +145,10 @@ class SearchFragmentOff : Fragment() {
 //            functionClass
 //        )
 
-        if (off != null) {
-            mOffViewModel.addOffData(off)
-        }
-        Toast.makeText(requireContext(), "Successfully added", Toast.LENGTH_LONG).show()
+//        if (off != null) {
+//            mOffViewModel.addOffData(off)
+//        }
+//        Toast.makeText(requireContext(), "Successfully added", Toast.LENGTH_LONG).show()
     }
 
     private fun Fragment.hideKeyboard() {

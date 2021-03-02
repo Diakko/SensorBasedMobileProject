@@ -13,7 +13,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -94,62 +93,20 @@ class MainFragment : Fragment() {
 
     private fun insertDataToDatabase(response: Response<OpenFoodFactResponse>) {
 
-        val ean = response.body()?.code?.toInt()
+        val code = response.body()?.code?.toLong()
+        val ingredients_text_debug = response.body()?.product?.ingredients_text_debug
+        val image_url = response.body()?.product?.image_url
+        val product_name = response.body()?.product?.product_name
 
-        val off = ean?.let { OffItem(0, it.toLong()) }
+        val offItem = OffItem(
+            0,
+            code,
+            product_name,
+            ingredients_text_debug,
+            image_url
+        )
 
-//        val fineliId = response.body()?.get(0)?.id
-//        val energy = response.body()?.get(0)?.energy
-//        val energyKcal = response.body()?.get(0)?.energyKcal
-//        val fat = response.body()?.get(0)?.fat
-//        val protein = response.body()?.get(0)?.protein
-//        val carbohydrate = response.body()?.get(0)?.carbohydrate
-//        val alcohol = response.body()?.get(0)?.alcohol
-//        val organicAcids = response.body()?.get(0)?.organicAcids
-//        val sugarAlcohol = response.body()?.get(0)?.sugarAlcohol
-//        val saturatedFat = response.body()?.get(0)?.saturatedFat
-//        val fiber = response.body()?.get(0)?.fiber
-//        val ediblePortion = response.body()?.get(0)?.ediblePortion
-//        val sugar = response.body()?.get(0)?.sugar
-//        val salt = response.body()?.get(0)?.salt
-//        val type = response.body()?.get(0)?.type
-//        val name = response.body()?.get(0)?.name
-//        val preparationMethod = response.body()?.get(0)?.preparationMethod
-//        val functionClass = response.body()?.get(0)?.functionClass
-//        val ingredientClass = response.body()?.get(0)?.ingredientClass
-//        val specialDiets = response.body()?.get(0)?.specialDiets
-//        val themes = response.body()?.get(0)?.themes
-//        val units = response.body()?.get(0)?.units
-//
-//        val fineli = FineliItem(
-//            0,
-//            fineliId,
-//            energy,
-//            energyKcal,
-//            fat,
-//            protein,
-//            carbohydrate,
-//            alcohol,
-//            organicAcids,
-//            sugarAlcohol,
-//            saturatedFat,
-//            fiber,
-//            sugar,
-//            salt,
-//            ediblePortion,
-//            type,
-//            name,
-//            preparationMethod,
-//            specialDiets,
-//            themes,
-//            units,
-//            ingredientClass,
-//            functionClass
-//        )
-
-        if (off != null) {
-            mOffViewModel.addOffData(off)
-        }
+        mOffViewModel.addOffData(offItem)
         Toast.makeText(requireContext(), "Successfully added", Toast.LENGTH_LONG).show()
     }
 

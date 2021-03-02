@@ -8,5 +8,8 @@ import java.math.BigInteger
 data class OffItem(
     // id in our room database
     @PrimaryKey(autoGenerate = true) val id: Int,
-    val code: Long
+    val code: Long?,
+    val product_name: String?,
+    val ingredients_text_debug: String?,
+    val image_url: String?
     )

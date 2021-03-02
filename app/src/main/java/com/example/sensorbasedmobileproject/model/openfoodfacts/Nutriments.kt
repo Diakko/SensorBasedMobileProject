@@ -39,7 +39,7 @@ data class Nutriments (
 	@SerializedName("vitamin-a_serving") val vitaminAServing : Double,
 	@SerializedName("nova-group_100g") val novaGroup100g : Int,
 	@SerializedName("proteins_100g") val proteins100g : Double,
-	@SerializedName("sodium_value") val sodiumValue : Int,
+	@SerializedName("sodium_value") val sodiumValue : Double,
 	@SerializedName("fat_serving") val fatServing : Int,
 	@SerializedName("vitamin-c_100g") val vitaminC100g : Int,
 	@SerializedName("vitamin-a") val vitaminA : Double,
@@ -54,7 +54,7 @@ data class Nutriments (
 	@SerializedName("iron_value") val ironValue : Double,
 	@SerializedName("trans-fat_serving") val transFatServing : Int,
 	@SerializedName("vitamin-a_100g") val vitaminA100g : Double,
-	@SerializedName("sugars_serving") val sugarsServing : Int,
+	@SerializedName("sugars_serving") val sugarsServing : Double,
 	@SerializedName("energy_value") val energyValue : Int,
 	@SerializedName("salt_serving") val saltServing : Double,
 	@SerializedName("energy-kcal_100g") val energyKcal100g : Int,
@@ -75,7 +75,7 @@ data class Nutriments (
 	@SerializedName("nutrition-score-fr_100g") val nutritionScoreFr100g : Int,
 	@SerializedName("fiber") val fiber : Double,
 	@SerializedName("trans-fat_value") val transFatValue : Int,
-	@SerializedName("fruits-vegetables-nuts-estimate-from-ingredients_100g") val fruitsVegetablesNutsEstimateFromIngredients100g : Int,
+	@SerializedName("fruits-vegetables-nuts-estimate-from-ingredients_100g") val fruitsVegetablesNutsEstimateFromIngredients100g : Double,
 	@SerializedName("fiber_100g") val fiber_100g : Double,
 	@SerializedName("energy-kcal_value") val energyKcalValue : Int,
 	@SerializedName("energy_100g") val energy100g : Int,
@@ -100,5 +100,5 @@ data class Nutriments (
 	@SerializedName("salt") val salt : Double,
 	@SerializedName("carbohydrates_100g") val carbohydrates100g : Double,
 	@SerializedName("salt_100g") val salt100g : Double,
-	@SerializedName("salt_value") val saltValue : Int
+	@SerializedName("salt_value") val saltValue : Double
 )

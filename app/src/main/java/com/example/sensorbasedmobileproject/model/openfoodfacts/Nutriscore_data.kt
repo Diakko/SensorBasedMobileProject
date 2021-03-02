@@ -16,7 +16,7 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 data class Nutriscore_data (
 
 	@SerializedName("sugars") val sugars : Double,
-	@SerializedName("fruits_vegetables_nuts_colza_walnut_olive_oils_value") val fruits_vegetables_nuts_colza_walnut_olive_oils_value : Int,
+	@SerializedName("fruits_vegetables_nuts_colza_walnut_olive_oils_value") val fruits_vegetables_nuts_colza_walnut_olive_oils_value : Double,
 	@SerializedName("saturated_fat") val saturated_fat : Double,
 	@SerializedName("saturated_fat_ratio_value") val saturated_fat_ratio_value : Int,
 	@SerializedName("energy") val energy : Int,
@@ -37,7 +37,7 @@ data class Nutriscore_data (
 	@SerializedName("fiber") val fiber : Double,
 	@SerializedName("negative_points") val negative_points : Int,
 	@SerializedName("proteins") val proteins : Double,
-	@SerializedName("fruits_vegetables_nuts_colza_walnut_olive_oils_points") val fruits_vegetables_nuts_colza_walnut_olive_oils_points : Int,
+	@SerializedName("fruits_vegetables_nuts_colza_walnut_olive_oils_points") val fruits_vegetables_nuts_colza_walnut_olive_oils_points : Double,
 	@SerializedName("grade") val grade : String,
 	@SerializedName("is_water") val is_water : Int,
 	@SerializedName("energy_value") val energy_value : Int,
@@ -45,6 +45,6 @@ data class Nutriscore_data (
 	@SerializedName("sugars_points") val sugars_points : Int,
 	@SerializedName("is_beverage") val is_beverage : Int,
 	@SerializedName("score") val score : Int,
-	@SerializedName("fruits_vegetables_nuts_colza_walnut_olive_oils") val fruits_vegetables_nuts_colza_walnut_olive_oils : Int,
+	@SerializedName("fruits_vegetables_nuts_colza_walnut_olive_oils") val fruits_vegetables_nuts_colza_walnut_olive_oils : Double,
 	@SerializedName("sodium_points") val sodium_points : Int
 )

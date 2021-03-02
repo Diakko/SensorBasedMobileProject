@@ -19,9 +19,9 @@ data class Origins_of_ingredients (
 
 	@SerializedName("aggregated_origins") val aggregated_origins : List<Aggregated_origins>,
 	@SerializedName("transportation_value") val transportation_value : Int,
-	@SerializedName("transportation_score") val transportation_score : Int,
+	@SerializedName("transportation_score") val transportation_score : Double,
 	@SerializedName("epi_value") val epi_value : Int,
 	@SerializedName("value") val value : Int,
 	@SerializedName("origins_from_origins_field") val origins_from_origins_field : List<String>,
-	@SerializedName("epi_score") val epi_score : Int
+	@SerializedName("epi_score") val epi_score : Double
 )
