@@ -45,7 +45,7 @@ class MapFragment : Fragment() {
     private lateinit var viewHere: View
     private lateinit var viewModel: MainViewModel
     private lateinit var mNominatimItemViewModel: NominatimItemViewModel
-    private  var mNominatimList = ArrayList<Nominatim>()
+    private  var mNominatimList = emptyList<NominatimItem>()
 
 
     override fun onCreateView(
@@ -68,7 +68,10 @@ class MapFragment : Fragment() {
 
 
         mNominatimItemViewModel = ViewModelProvider(this).get(NominatimItemViewModel::class.java)
-        mNominatimItemViewModel.readAllData.observe(viewLifecycleOwner, Observer { nominatim -> mNominatimList })
+        mNominatimItemViewModel.readAllData.observe(viewLifecycleOwner, Observer { nominatim -> mNominatimList = nominatim })
+
+
+
         return viewHere
     }
 
@@ -113,16 +116,23 @@ class MapFragment : Fragment() {
             lon!!,
             display_name!!
         )
+        mNominatimItemViewModel.addNominatimData(nominatim)
+        addMarker()
+        Toast.makeText(requireContext(), "Successfully added Alepa", Toast.LENGTH_SHORT).show()
+    }
 
+    private fun addMarker() {
+        val repository = Repository()
+        val viewModelFactory = MainViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+        viewModel.getNominatim()
         val marker = Marker(map)
-        marker.position = GeoPoint(lat, lon)
+        marker.position = GeoPoint(mNominatimList[0].lat, mNominatimList[0].lon)
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
         map.overlays.add(marker)
-        marker.title = display_name
-
-        mNominatimItemViewModel.addNominatimData(nominatim)
-        Toast.makeText(requireContext(), "Successfully retrieved Alepa", Toast.LENGTH_SHORT).show()
+        marker.title = mNominatimList[0].display_name
     }
+
 
     private fun getLocationUpdates() {
 
