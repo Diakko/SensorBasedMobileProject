@@ -15,4 +15,8 @@ interface OffItemDao {
     @Query("SELECT * FROM openfoodfacts ORDER BY id ASC")
     fun readAllData(): LiveData<List<OffItem>>
 
+    @Query("SELECT EXISTS (SELECT 1 FROM openfoodfacts WHERE code = :code)")
+    fun productExists(code: Long): Boolean
+
+
 }

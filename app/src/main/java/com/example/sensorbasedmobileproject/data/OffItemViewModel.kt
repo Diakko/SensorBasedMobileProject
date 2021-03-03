@@ -24,6 +24,12 @@ class OffItemViewModel(application: Application): AndroidViewModel(application) 
         }
     }
 
+    fun checkIfExists(code: Long): Boolean {
+        val launch = viewModelScope.launch(Dispatchers.IO) {
+            repository.checkIfExists(code)
+        }
+        return launch.isCompleted
+    }
 
 
 }

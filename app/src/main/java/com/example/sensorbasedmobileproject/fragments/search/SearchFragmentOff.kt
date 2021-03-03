@@ -13,19 +13,19 @@ import android.widget.EditText
 import android.widget.TextView.OnEditorActionListener
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sensorbasedmobileproject.ApiViewModel
 import com.example.sensorbasedmobileproject.ApiViewModelFactory
 import com.example.sensorbasedmobileproject.R
 import com.example.sensorbasedmobileproject.data.*
+import com.example.sensorbasedmobileproject.fragments.main.OffListAdapter
 import com.example.sensorbasedmobileproject.model.openfoodfacts.OpenFoodFactResponse
 import com.example.sensorbasedmobileproject.repository.ApiRepository
 import kotlinx.android.synthetic.main.fragment_search_off.view.*
 import retrofit2.Response
 
-
+// UNUSED CLASS AT THE MOMENT, ALL THIS IS DONE IN MAIN FRAGMENT
 class SearchFragmentOff : Fragment() {
 
     private lateinit var editText: EditText
@@ -47,7 +47,7 @@ class SearchFragmentOff : Fragment() {
 
         // Off viewmodel
         mOffViewModel = ViewModelProvider(this).get(OffItemViewModel::class.java)
-        mOffViewModel.readAllData.observe(viewLifecycleOwner, Observer { off ->
+        mOffViewModel.readAllData.observe(viewLifecycleOwner, { off ->
             adapter.setData(off)
         })
 
@@ -64,10 +64,10 @@ class SearchFragmentOff : Fragment() {
 
         // Set up editText
         editText = view.findViewById(R.id.ean)
-        var editTextValue = editText.text
+        val editTextValue = editText.text
 
         // Observe response
-        viewModel.myOffResponse.observe(viewLifecycleOwner, Observer { response ->
+        viewModel.myOffResponse.observe(viewLifecycleOwner, { response ->
             if (response.isSuccessful) {
                 insertDataToDatabase(response)
             } else {
@@ -78,7 +78,7 @@ class SearchFragmentOff : Fragment() {
 
         // Listen to editText and on complete do search via viewModels getFood(),
         // clear editText and hide keyboard
-        editText.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
+        editText.setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 Log.d("DBG", "Start EAN search")
                 viewModel.getOpenFood(editTextValue.toString())
@@ -94,61 +94,6 @@ class SearchFragmentOff : Fragment() {
 
         val ean = response.body()?.code
 
-//        val off = ean?.let { OffItem(0, it.toLong()) }
-
-//        val fineliId = response.body()?.get(0)?.id
-//        val energy = response.body()?.get(0)?.energy
-//        val energyKcal = response.body()?.get(0)?.energyKcal
-//        val fat = response.body()?.get(0)?.fat
-//        val protein = response.body()?.get(0)?.protein
-//        val carbohydrate = response.body()?.get(0)?.carbohydrate
-//        val alcohol = response.body()?.get(0)?.alcohol
-//        val organicAcids = response.body()?.get(0)?.organicAcids
-//        val sugarAlcohol = response.body()?.get(0)?.sugarAlcohol
-//        val saturatedFat = response.body()?.get(0)?.saturatedFat
-//        val fiber = response.body()?.get(0)?.fiber
-//        val ediblePortion = response.body()?.get(0)?.ediblePortion
-//        val sugar = response.body()?.get(0)?.sugar
-//        val salt = response.body()?.get(0)?.salt
-//        val type = response.body()?.get(0)?.type
-//        val name = response.body()?.get(0)?.name
-//        val preparationMethod = response.body()?.get(0)?.preparationMethod
-//        val functionClass = response.body()?.get(0)?.functionClass
-//        val ingredientClass = response.body()?.get(0)?.ingredientClass
-//        val specialDiets = response.body()?.get(0)?.specialDiets
-//        val themes = response.body()?.get(0)?.themes
-//        val units = response.body()?.get(0)?.units
-//
-//        val fineli = FineliItem(
-//            0,
-//            fineliId,
-//            energy,
-//            energyKcal,
-//            fat,
-//            protein,
-//            carbohydrate,
-//            alcohol,
-//            organicAcids,
-//            sugarAlcohol,
-//            saturatedFat,
-//            fiber,
-//            sugar,
-//            salt,
-//            ediblePortion,
-//            type,
-//            name,
-//            preparationMethod,
-//            specialDiets,
-//            themes,
-//            units,
-//            ingredientClass,
-//            functionClass
-//        )
-
-//        if (off != null) {
-//            mOffViewModel.addOffData(off)
-//        }
-//        Toast.makeText(requireContext(), "Successfully added", Toast.LENGTH_LONG).show()
     }
 
     private fun Fragment.hideKeyboard() {

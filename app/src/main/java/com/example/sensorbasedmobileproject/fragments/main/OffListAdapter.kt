@@ -1,10 +1,8 @@
-package com.example.sensorbasedmobileproject.fragments.search
+package com.example.sensorbasedmobileproject.fragments.main
 
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,15 +19,13 @@ import java.net.URL
 
 class OffListAdapter : RecyclerView.Adapter<OffListAdapter.MyViewHolder>() {
 
-    val scope = CoroutineScope(Dispatchers.IO)
+    private val scope = CoroutineScope(Dispatchers.IO)
 
     private var foodList = emptyList<OffItem>()
 
-    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OffListAdapter.MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
             LayoutInflater.from(parent.context).inflate(
                 R.layout.custom_row_off,
@@ -39,7 +35,7 @@ class OffListAdapter : RecyclerView.Adapter<OffListAdapter.MyViewHolder>() {
         )
     }
 
-    override fun onBindViewHolder(holder: OffListAdapter.MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = foodList[position]
         holder.itemView.code.text = currentItem.code.toString()
         holder.itemView.product_name.text = currentItem.product_name
@@ -55,13 +51,9 @@ class OffListAdapter : RecyclerView.Adapter<OffListAdapter.MyViewHolder>() {
                     Handler(Looper.getMainLooper()).post {
                         imageView.setImageBitmap(bmp)
                     }
-
                 }
             }
-
         }
-
-
     }
 
     override fun getItemCount(): Int {
@@ -72,6 +64,4 @@ class OffListAdapter : RecyclerView.Adapter<OffListAdapter.MyViewHolder>() {
         this.foodList = off
         notifyDataSetChanged()
     }
-
-
 }
