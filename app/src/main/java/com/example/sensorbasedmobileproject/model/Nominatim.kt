@@ -8,7 +8,7 @@ data class Nominatim (
     val place_id: Int,
     val licence: String,
     val osm_type: String,
-    val osm_id: Int,
+    val osm_id: Long,
     // val boundingbox: List<Double>,
     val lat: Double,
     val lon: Double,

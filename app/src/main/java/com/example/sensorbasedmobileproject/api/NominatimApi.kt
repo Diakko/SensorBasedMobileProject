@@ -9,6 +9,6 @@ import retrofit2.http.Query
 interface NominatimApi {
 
     @Headers("User-Agent: Nominatim-App")
-    @GET("q")
+    @GET("search.php?format=json&countrycodes=fi&limit=50")
     suspend fun getNominatim(@Query("q") q: String): Response<ArrayList<Nominatim>>
 }

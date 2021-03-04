@@ -12,8 +12,26 @@ class Repository {
         return RetrofitInstance.api.getFood(foodName)
     }
 
-    suspend fun getNominatim(): Response<ArrayList<Nominatim>> {
+    suspend fun getAlepas(): Response<ArrayList<Nominatim>> {
         return RetrofitInstanceNominatim.api.getNominatim("alepa")
+    }
+    suspend fun getSupermarkets(): Response<ArrayList<Nominatim>> {
+        return RetrofitInstanceNominatim.api.getNominatim("supermarket")
+    }
+    suspend fun getPrismas(): Response<ArrayList<Nominatim>> {
+        return RetrofitInstanceNominatim.api.getNominatim("prisma")
+    }
+    suspend fun getSMarkets(): Response<ArrayList<Nominatim>> {
+        return RetrofitInstanceNominatim.api.getNominatim("s-market")
+    }
+    suspend fun getSales(): Response<ArrayList<Nominatim>> {
+        return RetrofitInstanceNominatim.api.getNominatim("sale")
+    }
+    suspend fun getKMarkets(): Response<ArrayList<Nominatim>> {
+        return RetrofitInstanceNominatim.api.getNominatim("k-market")
+    }
+    suspend fun getCitymarkets(): Response<ArrayList<Nominatim>> {
+        return RetrofitInstanceNominatim.api.getNominatim("citymarket")
     }
 
 }

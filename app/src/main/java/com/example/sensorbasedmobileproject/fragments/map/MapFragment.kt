@@ -5,6 +5,7 @@ import android.location.Geocoder
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -81,6 +82,7 @@ class MapFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         val searchButton = search_stores
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
@@ -98,7 +100,7 @@ class MapFragment : Fragment() {
 
         searchButton.setOnClickListener(){
             viewModel.getNominatim()
-            addMarker()
+
         }
     }
 
@@ -113,7 +115,7 @@ class MapFragment : Fragment() {
     }
 
     private fun insertDataToDatabase(response: Response<ArrayList<Nominatim>>) {
-
+        val handler: Handler = Handler()
         for (item: Nominatim in response.body()!!) {
             val place_id = item.place_id
             val licence = item.licence
@@ -142,18 +144,19 @@ class MapFragment : Fragment() {
                 icon
             )
             mNominatimItemViewModel.addNominatimData(nominatim)
-
+            handler.postDelayed({
+                addMarker(lat, lon, display_name)
+            },2000L)
         }
-        Log.d("ALEPA", "")
-        Toast.makeText(requireContext(), "Successfully added Alepas", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "Successfully added stores", Toast.LENGTH_SHORT).show()
     }
 
-    private fun addMarker() {
+    private fun addMarker(lat: Double,  lon: Double, display_name: String) {
         val marker = Marker(map)
-        marker.position = GeoPoint(mNominatimList[0].lat, mNominatimList[0].lon)
+        marker.position = GeoPoint(lat, lon)
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
         map.overlays.add(marker)
-        marker.title = mNominatimList[0].display_name
+        marker.title = display_name
     }
 
 
