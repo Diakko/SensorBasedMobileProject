@@ -27,13 +27,33 @@ class MainViewModel(private val repository: Repository): ViewModel() {
     fun getNominatim() {
 
         viewModelScope.launch {
-            val response: Response<ArrayList<Nominatim>> = repository.getAlepas()
+            val response: Response<ArrayList<Nominatim>> = repository.getEspooAlepas()
+            myNominatimResponse.value = response
+        }
+        viewModelScope.launch {
+            val response: Response<ArrayList<Nominatim>> = repository.getHelsinkiAlepas()
+            myNominatimResponse.value = response
+        }
+        viewModelScope.launch {
+            val response: Response<ArrayList<Nominatim>> = repository.getVantaaAlepas()
             myNominatimResponse.value = response
         }
         viewModelScope.launch {
             val response: Response<ArrayList<Nominatim>> = repository.getKMarkets()
             myNominatimResponse.value = response
-        }/*
+        }
+        viewModelScope.launch {
+            val response: Response<ArrayList<Nominatim>> = repository.getHelsinkiKMarkets()
+            myNominatimResponse.value = response
+        }
+        viewModelScope.launch {
+            val response: Response<ArrayList<Nominatim>> = repository.getEspooKMarkets()
+            myNominatimResponse.value = response
+        }
+        viewModelScope.launch {
+            val response: Response<ArrayList<Nominatim>> = repository.getVantaaKMarkets()
+            myNominatimResponse.value = response
+        }
         viewModelScope.launch {
             val response: Response<ArrayList<Nominatim>> = repository.getPrismas()
             myNominatimResponse.value = response
@@ -53,7 +73,7 @@ class MainViewModel(private val repository: Repository): ViewModel() {
         viewModelScope.launch {
             val response: Response<ArrayList<Nominatim>> = repository.getSales()
             myNominatimResponse.value = response
-        }*/
+        }
     }
 
 }

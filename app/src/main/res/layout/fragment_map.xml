@@ -27,20 +27,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/map_card_view" />
 
-    <Button
-        android:id="@+id/search_stores"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Search Stores"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/location_now_text" />
+
 
     <!--<TextView
         android:id="@+id/distance_between_text"

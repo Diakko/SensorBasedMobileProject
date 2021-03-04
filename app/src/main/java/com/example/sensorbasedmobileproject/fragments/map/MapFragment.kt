@@ -72,10 +72,14 @@ class MapFragment : Fragment() {
         mNominatimItemViewModel = ViewModelProvider(this).get(NominatimItemViewModel::class.java)
         mNominatimItemViewModel.readAllData.observe(viewLifecycleOwner, Observer { nominatim ->
             mNominatimList = nominatim
+            if (mNominatimList.isNotEmpty()){
+                for (item in mNominatimList) {
+                    if (item.lat != null || item.lon != null || item.display_name != null){
+                        addMarker(item.lat!!, item.lon!!, item.display_name!!)
+                    }
+                }
+            }
         })
-
-
-
         return viewHere
     }
 
@@ -83,25 +87,20 @@ class MapFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        val searchButton = search_stores
+
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-
-
         viewModel.myNominatimResponse.observe(viewLifecycleOwner, Observer { response ->
             if (response.isSuccessful && !(response.body()?.isEmpty())!!) {
                 insertDataToDatabase(response)
             } else {
                 Log.d("DBG", response.errorBody().toString())
-                Toast.makeText(requireContext(), "No Alepas found", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "No Stores found", Toast.LENGTH_SHORT).show()
             }
         })
+        viewModel.getNominatim()
 
-        searchButton.setOnClickListener(){
-            viewModel.getNominatim()
-
-        }
     }
 
     override fun onResume() {
@@ -115,7 +114,6 @@ class MapFragment : Fragment() {
     }
 
     private fun insertDataToDatabase(response: Response<ArrayList<Nominatim>>) {
-        val handler: Handler = Handler()
         for (item: Nominatim in response.body()!!) {
             val place_id = item.place_id
             val licence = item.licence
@@ -128,6 +126,7 @@ class MapFragment : Fragment() {
             val type = item.type
             val importance = item.importance
             val icon = item.icon
+
 
             val nominatim = NominatimItem(
                 0,
@@ -144,9 +143,6 @@ class MapFragment : Fragment() {
                 icon
             )
             mNominatimItemViewModel.addNominatimData(nominatim)
-            handler.postDelayed({
-                addMarker(lat, lon, display_name)
-            },2000L)
         }
         Toast.makeText(requireContext(), "Successfully added stores", Toast.LENGTH_SHORT).show()
     }
