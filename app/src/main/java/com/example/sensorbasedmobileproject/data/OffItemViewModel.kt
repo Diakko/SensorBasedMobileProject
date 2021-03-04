@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class OffItemViewModel(application: Application): AndroidViewModel(application) {
+class OffItemViewModel(application: Application) : AndroidViewModel(application) {
 
     val readAllData: LiveData<List<OffItem>>
     private val repository: OffItemRepository
@@ -25,11 +25,9 @@ class OffItemViewModel(application: Application): AndroidViewModel(application) 
     }
 
     fun checkIfExists(code: Long): Boolean {
-        val launch = viewModelScope.launch(Dispatchers.IO) {
-            repository.checkIfExists(code)
-        }
-        return launch.isCompleted
+        var exists: Boolean
+        exists = repository.checkIfExists(code)
+        return exists
     }
-
 
 }

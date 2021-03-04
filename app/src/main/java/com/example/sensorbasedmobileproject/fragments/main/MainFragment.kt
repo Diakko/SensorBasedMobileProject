@@ -84,7 +84,7 @@ class MainFragment : Fragment() {
 
         // Observe response
         viewModel.myOffResponse.observe(viewLifecycleOwner, { response ->
-            if (response.isSuccessful) {
+            if (response.isSuccessful && response.body()?.status == 1) {
                 insertDataToDatabase(response)
             } else {
                 Log.d("DBG", response.errorBody().toString())
@@ -113,63 +113,45 @@ class MainFragment : Fragment() {
     private fun insertDataToDatabase(response: Response<OpenFoodFactResponse>) {
         var exists: Boolean
 
-        // Check if product is found in Open Food Facts
-        when (response.body()?.status) {
+        // Check here if in local database
+        val code = response.body()?.code
+        exists = mOffViewModel.checkIfExists(code!!)
+        Log.d("DBG", exists.toString())
 
-            0 -> {
-                // Product not found in Open Food Facts
-                Toast.makeText(
-                    requireContext(),
-                    "Product not found in Open Food Facts database",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
+        if (exists) {
+            Toast.makeText(
+                requireContext(),
+                "Product already in local database",
+                Toast.LENGTH_LONG
+            ).show()
 
-            1 -> {
-                // Product found in Open Food Facts
-                // Check here if in local database
-                val code = response.body()?.code
+        } else {
 
-                // TODO: call mOffViewModel.checkIfExists(code!!) and then .join() to get the result of the db query
-
-                exists = mOffViewModel.checkIfExists(code!!)
-                Log.d("DBG", exists.toString())
-
-                if (exists) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Product already in local database added",
-                        Toast.LENGTH_LONG
-                    ).show()
-
-                } else {
-
-                    // if product not in local database, proceed with adding into database
-                    val ingredientsTextDebug = response.body()?.product?.ingredients_text_debug
-                    val imageUrl = response.body()?.product?.image_url
-                    val productName = response.body()?.product?.product_name
-                    val offItem = OffItem(
-                        0,
-                        code,
-                        productName,
-                        ingredientsTextDebug,
-                        imageUrl
-                    )
-                    mOffViewModel.addOffData(offItem)
-                    Toast.makeText(requireContext(), "Successfully added", Toast.LENGTH_LONG).show()
-                }
-
-            }
+            // if product not in local database, proceed with adding into database
+            val ingredientsTextDebug = response.body()?.product?.ingredients_text_debug
+            val imageUrl = response.body()?.product?.image_url
+            val productName = response.body()?.product?.product_name
+            val offItem = OffItem(
+                0,
+                code,
+                productName,
+                ingredientsTextDebug,
+                imageUrl
+            )
+            mOffViewModel.addOffData(offItem)
+            Toast.makeText(requireContext(), "Successfully added", Toast.LENGTH_LONG).show()
         }
-    }
 
-    private fun Fragment.hideKeyboard() {
-        view?.let { activity?.hideKeyboard(it) }
     }
+}
 
-    private fun Context.hideKeyboard(view: View) {
-        val inputMethodManager =
-            getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
-    }
+
+private fun Fragment.hideKeyboard() {
+    view?.let { activity?.hideKeyboard(it) }
+}
+
+private fun Context.hideKeyboard(view: View) {
+    val inputMethodManager =
+        getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
 }
