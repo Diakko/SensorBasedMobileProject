@@ -26,6 +26,7 @@ import com.example.sensorbasedmobileproject.data.NominatimItemViewModel
 import com.example.sensorbasedmobileproject.model.Nominatim
 import com.example.sensorbasedmobileproject.repository.Repository
 import com.google.android.gms.location.*
+import kotlinx.android.synthetic.main.fragment_map.*
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
@@ -45,7 +46,7 @@ class MapFragment : Fragment() {
     private lateinit var viewHere: View
     private lateinit var viewModel: MainViewModel
     private lateinit var mNominatimItemViewModel: NominatimItemViewModel
-    private  var mNominatimList = emptyList<NominatimItem>()
+    private var mNominatimList = emptyList<NominatimItem>()
 
 
     override fun onCreateView(
@@ -68,7 +69,9 @@ class MapFragment : Fragment() {
 
 
         mNominatimItemViewModel = ViewModelProvider(this).get(NominatimItemViewModel::class.java)
-        mNominatimItemViewModel.readAllData.observe(viewLifecycleOwner, Observer { nominatim -> mNominatimList = nominatim })
+        mNominatimItemViewModel.readAllData.observe(viewLifecycleOwner, Observer { nominatim ->
+            mNominatimList = nominatim
+        })
 
 
 
@@ -78,6 +81,7 @@ class MapFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val searchButton = search_stores
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
@@ -91,6 +95,11 @@ class MapFragment : Fragment() {
                 Toast.makeText(requireContext(), "No Alepas found", Toast.LENGTH_SHORT).show()
             }
         })
+
+        searchButton.setOnClickListener(){
+            viewModel.getNominatim()
+            addMarker()
+        }
     }
 
     override fun onResume() {
@@ -104,28 +113,40 @@ class MapFragment : Fragment() {
     }
 
     private fun insertDataToDatabase(response: Response<ArrayList<Nominatim>>) {
-        val place_id = response.body()?.get(0)?.place_id
-        val lat = response.body()?.get(0)?.lat
-        val lon = response.body()?.get(0)?.lon
-        val display_name = response.body()?.get(0)?.display_name
+        for (item: Nominatim in response.body()!!) {
+            val place_id = item.place_id
+            val licence = item.licence
+            val osm_type = item.osm_type
+            val osm_id = item.osm_id
+            // val boundingbox = item.boundingbox
+            val lat = item.lat
+            val lon = item.lon
+            val display_name = item.display_name
+            val type = item.type
+            val importance = item.importance
+            val icon = item.icon
 
-        val nominatim = NominatimItem(
-            0,
-            place_id!!,
-            lat!!,
-            lon!!,
-            display_name!!
-        )
-        mNominatimItemViewModel.addNominatimData(nominatim)
-        addMarker()
-        Toast.makeText(requireContext(), "Successfully added Alepa", Toast.LENGTH_SHORT).show()
+            val nominatim = NominatimItem(
+                0,
+                place_id,
+                licence,
+                osm_type,
+                osm_id,
+                // boundingbox,
+                lat,
+                lon,
+                display_name,
+                type,
+                importance,
+                icon
+            )
+            mNominatimItemViewModel.addNominatimData(nominatim)
+        }
+        Log.d("ALEPA", "")
+        Toast.makeText(requireContext(), "Successfully added Alepas", Toast.LENGTH_SHORT).show()
     }
 
     private fun addMarker() {
-        val repository = Repository()
-        val viewModelFactory = MainViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-        viewModel.getNominatim()
         val marker = Marker(map)
         marker.position = GeoPoint(mNominatimList[0].lat, mNominatimList[0].lon)
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
