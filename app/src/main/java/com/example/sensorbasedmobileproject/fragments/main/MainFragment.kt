@@ -111,18 +111,17 @@ class MainFragment : Fragment() {
         val code = response.body()?.code
 
         // TODO: call mOffViewModel.checkIfExists(code!!) and then .join() to get the result of the db query
+        // exists = mOffViewModel.checkIfExists(code!!)
+        // Log.d("DBG", exists.toString())
 
-        exists = mOffViewModel.checkIfExists(code!!)
-        Log.d("DBG", exists.toString())
-
-        if (exists) {
-            Toast.makeText(
-                requireContext(),
-                "Product already in local database",
-                Toast.LENGTH_LONG
-            ).show()
-
-        } else {
+//        if (exists) {
+//            Toast.makeText(
+//                requireContext(),
+//                "Product already in local database",
+//                Toast.LENGTH_LONG
+//            ).show()
+//
+//        } else {
 
 
             // if product not in local database, proceed with adding into database
@@ -141,7 +140,7 @@ class MainFragment : Fragment() {
         }
 
     }
-}
+//}
 
 
 
