@@ -19,6 +19,7 @@ abstract class NominatimItemDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: NominatimItemDatabase? = null
 
+        @Synchronized
         fun getDatabase(context: Context): NominatimItemDatabase {
             val tempInstance = INSTANCE
             if (tempInstance != null) {

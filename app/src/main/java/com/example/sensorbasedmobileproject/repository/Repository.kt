@@ -13,7 +13,7 @@ class Repository {
     }
 
     suspend fun getNominatim(): Response<ArrayList<Nominatim>> {
-        return RetrofitInstanceNominatim.api.getNominatim()
+        return RetrofitInstanceNominatim.api.getNominatim("alepa")
     }
 
 }

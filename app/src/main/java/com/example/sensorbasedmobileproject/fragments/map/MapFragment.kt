@@ -113,6 +113,7 @@ class MapFragment : Fragment() {
     }
 
     private fun insertDataToDatabase(response: Response<ArrayList<Nominatim>>) {
+
         for (item: Nominatim in response.body()!!) {
             val place_id = item.place_id
             val licence = item.licence
@@ -141,6 +142,7 @@ class MapFragment : Fragment() {
                 icon
             )
             mNominatimItemViewModel.addNominatimData(nominatim)
+
         }
         Log.d("ALEPA", "")
         Toast.makeText(requireContext(), "Successfully added Alepas", Toast.LENGTH_SHORT).show()
