@@ -124,6 +124,7 @@ class MainFragment : Fragment() {
 
         } else {
 
+
             // if product not in local database, proceed with adding into database
             val ingredientsTextDebug = response.body()?.product?.ingredients_text_debug
             val imageUrl = response.body()?.product?.image_url
@@ -140,8 +141,9 @@ class MainFragment : Fragment() {
         }
 
     }
-
 }
+
+
 
 private fun Fragment.hideKeyboard() {
     view?.let { activity?.hideKeyboard(it) }

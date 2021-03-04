@@ -9,10 +9,10 @@ class OffItemRepository(private val offItemDao: OffItemDao) {
     suspend fun addOffItem(offItem: OffItem) {
         val code = offItem.code!!
         // If not in database, insert
-        if (!offItemDao.productExists(code)) {
+//        if (!offItemDao.productExists(code)) {
             offItemDao.addOffItem(offItem)
             // Get confirmation of insert and make a Toast
-        }
+//        }
     }
 
     fun checkIfExists(code: Long): Boolean {
