@@ -20,18 +20,12 @@ import com.example.sensorbasedmobileproject.ApiViewModel
 import com.example.sensorbasedmobileproject.ApiViewModelFactory
 import com.example.sensorbasedmobileproject.R
 import com.example.sensorbasedmobileproject.data.OffItem
-
-import com.example.sensorbasedmobileproject.data.OffItemDatabase
 import com.example.sensorbasedmobileproject.data.OffItemViewModel
 import com.example.sensorbasedmobileproject.model.openfoodfacts.OpenFoodFactResponse
 import com.example.sensorbasedmobileproject.repository.ApiRepository
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_search_off.view.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
 import retrofit2.Response
-import kotlin.math.log
 
 class MainFragment : Fragment() {
 
@@ -42,7 +36,7 @@ class MainFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
 
         val view: View = inflater.inflate(R.layout.fragment_main, container, false)
@@ -84,7 +78,7 @@ class MainFragment : Fragment() {
 
         // Observe response
         viewModel.myOffResponse.observe(viewLifecycleOwner, { response ->
-            if (response.isSuccessful) {
+            if (response.isSuccessful && response.body()?.status == 1) {
                 insertDataToDatabase(response)
             } else {
                 Log.d("DBG", response.errorBody().toString())
@@ -114,62 +108,48 @@ class MainFragment : Fragment() {
         var exists: Boolean
 
         // Check if product is found in Open Food Facts
-        when (response.body()?.status) {
+        val code = response.body()?.code
 
-            0 -> {
-                // Product not found in Open Food Facts
-                Toast.makeText(
-                    requireContext(),
-                    "Product not found in Open Food Facts database",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
+        // TODO: call mOffViewModel.checkIfExists(code!!) and then .join() to get the result of the db query
 
-            1 -> {
-                // Product found in Open Food Facts
-                // Check here if in local database
-                val code = response.body()?.code
+        exists = mOffViewModel.checkIfExists(code!!)
+        Log.d("DBG", exists.toString())
 
-                // TODO: call mOffViewModel.checkIfExists(code!!) and then .join() to get the result of the db query
+        if (exists) {
+            Toast.makeText(
+                requireContext(),
+                "Product already in local database",
+                Toast.LENGTH_LONG
+            ).show()
 
-                exists = mOffViewModel.checkIfExists(code!!)
-                Log.d("DBG", exists.toString())
+        } else {
 
-                if (exists) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Product already in local database added",
-                        Toast.LENGTH_LONG
-                    ).show()
-
-                } else {
-
-                    // if product not in local database, proceed with adding into database
-                    val ingredientsTextDebug = response.body()?.product?.ingredients_text_debug
-                    val imageUrl = response.body()?.product?.image_url
-                    val productName = response.body()?.product?.product_name
-                    val offItem = OffItem(
-                        0,
-                        code,
-                        productName,
-                        ingredientsTextDebug,
-                        imageUrl
-                    )
-                    mOffViewModel.addOffData(offItem)
-                    Toast.makeText(requireContext(), "Successfully added", Toast.LENGTH_LONG).show()
-                }
-
-            }
+            // if product not in local database, proceed with adding into database
+            val ingredientsTextDebug = response.body()?.product?.ingredients_text_debug
+            val imageUrl = response.body()?.product?.image_url
+            val productName = response.body()?.product?.product_name
+            val offItem = OffItem(
+                0,
+                code,
+                productName,
+                ingredientsTextDebug,
+                imageUrl
+            )
+            mOffViewModel.addOffData(offItem)
+            Toast.makeText(requireContext(), "Successfully added", Toast.LENGTH_LONG).show()
         }
+
     }
 
-    private fun Fragment.hideKeyboard() {
-        view?.let { activity?.hideKeyboard(it) }
-    }
-
-    private fun Context.hideKeyboard(view: View) {
-        val inputMethodManager =
-            getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
-    }
 }
+
+private fun Fragment.hideKeyboard() {
+    view?.let { activity?.hideKeyboard(it) }
+}
+
+private fun Context.hideKeyboard(view: View) {
+    val inputMethodManager =
+        getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+}
+
