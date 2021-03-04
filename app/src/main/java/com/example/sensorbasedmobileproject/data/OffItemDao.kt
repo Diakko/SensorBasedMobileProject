@@ -18,5 +18,4 @@ interface OffItemDao {
     @Query("SELECT EXISTS (SELECT 1 FROM openfoodfacts WHERE code = :code)")
     fun productExists(code: Long): Boolean
 
-
 }

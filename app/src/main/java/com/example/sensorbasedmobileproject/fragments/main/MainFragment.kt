@@ -112,11 +112,12 @@ class MainFragment : Fragment() {
 
     private fun insertDataToDatabase(response: Response<OpenFoodFactResponse>) {
         var exists: Boolean
+
         // Check if product is found in Open Food Facts
         when (response.body()?.status) {
 
             0 -> {
-                // Product not found
+                // Product not found in Open Food Facts
                 Toast.makeText(
                     requireContext(),
                     "Product not found in Open Food Facts database",
@@ -125,7 +126,7 @@ class MainFragment : Fragment() {
             }
 
             1 -> {
-                // Product found
+                // Product found in Open Food Facts
                 // Check here if in local database
                 val code = response.body()?.code
 
@@ -172,4 +173,3 @@ class MainFragment : Fragment() {
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }
-

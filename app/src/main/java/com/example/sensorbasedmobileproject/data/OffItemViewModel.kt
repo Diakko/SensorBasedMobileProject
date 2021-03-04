@@ -20,7 +20,7 @@ class OffItemViewModel(application: Application): AndroidViewModel(application) 
 
     fun addOffData(offItem: OffItem) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.addOffInfo(offItem)
+            repository.addOffItem(offItem)
         }
     }
 
