@@ -154,7 +154,6 @@ class MainFragment : Fragment() {
     }
 }
 
-
 private fun Fragment.hideKeyboard() {
     view?.let { activity?.hideKeyboard(it) }
 }
