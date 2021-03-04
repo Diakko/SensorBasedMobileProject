@@ -29,7 +29,6 @@
             android:id="@+id/searchable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/search_fineli_database"
             android:textColorHint="@color/design_default_color_on_secondary"
             android:ellipsize="end"
             android:imeOptions="actionDone"
