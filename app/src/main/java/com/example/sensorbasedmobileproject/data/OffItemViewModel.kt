@@ -26,10 +26,10 @@ class OffItemViewModel(application: Application) : AndroidViewModel(application)
 
     suspend fun checkIfExists(code: Long): Boolean {
         var exists = false
-        val launch = viewModelScope.launch(Dispatchers.IO) {
+        val job = viewModelScope.launch(Dispatchers.IO) {
             exists = repository.checkIfExists(code)
         }
-        launch.join()
+        job.join()
         return exists
     }
 

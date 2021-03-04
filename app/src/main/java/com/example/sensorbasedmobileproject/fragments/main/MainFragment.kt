@@ -3,6 +3,8 @@ package com.example.sensorbasedmobileproject.fragments.main
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.util.Log
 import android.view.LayoutInflater
@@ -25,6 +27,9 @@ import com.example.sensorbasedmobileproject.model.openfoodfacts.OpenFoodFactResp
 import com.example.sensorbasedmobileproject.repository.ApiRepository
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_search_off.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class MainFragment : Fragment() {
@@ -76,6 +81,7 @@ class MainFragment : Fragment() {
             viewModel.getOpenFood(ean.toString())
         }
 
+
         // Observe response
         viewModel.myOffResponse.observe(viewLifecycleOwner, { response ->
             if (response.isSuccessful && response.body()?.status == 1) {
@@ -106,42 +112,47 @@ class MainFragment : Fragment() {
 
     private fun insertDataToDatabase(response: Response<OpenFoodFactResponse>) {
         var exists: Boolean
-
-        // Check if product is found in Open Food Facts
         val code = response.body()?.code
 
-        // TODO: call mOffViewModel.checkIfExists(code!!) and then .join() to get the result of the db query
-        // exists = mOffViewModel.checkIfExists(code!!)
-        // Log.d("DBG", exists.toString())
+        // Check if product is already in local database
+        GlobalScope.launch(context = Dispatchers.IO) {
+            exists = mOffViewModel.checkIfExists(code!!)
 
-//        if (exists) {
-//            Toast.makeText(
-//                requireContext(),
-//                "Product already in local database",
-//                Toast.LENGTH_LONG
-//            ).show()
-//
-//        } else {
+            // Product is in local database, inform user
+            if (exists) {
 
+                // Toasts inside GlobalScope need to be done with Handler/Looper
+                Handler(Looper.getMainLooper()).post {
+                    Toast.makeText(
+                        requireContext(),
+                        "Product already in local database",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
 
-            // if product not in local database, proceed with adding into database
-            val ingredientsTextDebug = response.body()?.product?.ingredients_text_debug
-            val imageUrl = response.body()?.product?.image_url
-            val productName = response.body()?.product?.product_name
-            val offItem = OffItem(
-                0,
-                code,
-                productName,
-                ingredientsTextDebug,
-                imageUrl
-            )
-            mOffViewModel.addOffData(offItem)
-            Toast.makeText(requireContext(), "Successfully added", Toast.LENGTH_LONG).show()
+            } else {
+
+                // Product not in local database, proceed with adding into database
+                val ingredientsTextDebug = response.body()?.product?.ingredients_text_debug
+                val imageUrl = response.body()?.product?.image_url
+                val productName = response.body()?.product?.product_name
+                val offItem = OffItem(
+                    0,
+                    code,
+                    productName,
+                    ingredientsTextDebug,
+                    imageUrl
+                )
+
+                mOffViewModel.addOffData(offItem)
+
+                Handler(Looper.getMainLooper()).post {
+                    Toast.makeText(requireContext(), "Successfully added", Toast.LENGTH_LONG).show()
+                }
+            }
         }
-
     }
-//}
-
+}
 
 
 private fun Fragment.hideKeyboard() {
