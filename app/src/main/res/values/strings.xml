@@ -31,8 +31,10 @@
     <string name="start">placeholder</string>
     <string name="stop">placeholder</string>
     <string name="btn_search_fineli">Search</string>
-
     <string name="search_hint">Food you want to search</string>
+
+    // OpenFoodFacts Search
+    <string name="search_openfoodfacts_database">EAN you want to search</string>
 
     // Home fragment
     <string name="welcome_text">Welcome</string>

@@ -39,4 +39,3 @@ data class FineliItem(
     @Embedded val ingredientClass: IngredientClass?,
     @Embedded val functionClass: FunctionClass?
 )
-

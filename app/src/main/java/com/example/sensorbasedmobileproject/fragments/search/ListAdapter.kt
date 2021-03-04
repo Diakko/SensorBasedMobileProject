@@ -6,8 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sensorbasedmobileproject.R
 import com.example.sensorbasedmobileproject.data.FineliItem
-import com.example.sensorbasedmobileproject.model.Fineli
-import kotlinx.android.synthetic.main.custom_row.view.*
+import kotlinx.android.synthetic.main.custom_row_fineli.view.*
 
 class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
@@ -17,11 +16,11 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListAdapter.MyViewHolder {
-        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.custom_row, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.custom_row_fineli, parent, false))
     }
 
-    override fun onBindViewHolder(holder: ListAdapter.MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = foodList[position]
         holder.itemView.fineli_id.text = currentItem.fineliId.toString()
         holder.itemView.fineli_name.text = currentItem.name?.fi

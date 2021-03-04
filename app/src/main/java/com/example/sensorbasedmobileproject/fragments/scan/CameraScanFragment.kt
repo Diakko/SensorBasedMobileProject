@@ -8,11 +8,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.example.sensorbasedmobileproject.R
 import com.google.zxing.integration.android.IntentIntegrator
 
 
-class CameraScanFragment() : Fragment(){
+class CameraScanFragment() : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,9 +23,9 @@ class CameraScanFragment() : Fragment(){
         val view = inflater.inflate(R.layout.fragment_camera_scan, container, false)
         val integrator = IntentIntegrator.forSupportFragment(this@CameraScanFragment)
 
-        integrator.setOrientationLocked(false)
+        integrator.setOrientationLocked(true)
         integrator.setPrompt("Scan QR code")
-        integrator.setBeepEnabled(false)
+        integrator.setBeepEnabled(true)
         integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES)
 
 
@@ -39,9 +40,14 @@ class CameraScanFragment() : Fragment(){
                 Toast.makeText(context, "Cancelled", Toast.LENGTH_LONG).show()
             } else {
                 Toast.makeText(context, "Scanned : " + result.contents, Toast.LENGTH_LONG).show()
+
+                val ean = result.contents.toString()
+                val action = CameraScanFragmentDirections.actionScanToHome(ean)
+                requireView().findNavController().navigate(action)
             }
         }
     }
+
 
 
 }

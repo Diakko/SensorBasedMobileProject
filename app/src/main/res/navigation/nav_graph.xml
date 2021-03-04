@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
@@ -10,39 +9,35 @@
         android:id="@+id/action_home"
         android:name="com.example.sensorbasedmobileproject.fragments.main.MainFragment"
         android:label="Home"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main">
+
+
+        <argument
+            android:name="ean"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/action_search"
         android:name="com.example.sensorbasedmobileproject.fragments.search.SearchFragment"
         android:label="Home"
-        tools:layout="@layout/fragment_search" >
-        <action
-            android:id="@+id/action_action_search_to_listFragment"
-            app:destination="@id/listFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_search" />
 
     <fragment
         android:id="@+id/action_camera"
         android:name="com.example.sensorbasedmobileproject.fragments.scan.CameraScanFragment"
         android:label="Scan"
-        tools:layout="@layout/fragment_camera_scan" />
+        tools:layout="@layout/fragment_camera_scan">
+        <action
+            android:id="@+id/action_scan_to_home"
+            app:destination="@id/action_home" />
+    </fragment>
 
     <fragment
         android:id="@+id/action_profile"
         android:name="com.example.sensorbasedmobileproject.fragments.profile.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
-
-    <fragment
-        android:id="@+id/listFragment"
-        android:name="com.example.sensorbasedmobileproject.ListFragment"
-        android:label="fragment_list"
-        tools:layout="@layout/fragment_list" >
-        <action
-            android:id="@+id/action_listFragment_to_action_search"
-            app:destination="@id/action_search" />
-    </fragment>
 
     <fragment
         android:id="@+id/action_map"

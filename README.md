@@ -1,16 +1,8 @@
 # SensorBasedMobileProject
+A school project for the course "Sensor Based Mobile Applications" (course info here: 
+https://opinto-opas.metropolia.fi/en/realization/TX00CK66-3009)
 
-### GIT WORKFLOW
-
-1. Git clone the repo
-2. Make a new branch for a new feature
-3. Make a pull request of your branch
-4. Rename branch as "WIP branch name" (Work In Progress) and write down description what you are doing
-5. Do work on your branch
-6. When work done, remove WIP from the branch name
-7. Code review with the team
-8. Merge to master
-9. Repeat from 2. ->
+The idea behind this app is to be able to scan a food product at your local grocery store and see if the food contains substances that may be cause an allergic reaction to you. It also gives an general overview of the products nutriments.
 
 ### INGREDIENTS
 
