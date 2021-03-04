@@ -16,11 +16,11 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListAdapter.MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.custom_row_fineli, parent, false))
     }
 
-    override fun onBindViewHolder(holder: ListAdapter.MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = foodList[position]
         holder.itemView.fineli_id.text = currentItem.fineliId.toString()
         holder.itemView.fineli_name.text = currentItem.name?.fi

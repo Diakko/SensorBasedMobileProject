@@ -20,7 +20,6 @@ import java.net.URL
 class OffListAdapter : RecyclerView.Adapter<OffListAdapter.MyViewHolder>() {
 
     private val scope = CoroutineScope(Dispatchers.IO)
-
     private var foodList = emptyList<OffItem>()
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
