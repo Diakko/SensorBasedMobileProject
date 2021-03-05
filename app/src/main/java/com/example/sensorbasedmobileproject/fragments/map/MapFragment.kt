@@ -1,25 +1,19 @@
 package com.example.sensorbasedmobileproject.fragments.map
 
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.location.Geocoder
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ListAdapter
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
-import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
@@ -31,7 +25,9 @@ import com.example.sensorbasedmobileproject.data.NominatimItemViewModel
 import com.example.sensorbasedmobileproject.model.Nominatim
 import com.example.sensorbasedmobileproject.repository.Repository
 import com.google.android.gms.location.*
-import kotlinx.android.synthetic.main.fragment_map.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
@@ -53,12 +49,13 @@ class MapFragment : Fragment() {
     private lateinit var viewModel: MainViewModel
     private lateinit var mNominatimItemViewModel: NominatimItemViewModel
     private var mNominatimList = emptyList<NominatimItem>()
-
+    private val excludes = mutableListOf<String>()
+    private var first = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         viewHere = inflater.inflate(R.layout.fragment_map, container, false)
         val ctx = context
@@ -77,34 +74,13 @@ class MapFragment : Fragment() {
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
-        var exists: Boolean
 
         mNominatimItemViewModel = ViewModelProvider(this).get(NominatimItemViewModel::class.java)
         mNominatimItemViewModel.readAllData.observe(viewLifecycleOwner, Observer { nominatim ->
             mNominatimList = nominatim
-            if (mNominatimList.isNotEmpty()){
-                for (item in mNominatimList) {
-                    if (item.lat != null || item.lon != null || item.display_name != null){
-                        addMarker(item.lat!!, item.lon!!, item.display_name!!, "stores")
-                    }
-                }
-                var excludes = ""
-                var first = true
-                for (item in mNominatimList) {
-                    if (first) {
-                        excludes = "${item.place_id}"
-                        first = false
-                    } else {
-                        excludes += ",${item.place_id}"
-                    }
-                }
-                Log.d("EXCLUDES", excludes)
-                viewModel.getNominatimExcluded(excludes)
-            } else {
-                viewModel.getNominatim()
-            }
         })
 
+        viewModel.getNominatim()
         return viewHere
     }
 
@@ -135,35 +111,58 @@ class MapFragment : Fragment() {
     }
 
     private fun insertDataToDatabase(response: Response<ArrayList<Nominatim>>) {
+        var exists: Boolean
+        var checkPlaceId: Int
+
+
+
         for (item: Nominatim in response.body()!!) {
-            val place_id = item.place_id
-            val licence = item.licence
-            val osm_type = item.osm_type
-            val osm_id = item.osm_id
-            // val boundingbox = item.boundingbox
-            val lat = item.lat
-            val lon = item.lon
-            val display_name = item.display_name
-            val type = item.type
-            val importance = item.importance
-            val icon = item.icon
+            checkPlaceId = item.place_id
+            GlobalScope.launch(context = Dispatchers.IO) {
+                exists = mNominatimItemViewModel.checkIfExists(checkPlaceId)
+
+                if (!exists) {
+
+                    val place_id = item.place_id
+                    val licence = item.licence
+                    val osm_type = item.osm_type
+                    val osm_id = item.osm_id
+                    // val boundingbox = item.boundingbox
+                    val lat = item.lat
+                    val lon = item.lon
+                    val display_name = item.display_name
+                    val type = item.type
+                    val importance = item.importance
+                    val icon = item.icon
 
 
-            val nominatim = NominatimItem(
-                0,
-                place_id,
-                licence,
-                osm_type,
-                osm_id,
-                // boundingbox,
-                lat,
-                lon,
-                display_name,
-                type,
-                importance,
-                icon
-            )
-            mNominatimItemViewModel.addNominatimData(nominatim)
+                    val nominatim = NominatimItem(
+                        0,
+                        place_id,
+                        licence,
+                        osm_type,
+                        osm_id,
+                        // boundingbox,
+                        lat,
+                        lon,
+                        display_name,
+                        type,
+                        importance,
+                        icon
+                    )
+
+                    addMarker(lat, lon, display_name, "stores")
+                    if (first) {
+                        excludes.add("$place_id")
+                        first = false
+                    } else {
+                        excludes.add("%2C${item.place_id}")
+                    }
+
+                    mNominatimItemViewModel.addNominatimData(nominatim)
+                }
+
+            }
         }
         Log.d("STORES", "Successfully added stores")
     }
@@ -176,7 +175,7 @@ class MapFragment : Fragment() {
                 val marker = Marker(map)
                 marker.position = GeoPoint(lat, lon)
                 marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-                marker.setIcon(requireContext().resources.getDrawable(R.drawable.shopping_icon))
+                marker.icon = requireContext().resources.getDrawable(R.drawable.shopping_icon)
                 marker.title = title
                 map.overlays.add(marker)
             }
