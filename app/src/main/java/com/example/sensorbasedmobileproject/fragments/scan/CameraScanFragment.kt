@@ -39,8 +39,7 @@ class CameraScanFragment() : Fragment() {
             if (result.contents == null) {
                 Toast.makeText(context, "Cancelled", Toast.LENGTH_LONG).show()
             } else {
-                Toast.makeText(context, "Scanned : " + result.contents, Toast.LENGTH_LONG).show()
-
+                // Toast.makeText(context, "Scanned : " + result.contents, Toast.LENGTH_LONG).show()
                 val ean = result.contents.toString()
                 val action = CameraScanFragmentDirections.actionScanToHome(ean)
                 requireView().findNavController().navigate(action)
