@@ -36,7 +36,7 @@ class OffListAdapter : RecyclerView.Adapter<OffListAdapter.MyViewHolder>() {
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = foodList[position]
-        holder.itemView.code.text = currentItem.code.toString()
+        holder.itemView.code.text = "EAN: ${currentItem.code.toString()}"
         holder.itemView.product_name.text = currentItem.product_name
         holder.itemView.ingredients_text_debug.text = currentItem.ingredients_text_debug
 

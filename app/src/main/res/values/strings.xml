@@ -34,7 +34,7 @@
     <string name="search_hint">Food you want to search</string>
 
     // OpenFoodFacts Search
-    <string name="search_openfoodfacts_database">EAN you want to search</string>
+    <string name="search_openfoodfacts_database">Search with EAN code</string>
 
     // Home fragment
     <string name="welcome_text">Welcome</string>
