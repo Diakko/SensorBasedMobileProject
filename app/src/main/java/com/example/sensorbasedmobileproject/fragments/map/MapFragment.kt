@@ -73,6 +73,11 @@ class MapFragment : Fragment() {
         map.controller.setCenter(GeoPoint(60.0, 25.0))
 
 
+        val repository = Repository()
+        val viewModelFactory = MainViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+
+        var exists: Boolean
 
         mNominatimItemViewModel = ViewModelProvider(this).get(NominatimItemViewModel::class.java)
         mNominatimItemViewModel.readAllData.observe(viewLifecycleOwner, Observer { nominatim ->
@@ -83,15 +88,28 @@ class MapFragment : Fragment() {
                         addMarker(item.lat!!, item.lon!!, item.display_name!!, "stores")
                     }
                 }
+                var excludes = ""
+                var first = true
+                for (item in mNominatimList) {
+                    if (first) {
+                        excludes = "${item.place_id}"
+                        first = false
+                    } else {
+                        excludes += ",${item.place_id}"
+                    }
+                }
+                Log.d("EXCLUDES", excludes)
+                viewModel.getNominatimExcluded(excludes)
+            } else {
+                viewModel.getNominatim()
             }
         })
+
         return viewHere
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
 
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
@@ -104,8 +122,6 @@ class MapFragment : Fragment() {
                 Toast.makeText(requireContext(), "No Stores found", Toast.LENGTH_SHORT).show()
             }
         })
-        viewModel.getNominatim()
-
     }
 
     override fun onResume() {
@@ -154,6 +170,7 @@ class MapFragment : Fragment() {
 
     private fun addMarker(lat: Double,  lon: Double, title: String, customIcon: String) {
 
+        // Custom markers if needed
         when (customIcon) {
             "stores" -> {
                 val marker = Marker(map)
@@ -163,6 +180,7 @@ class MapFragment : Fragment() {
                 marker.title = title
                 map.overlays.add(marker)
             }
+            // Default marker
             else -> {
                 val marker = Marker(map)
                 marker.position = GeoPoint(lat, lon)

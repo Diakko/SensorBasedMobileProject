@@ -9,4 +9,8 @@ class NominatimItemRepository(private val nominatimDao: NominatimItemDao) {
     suspend fun addNominatimInfo(nominatimItem: NominatimItem){
         nominatimDao.addNominatimInfo(nominatimItem)
     }
+
+    suspend fun checkIfExists(place_id: Int): Boolean {
+        return nominatimDao.productExists(place_id)
+    }
 }

@@ -14,4 +14,8 @@ interface NominatimItemDao {
 
     @Query("SELECT * FROM nominatim ORDER BY id ASC")
     fun readAllData(): LiveData<List<NominatimItem>>
+
+    @Query("SELECT EXISTS (SELECT 1 FROM nominatim WHERE place_id = :place_id)")
+    suspend fun productExists(place_id: Int): Boolean
+
 }

@@ -11,4 +11,8 @@ interface NominatimApi {
     @Headers("User-Agent: Nominatim-App")
     @GET("search.php?format=json&countrycodes=fi&limit=50")
     suspend fun getNominatim(@Query("q") q: String): Response<ArrayList<Nominatim>>
+
+    @Headers("User-Agent: Nominatim-App")
+    @GET("search.php?format=json&countrycodes=fi&limit=50")
+    suspend fun getNominatimExcluded(@Query("q") q: String, @Query("exclude_place_ids") exclude_place_ids: String): Response<ArrayList<Nominatim>>
 }

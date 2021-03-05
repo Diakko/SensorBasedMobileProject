@@ -22,4 +22,13 @@ class NominatimItemViewModel(application: Application): AndroidViewModel(applica
             repository.addNominatimInfo(nominatimItem)
         }
     }
+    suspend fun checkIfExists(place_id: Int): Boolean {
+        var exists = false
+        val job = viewModelScope.launch(Dispatchers.IO) {
+            exists = repository.checkIfExists(place_id)
+        }
+        job.join()
+        return exists
+    }
+
 }
