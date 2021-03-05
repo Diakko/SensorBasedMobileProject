@@ -1,6 +1,8 @@
 package com.example.sensorbasedmobileproject.fragments.map
 
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.location.Geocoder
 import android.location.Location
 import android.os.Build
@@ -16,6 +18,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
@@ -34,6 +38,7 @@ import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
 import retrofit2.Response
+import kotlin.math.absoluteValue
 
 class MapFragment : Fragment() {
 
@@ -75,7 +80,7 @@ class MapFragment : Fragment() {
             if (mNominatimList.isNotEmpty()){
                 for (item in mNominatimList) {
                     if (item.lat != null || item.lon != null || item.display_name != null){
-                        addMarker(item.lat!!, item.lon!!, item.display_name!!)
+                        addMarker(item.lat!!, item.lon!!, item.display_name!!, "stores")
                     }
                 }
             }
@@ -144,15 +149,28 @@ class MapFragment : Fragment() {
             )
             mNominatimItemViewModel.addNominatimData(nominatim)
         }
-        Toast.makeText(requireContext(), "Successfully added stores", Toast.LENGTH_SHORT).show()
+        Log.d("STORES", "Successfully added stores")
     }
 
-    private fun addMarker(lat: Double,  lon: Double, display_name: String) {
-        val marker = Marker(map)
-        marker.position = GeoPoint(lat, lon)
-        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-        map.overlays.add(marker)
-        marker.title = display_name
+    private fun addMarker(lat: Double,  lon: Double, title: String, customIcon: String) {
+
+        when (customIcon) {
+            "stores" -> {
+                val marker = Marker(map)
+                marker.position = GeoPoint(lat, lon)
+                marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+                marker.setIcon(requireContext().resources.getDrawable(R.drawable.shopping_icon))
+                marker.title = title
+                map.overlays.add(marker)
+            }
+            else -> {
+                val marker = Marker(map)
+                marker.position = GeoPoint(lat, lon)
+                marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+                marker.title = title
+                map.overlays.add(marker)
+            }
+        }
     }
 
 
@@ -194,13 +212,9 @@ class MapFragment : Fragment() {
                     distanceText.text = getString(R.string.distance_locations,
                         distanceBetween.toString()
                     )*/
-                    if (oldLocation != locationNow) {
-                        val marker = Marker(map)
-                        marker.position = GeoPoint(locationNow)
-                        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-                        map.overlays.add(marker)
-                        marker.title = getString(R.string.map_point_address, getAddress(locationNow.latitude, locationNow.longitude))
-
+                    if (oldLocation != locationNow && (((oldLocation.latitude - locationNow.latitude).absoluteValue >= 0.001) || ((oldLocation.longitude - locationNow.longitude).absoluteValue >= 0.001))) {
+                        val title = getString(R.string.map_point_address, getAddress(locationNow.latitude, locationNow.longitude))
+                        addMarker(locationNow.latitude, locationNow.longitude, title, "none")
                         /*val polyline = Polyline()
                         map.overlays.add(polyline)
                         pathPoints.add(GeoPoint(locationNow))
