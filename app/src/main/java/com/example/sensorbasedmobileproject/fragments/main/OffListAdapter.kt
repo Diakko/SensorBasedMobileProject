@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sensorbasedmobileproject.R
 import com.example.sensorbasedmobileproject.data.OffItem
@@ -25,18 +26,22 @@ class OffListAdapter : RecyclerView.Adapter<OffListAdapter.MyViewHolder>() {
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.custom_row_off,
-                parent,
-                false
+        val inflater = LayoutInflater.from(parent.context)
+        val view = inflater.inflate(R.layout.custom_row_off, parent, false)
+
+        return MyViewHolder(view).listen { pos, _ ->
+            val item = foodList[pos]
+            // Navigate to details_fragment
+            // From that fragment do a Fineli search and show results
+            Navigation.findNavController(view).navigate(
+                MainFragmentDirections.actionActionHomeToDetailsFragment(item.toString())
             )
-        )
+        }
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = foodList[position]
-        holder.itemView.code.text = "EAN: ${currentItem.code.toString()}"
+        "EAN: ${currentItem.code.toString()}".also { holder.itemView.code.text = it }
         holder.itemView.product_name.text = currentItem.product_name
         holder.itemView.ingredients_text_debug.text = currentItem.ingredients_text_debug
 
@@ -63,4 +68,12 @@ class OffListAdapter : RecyclerView.Adapter<OffListAdapter.MyViewHolder>() {
         this.foodList = off
         notifyDataSetChanged()
     }
+
+    fun <T : RecyclerView.ViewHolder> T.listen(event: (position: Int, type: Int) -> Unit): T {
+        itemView.setOnClickListener {
+            event.invoke(adapterPosition, itemViewType)
+        }
+        return this
+    }
+
 }
