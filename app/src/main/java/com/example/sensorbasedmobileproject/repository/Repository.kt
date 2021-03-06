@@ -18,4 +18,8 @@ class Repository {
         return RetrofitInstanceNominatim.api.getNominatimExcluded(place, excluded)
     }
 
+    suspend fun getViewBoxNominatim(place: String, viewBoxString: String): Response<ArrayList<Nominatim>> {
+        return RetrofitInstanceNominatim.api.getNominatimViewBox(place, viewBoxString)
+    }
+
 }

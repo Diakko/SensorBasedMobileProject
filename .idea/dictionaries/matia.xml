@@ -4,9 +4,12 @@
       <w>alepa</w>
       <w>barcodes</w>
       <w>boundingbox</w>
+      <w>citymarket</w>
       <w>countrycodes</w>
       <w>fineli</w>
+      <w>kioski</w>
       <w>nominatim</w>
+      <w>prisma</w>
       <w>sensorbasedmobileproject</w>
       <w>textview</w>
     </words>
