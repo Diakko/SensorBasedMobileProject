@@ -136,12 +136,15 @@ class MainFragment : Fragment() {
                 val ingredientsTextDebug = response.body()?.product?.ingredients_text_debug
                 val imageUrl = response.body()?.product?.image_url
                 val productName = response.body()?.product?.product_name
+                val nutriments = response.body()?.product?.nutriments
+
                 val offItem = OffItem(
                     0,
                     code,
                     productName,
                     ingredientsTextDebug,
-                    imageUrl
+                    imageUrl,
+                    nutriments!!
                 )
 
                 mOffViewModel.addOffData(offItem)

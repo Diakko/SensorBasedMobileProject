@@ -1,8 +1,9 @@
 package com.example.sensorbasedmobileproject.data
 
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.math.BigInteger
+import com.example.sensorbasedmobileproject.model.openfoodfacts.Nutriments
 
 @Entity(tableName = "openfoodfacts")
 data class OffItem(
@@ -11,5 +12,6 @@ data class OffItem(
     val code: Long?,
     val product_name: String?,
     val ingredients_text_debug: String?,
-    val image_url: String?
+    val image_url: String?,
+    @Embedded val nutriments: Nutriments?
     )
