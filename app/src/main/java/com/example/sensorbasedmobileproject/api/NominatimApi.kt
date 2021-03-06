@@ -16,6 +16,7 @@ interface NominatimApi {
     @GET("search.php?format=json&countrycodes=fi&limit=50")
     suspend fun getNominatimExcluded(@Query("q") q: String, @Query("exclude_place_ids") exclude_place_ids: String): Response<ArrayList<Nominatim>>
 
+    // "bounded=1" needed to apply view box instead of just using it as a "hint(?)"
     @Headers("User-Agent: Nominatim-App")
     @GET("search.php?format=json&countrycodes=fi&limit=50&bounded=1")
     suspend fun getNominatimViewBox(@Query("q") q: String, @Query("viewbox") viewBoxString: String): Response<ArrayList<Nominatim>>
