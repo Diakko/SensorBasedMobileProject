@@ -10,7 +10,11 @@
     android:checkable="true"
     android:clickable="true"
     android:focusable="true"
-    android:padding="8dp">
+    android:padding="8dp"
+    android:id="@+id/off_card"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="5dp"
+    >
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,7 +37,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/ingredients_text_debug"
+            android:id="@+id/manufacturing_places"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="fill"
@@ -45,6 +49,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/product_image"
             app:layout_constraintTop_toBottomOf="@+id/product_name" />
+
+        <TextView
+            android:id="@+id/allergens_from_ingredients"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/allergens_from_ingredients"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/product_image"
+            app:layout_constraintTop_toBottomOf="@+id/manufacturing_places" />
 
         <TextView
             android:id="@+id/code"
@@ -61,20 +79,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/product_image"
             app:layout_constraintTop_toBottomOf="@+id/allergens_from_ingredients" />
-
-        <TextView
-            android:id="@+id/allergens_from_ingredients"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="fill"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="@string/allergens_from_ingredients"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/product_image"
-            app:layout_constraintTop_toBottomOf="@+id/ingredients_text_debug" />
 
         <ImageView
             android:id="@+id/product_image"

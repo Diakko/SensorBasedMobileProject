@@ -17,7 +17,7 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 data class Packagings (
 
 	@SerializedName("ecoscore_material_score") val ecoscore_material_score : Int,
-	@SerializedName("ecoscore_shape_ratio") val ecoscore_shape_ratio : Int,
+	@SerializedName("ecoscore_shape_ratio") val ecoscore_shape_ratio : Double,
 	@SerializedName("material") val material : String,
 	@SerializedName("shape") val shape : String
 )

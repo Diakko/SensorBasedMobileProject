@@ -25,6 +25,7 @@ import com.example.sensorbasedmobileproject.data.OffItem
 import com.example.sensorbasedmobileproject.data.OffItemViewModel
 import com.example.sensorbasedmobileproject.model.openfoodfacts.OpenFoodFactResponse
 import com.example.sensorbasedmobileproject.repository.ApiRepository
+import kotlinx.android.synthetic.main.custom_row_off.view.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_search_off.view.*
 import kotlinx.coroutines.Dispatchers
@@ -85,6 +86,7 @@ class MainFragment : Fragment() {
         // Observe response
         viewModel.myOffResponse.observe(viewLifecycleOwner, { response ->
             if (response.isSuccessful && response.body()?.status == 1) {
+                Log.d("DBG", response.body()?.product?.allergens_from_ingredients.toString())
                 insertDataToDatabase(response)
             } else {
                 Log.d("DBG", response.errorBody().toString())
@@ -137,6 +139,10 @@ class MainFragment : Fragment() {
                 val imageUrl = response.body()?.product?.image_url
                 val productName = response.body()?.product?.product_name
                 val nutriments = response.body()?.product?.nutriments
+                val allergensFromIngredients = response.body()?.product?.allergens_from_ingredients
+                val manufacturingPlaces = response.body()?.product?.manufacturing_places
+                val ingredientsText = response.body()?.product?.ingredients_text
+
 
                 val offItem = OffItem(
                     0,
@@ -144,9 +150,13 @@ class MainFragment : Fragment() {
                     productName,
                     ingredientsTextDebug,
                     imageUrl,
+                    ingredientsText,
+                    allergensFromIngredients,
+                    manufacturingPlaces,
                     nutriments!!
                 )
 
+                Log.d("DBG", offItem.toString())
                 mOffViewModel.addOffData(offItem)
 
                 Handler(Looper.getMainLooper()).post {
