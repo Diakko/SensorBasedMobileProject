@@ -14,8 +14,8 @@
     <string name="menu_home">Home</string>
     <string name="menu_search">Search</string>
     <string name="menu_map">Map</string>
-
     <string name="main_fragment_text">Just a placeholder.</string>
+
     <string name="profile_fragment_text">Profile Fragment</string>
 
     // Scanning fragment
