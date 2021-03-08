@@ -11,17 +11,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
+import com.example.sensorbasedmobileproject.ApiViewModel
+import com.example.sensorbasedmobileproject.ApiViewModelFactory
 import com.example.sensorbasedmobileproject.R
+import com.example.sensorbasedmobileproject.data.NominatimItem
+import com.example.sensorbasedmobileproject.data.NominatimItemViewModel
+import com.example.sensorbasedmobileproject.model.Nominatim
+import com.example.sensorbasedmobileproject.repository.Repository
 import com.google.android.gms.location.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
-import org.osmdroid.views.overlay.Polyline
+import retrofit2.Response
+import kotlin.math.absoluteValue
 
 class MapFragment : Fragment() {
 
@@ -31,27 +44,72 @@ class MapFragment : Fragment() {
     private lateinit var locationCallback: LocationCallback
     private lateinit var locationText: TextView
     private lateinit var map: MapView
-    private val pathPoints: ArrayList<GeoPoint?> = ArrayList()
     private lateinit var viewHere: View
+    private lateinit var viewModel: ApiViewModel
+    private lateinit var mNominatimItemViewModel: NominatimItemViewModel
+    private var mNominatimList = emptyList<NominatimItem>()
+    private var boundingBox = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         viewHere = inflater.inflate(R.layout.fragment_map, container, false)
         val ctx = context
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx))
 
+        // Set up map
         locationText = viewHere.findViewById(R.id.location_now_text)
         map = viewHere.findViewById(R.id.map)
         map.setTileSource(TileSourceFactory.MAPNIK)
         map.setMultiTouchControls(true)
-        map.controller.setZoom(9.0)
+        map.controller.setZoom(14.0)
         getLocationUpdates()
-        map.controller.setCenter(GeoPoint(60.0, 25.0))
+        map.controller.setCenter(GeoPoint(60.2, 25.0))
+        // Initialized location
+        locationNow.latitude = 60.2
+        locationNow.longitude = 25.0
 
+        mNominatimItemViewModel = ViewModelProvider(this).get(NominatimItemViewModel::class.java)
+        mNominatimItemViewModel.readAllData.observe(viewLifecycleOwner, Observer { nominatim ->
+            mNominatimList = nominatim
+
+            if (nominatim.isNotEmpty()) {
+                map.overlays.clear()
+                val boundingBoxMinLon = (locationNow.longitude - 0.15)
+                val boundingBoxMinLat = (locationNow.latitude - 0.1)
+                val boundingBoxMaxLon = (locationNow.longitude + 0.15)
+                val boundingBoxMaxLat = (locationNow.latitude + 0.1)
+                for (shop in nominatim) {
+                    if ((shop.lat!! <= boundingBoxMaxLat && shop.lat >= boundingBoxMinLat) && (shop.lon!! <= boundingBoxMaxLon && shop.lon >= boundingBoxMinLon)) {
+                        addMarker(shop.lat, shop.lon, shop.display_name!!, "stores")
+                    }
+                }
+                Log.d("LOCATIONNOW","$locationNow")
+                val title = getString(R.string.map_point_address,
+                    getAddress(locationNow.latitude, locationNow.longitude))
+                addMarker(locationNow.latitude, locationNow.longitude, title, null)
+            }
+        })
         return viewHere
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val repository = Repository()
+        val viewModelFactory = ApiViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(ApiViewModel::class.java)
+        viewModel.myNominatimResponse.observe(viewLifecycleOwner, Observer { response ->
+            if (response.isSuccessful && !(response.body()?.isEmpty())!!) {
+                insertDataToDatabase(response)
+
+            } else {
+                Log.d("DBG", response.errorBody().toString())
+                Toast.makeText(requireContext(), "No new stores found", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     override fun onResume() {
@@ -64,13 +122,86 @@ class MapFragment : Fragment() {
         stopLocationUpdates()
     }
 
+    private fun insertDataToDatabase(response: Response<ArrayList<Nominatim>>) {
+        var exists: Boolean
+        var checkPlaceId: Int
+
+        for (item: Nominatim in response.body()!!) {
+            checkPlaceId = item.place_id
+            GlobalScope.launch(context = Dispatchers.IO) {
+                exists = mNominatimItemViewModel.checkIfExists(checkPlaceId)
+                if (!exists) {
+
+                    val place_id = item.place_id
+                    val licence = item.licence
+                    val osm_type = item.osm_type
+                    val osm_id = item.osm_id
+                    // val boundingbox = item.boundingbox
+                    val lat = item.lat
+                    val lon = item.lon
+                    val display_name = item.display_name
+                    val type = item.type
+                    val importance = item.importance
+                    val icon = item.icon
+
+
+                    val nominatim = NominatimItem(
+                        0,
+                        place_id,
+                        licence,
+                        osm_type,
+                        osm_id,
+                        // boundingbox,
+                        lat,
+                        lon,
+                        display_name,
+                        type,
+                        importance,
+                        icon
+                    )
+                    for (shop in response.body()!!) {
+                        addMarker(shop.lat, shop.lon, shop.display_name, "stores")
+                    }
+                    val title = getString(R.string.map_point_address, getAddress(locationNow.latitude, locationNow.longitude))
+                    addMarker(locationNow.latitude, locationNow.longitude, title, "none")
+
+                    mNominatimItemViewModel.addNominatimData(nominatim)
+                }
+            }
+        }
+        Log.d("STORES", "Successfully added stores")
+    }
+
+    private fun addMarker(lat: Double,  lon: Double, title: String, customIcon: String?) {
+
+        // Custom markers if needed
+        when (customIcon) {
+            "stores" -> {
+                val marker = Marker(map)
+                marker.position = GeoPoint(lat, lon)
+                marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+                marker.icon = requireContext().resources.getDrawable(R.drawable.shopping_icon)
+                marker.title = title
+                map.overlays.add(marker)
+            }
+            // Default marker
+            else -> {
+                val marker = Marker(map)
+                marker.position = GeoPoint(lat, lon)
+                marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+                marker.title = title
+                map.overlays.add(marker)
+            }
+        }
+    }
+
     private fun getLocationUpdates() {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity)
         locationRequest = LocationRequest()
         locationRequest.interval = 100
         locationRequest.fastestInterval = 1000
-        locationRequest.smallestDisplacement = 5F
+        locationRequest.smallestDisplacement = 30F
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY //set according to your app function
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult?) {
@@ -79,9 +210,23 @@ class MapFragment : Fragment() {
                 if (locationResult.locations.isNotEmpty()) {
                     val location = locationResult.lastLocation
                     val oldLocation = locationNow
-                    // val distanceText = viewHere.findViewById<TextView>(R.id.distance_between_text)
                     locationNow = location
-                    locationText.text = getString(R.string.address_location,
+
+
+                    // New shops if the location changed over ~2 km
+                    if (((oldLocation.latitude - locationNow.latitude).absoluteValue >= 0.02) || ((oldLocation.longitude - locationNow.longitude).absoluteValue >= 0.02)) {
+
+                        map.overlays.clear()
+                        val boundingBoxMinLon = (locationNow.longitude - 0.15)
+                        val boundingBoxMinLat = (locationNow.latitude - 0.1)
+                        val boundingBoxMaxLon = (locationNow.longitude + 0.15)
+                        val boundingBoxMaxLat = (locationNow.latitude + 0.1)
+                        boundingBox = "$boundingBoxMinLon,$boundingBoxMinLat,$boundingBoxMaxLon,$boundingBoxMaxLat"
+
+                        viewModel.getNominatimViewBox(boundingBox)
+
+
+                        locationText.text = getString(R.string.address_location,
 
                         getAddress(
                             locationNow.latitude,
@@ -89,33 +234,19 @@ class MapFragment : Fragment() {
                         ),
                         locationNow.latitude.toString(),
                         locationNow.longitude.toString()
-                    )
+                        )
 
 
-                    map.controller.setCenter(GeoPoint(locationNow.latitude, locationNow.longitude))
-                    Log.d(
-                        "LOCATION_UPDATED",
-                        "Location now: latitude: ${locationNow.latitude}, longitude: ${locationNow.longitude}"
-                    )
+                        map.controller.setCenter(GeoPoint(locationNow.latitude, locationNow.longitude))
+                        Log.d(
+                            "LOCATION_UPDATED",
+                            "Location now: latitude: ${locationNow.latitude}, longitude: ${locationNow.longitude}"
+                        )
 
-                    /*val distanceBetween = oldLocation.distanceTo(locationNow).toInt()
-                    distanceText.text = getString(R.string.distance_locations,
-                        distanceBetween.toString()
-                    )*/
-                    if (oldLocation != locationNow) {
-                        val marker = Marker(map)
-                        marker.position = GeoPoint(locationNow)
-                        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-                        map.overlays.add(marker)
-                        marker.title = getString(R.string.map_point_address, getAddress(locationNow.latitude, locationNow.longitude))
 
-                        val polyline = Polyline()
-                        map.overlays.add(polyline)
-                        pathPoints.add(GeoPoint(locationNow))
-                        polyline.setPoints(pathPoints)
+                        val title = getString(R.string.map_point_address, getAddress(locationNow.latitude, locationNow.longitude))
+                        addMarker(locationNow.latitude, locationNow.longitude, title, "none")
                     }
-
-
                 }
             }
         }
@@ -166,5 +297,4 @@ class MapFragment : Fragment() {
         val list = geoCoder.getFromLocation(lat ?: 0.0, lng ?: 0.0, 1)
         return list[0].getAddressLine(0)
     }
-
 }

@@ -1,7 +1,10 @@
 package com.example.sensorbasedmobileproject.api
 
+
 import com.example.sensorbasedmobileproject.utils.Constants.Companion.BASE_URL_FINELI
 import com.example.sensorbasedmobileproject.utils.Constants.Companion.BASE_URL_OPEN_FOOD_FACTS
+import com.example.sensorbasedmobileproject.utils.Constants
+import com.example.sensorbasedmobileproject.utils.Constants.Companion.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -19,6 +22,13 @@ object RetrofitInstance {
             .baseUrl(BASE_URL_OPEN_FOOD_FACTS)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+	}
+			
+    private val retrofitNominatim by lazy {
+        Retrofit.Builder()
+            .baseUrl(Constants.NOMINATIM_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
     }
 
     val fineliApi: FineliApi by lazy {
@@ -27,5 +37,9 @@ object RetrofitInstance {
 
     val openFoodApi: OpenFoodFactsApi by lazy {
         retrofitOff.create(OpenFoodFactsApi::class.java)
+    }
+
+    val apiNominatim: NominatimApi by lazy {
+        retrofitNominatim.create(NominatimApi::class.java)
     }
 }

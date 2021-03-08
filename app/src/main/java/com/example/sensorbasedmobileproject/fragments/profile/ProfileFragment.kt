@@ -10,44 +10,104 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.sensorbasedmobileproject.R
+import com.example.sensorbasedmobileproject.data.ShoppingListItem
+import com.example.sensorbasedmobileproject.data.ShoppingListItemDatabase
+import com.example.sensorbasedmobileproject.data.ShoppingListItemViewModel
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
+import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.android.synthetic.main.fragment_search.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class ProfileFragment : Fragment(), SensorEventListener{
+class ProfileFragment : Fragment(), SensorEventListener, AdapterView.OnItemSelectedListener {
 
     private var sensorManager: SensorManager? = null
     private var running = false
     private var totalSteps = 0f
     private var previousTotalSteps = 0f
-    private var targetSteps : Int? = 9000
     private lateinit var stepsTextView: TextView
-    private lateinit var stepsTargetTextView: TextView
-    private lateinit var stepsTargetEditText: EditText
     private lateinit var stepsProgressBar: CircularProgressBar
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var fragmentView: View
+    private lateinit var spinner: Spinner
+    private lateinit var shoppingListItem: String
+    private var shoppingListItemAmount: Int = 0
+    private lateinit var shoppingListItemType: String
+    private lateinit var shoppingListViewModel: ShoppingListItemViewModel
+    private val shoppingListDatabase by lazy {context?.let {ShoppingListItemDatabase.getDatabase(it)}}
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_profile, container, false)
-        stepsTextView = view.findViewById(R.id.text_view_steps_taken)
-        stepsTargetTextView = view.findViewById(R.id.text_view_steps_target)
-        stepsTargetEditText = view.findViewById(R.id.editTextTargetSteps)
+        fragmentView = inflater.inflate(R.layout.fragment_profile, container, false)
+
+        // Stepcounter Initialization
+        stepsTextView = fragmentView.findViewById(R.id.text_view_steps_taken)
         sensorManager = activity?.getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        stepsProgressBar = view.findViewById(R.id.circular_progress_bar)
-        stepsProgressBar.progressMax = 9000F // default 9000 steps target
-        stepsTargetTextView.text = "/ 9000"
+        stepsProgressBar = fragmentView.findViewById(R.id.circular_progress_bar)
+        stepsProgressBar.progressMax = 10000F // default 9000 steps target
+
+        // Recyclerview
+        val recyclerAdapter =  ShoppingListAdapter(requireContext())
+        recyclerView = fragmentView.findViewById(R.id.recyclerview)
+        recyclerView.adapter = recyclerAdapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        // Add Button
+        val addButton = fragmentView.findViewById<ImageButton>(R.id.add_button)
+
+        addButton.setOnClickListener() {
+            if (shoppingListDatabase != null) {
+                GlobalScope.launch {
+                    shoppingListItem = fragmentView.findViewById<EditText>(R.id.edit_text_shopping_list_item).text.toString()
+                    shoppingListItemAmount = fragmentView.findViewById<EditText>(R.id.edit_text_shopping_list_item_amount).text.toString().toInt()
+                    shoppingListDatabase!!.shoppingListItemDao().insertShoppingListData(ShoppingListItem(0, shoppingListItem, shoppingListItemAmount, shoppingListItemType))
+                }
+            }
+        }
+
+        // Clear button
+        val clearButton = fragmentView.findViewById<Button>(R.id.clear_button)
+
+        clearButton.setOnClickListener() {
+            if (shoppingListDatabase != null) {
+                GlobalScope.launch {
+                    shoppingListDatabase!!.shoppingListItemDao().clearShoppingList()
+                }
+            }
+        }
+
+        shoppingListViewModel = ViewModelProvider(this).get(ShoppingListItemViewModel::class.java)
+        shoppingListViewModel.readAllData.observe(viewLifecycleOwner, Observer { shoppingListItem ->
+            recyclerAdapter.setData(shoppingListItem)
+        })
+
+        // Spinner item
+        spinner = fragmentView.findViewById(R.id.type_spinner)
+        spinner.onItemSelectedListener = this
+
+        ArrayAdapter.createFromResource(requireContext(), R.array.type_array, android.R.layout.simple_spinner_item).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = adapter
+        }
+
 
         loadData()
         resetSteps()
-        setTargetSteps()
-        return view
+        return fragmentView
     }
+
 
     override fun onResume() {
         super.onResume()
@@ -75,6 +135,18 @@ class ProfileFragment : Fragment(), SensorEventListener{
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
     }
 
+    // Spinner adapter overrides
+    override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
+        shoppingListItemType = parent.getItemAtPosition(pos).toString()
+        Log.d("SHOPPING", shoppingListItemType)
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>) {
+        Log.d("SHOPPING", "nothing selected")
+    }
+
+
+    // Activity step calculator functions
     private fun resetSteps() {
         stepsTextView.setOnClickListener {
             Toast.makeText(context, "Long tap to reset steps", Toast.LENGTH_SHORT).show()
@@ -87,30 +159,9 @@ class ProfileFragment : Fragment(), SensorEventListener{
         }
     }
 
-    private fun setTargetSteps() {
-        stepsTargetTextView.setOnClickListener {
-            Toast.makeText(context, "Long tap to set target, input amount below", Toast.LENGTH_LONG).show()
-        }
-
-        stepsTargetTextView.setOnLongClickListener {
-
-            if (stepsTargetEditText.text.toString().trim().isEmpty()) {
-                Toast.makeText(context, "Input a valid number", Toast.LENGTH_SHORT).show()
-            }else {
-                targetSteps = stepsTargetEditText.text.toString().toInt()
-                stepsTargetTextView.text = "/ $targetSteps"
-                stepsTargetEditText.text.clear()
-                stepsProgressBar.progressMax = targetSteps!!.toFloat()
-                saveData()
-            }
-            true
-        }
-    }
-
     private fun saveData() {
         val sharedPreferences = activity?.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences?.edit()
-        editor?.putInt("StepsTarget", targetSteps!!)
         editor?.putFloat("Steps", previousTotalSteps)
         editor?.apply()
     }
@@ -118,11 +169,7 @@ class ProfileFragment : Fragment(), SensorEventListener{
     private fun loadData() {
         val sharedPreferences = activity?.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
         val savedStepsNumber = sharedPreferences?.getFloat("Steps", 0f)
-        val savedTargetStepsNumber = sharedPreferences?.getInt("StepsTarget", 9000)
-        Log.d("PROFILE_FRAGMENT","$savedStepsNumber / $savedTargetStepsNumber")
         previousTotalSteps = savedStepsNumber!!
-        targetSteps = savedTargetStepsNumber!!
-        stepsProgressBar.progressMax = savedTargetStepsNumber.toFloat()
 
     }
 
