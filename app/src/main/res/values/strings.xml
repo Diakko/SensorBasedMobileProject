@@ -36,6 +36,8 @@
     // OpenFoodFacts Search
     <string name="search_openfoodfacts_database">Search with EAN code</string>
     <string name="content_image">Product image from Open Food Facts database</string>
+    <string name="allergens_from_ingredients">No allergens from product ingredients</string>
+
 
 
     // Home fragment
