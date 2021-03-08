@@ -44,13 +44,10 @@ class MapFragment : Fragment() {
     private lateinit var locationCallback: LocationCallback
     private lateinit var locationText: TextView
     private lateinit var map: MapView
-    // private val pathPoints: ArrayList<GeoPoint?> = ArrayList()
     private lateinit var viewHere: View
     private lateinit var viewModel: MainViewModel
     private lateinit var mNominatimItemViewModel: NominatimItemViewModel
     private var mNominatimList = emptyList<NominatimItem>()
-    // private val excludes = mutableListOf<String>()
-    // private var first = true
     private var boundingBox = ""
 
     override fun onCreateView(
@@ -62,6 +59,7 @@ class MapFragment : Fragment() {
         val ctx = context
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx))
 
+        // Set up map
         locationText = viewHere.findViewById(R.id.location_now_text)
         map = viewHere.findViewById(R.id.map)
         map.setTileSource(TileSourceFactory.MAPNIK)
@@ -69,15 +67,9 @@ class MapFragment : Fragment() {
         map.controller.setZoom(14.0)
         getLocationUpdates()
         map.controller.setCenter(GeoPoint(60.2, 25.0))
-
         // Initialized location
         locationNow.latitude = 60.2
         locationNow.longitude = 25.0
-
-        /*val repository = Repository()
-        val viewModelFactory = MainViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)*/
-
 
         mNominatimItemViewModel = ViewModelProvider(this).get(NominatimItemViewModel::class.java)
         mNominatimItemViewModel.readAllData.observe(viewLifecycleOwner, Observer { nominatim ->
@@ -100,8 +92,6 @@ class MapFragment : Fragment() {
                 addMarker(locationNow.latitude, locationNow.longitude, title, null)
             }
         })
-
-        // viewModel.getNominatim()
         return viewHere
     }
 
@@ -135,7 +125,6 @@ class MapFragment : Fragment() {
     private fun insertDataToDatabase(response: Response<ArrayList<Nominatim>>) {
         var exists: Boolean
         var checkPlaceId: Int
-
 
         for (item: Nominatim in response.body()!!) {
             checkPlaceId = item.place_id
@@ -206,7 +195,6 @@ class MapFragment : Fragment() {
         }
     }
 
-
     private fun getLocationUpdates() {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity)
@@ -222,7 +210,6 @@ class MapFragment : Fragment() {
                 if (locationResult.locations.isNotEmpty()) {
                     val location = locationResult.lastLocation
                     val oldLocation = locationNow
-                    // val distanceText = viewHere.findViewById<TextView>(R.id.distance_between_text)
                     locationNow = location
 
 
@@ -260,17 +247,6 @@ class MapFragment : Fragment() {
                         val title = getString(R.string.map_point_address, getAddress(locationNow.latitude, locationNow.longitude))
                         addMarker(locationNow.latitude, locationNow.longitude, title, "none")
                     }
-                    /*val distanceBetween = oldLocation.distanceTo(locationNow).toInt()
-                    distanceText.text = getString(R.string.distance_locations,
-                        distanceBetween.toString()
-                    )*/
-                    /*val polyline = Polyline()
-                    map.overlays.add(polyline)
-                    pathPoints.add(GeoPoint(locationNow))
-                    polyline.setPoints(pathPoints)*/
-
-
-
                 }
             }
         }
@@ -321,8 +297,4 @@ class MapFragment : Fragment() {
         val list = geoCoder.getFromLocation(lat ?: 0.0, lng ?: 0.0, 1)
         return list[0].getAddressLine(0)
     }
-
-
-
-
 }

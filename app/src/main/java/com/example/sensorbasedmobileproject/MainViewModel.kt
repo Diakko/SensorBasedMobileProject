@@ -13,11 +13,9 @@ import retrofit2.Response
 
 class MainViewModel(private val repository: Repository): ViewModel() {
 
-    private val listOfInitialShops = mutableListOf("r-kioski","alepa", "alepa helsinki", "alepa espoo", "alepa vantaa", "k-market helsinki", "k-market vantaa", "k-market espoo", "k-market", "prisma helsinki", "prisma vantaa", "prisma espoo", "s-market", "s-market espoo", "s-market helsinki", "s-market vantaa", "supermarket", "citymarket", "sale")
-    private val listOfShops = mutableListOf("r-kioski", "alepa", "k-market", "sale", "prisma", "supermarket", "citymarket", "s-market", "lidl")
+    private val listOfShops = mutableListOf("r-kioski", "alepa", "k-market", "sale", "prisma", "supermarket", "citymarket", "s-market", "lidl", "abc")
     val myResponse: MutableLiveData<Response<ArrayList<Fineli>>> = MutableLiveData()
     val myNominatimResponse: MutableLiveData<Response<ArrayList<Nominatim>>> = MutableLiveData()
-
 
     fun getFood(foodName: String) {
         viewModelScope.launch {
@@ -27,11 +25,8 @@ class MainViewModel(private val repository: Repository): ViewModel() {
         }
     }
 
-
-
+    // Search for all shops in Finland
     fun getNominatim() {
-
-
         for (shops in listOfShops) {
             viewModelScope.launch {
                 val response: Response<ArrayList<Nominatim>> = repository.getNominatim(shops)
@@ -40,6 +35,7 @@ class MainViewModel(private val repository: Repository): ViewModel() {
         }
     }
 
+    // Search for all shops that's not in the database, needs a string for search. Inefficient as the API url can be only so long
     fun getNominatimExcluded(excluded: String) {
         for (shops in listOfShops) {
             viewModelScope.launch {
@@ -49,6 +45,7 @@ class MainViewModel(private val repository: Repository): ViewModel() {
         }
     }
 
+    // Search for nearby shops
     fun getNominatimViewBox(viewBox: String) {
         for (shop in listOfShops) {
             viewModelScope.launch {
