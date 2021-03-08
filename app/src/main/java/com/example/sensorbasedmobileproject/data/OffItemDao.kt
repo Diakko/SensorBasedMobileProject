@@ -18,4 +18,7 @@ interface OffItemDao {
     @Query("SELECT EXISTS (SELECT 1 FROM openfoodfacts WHERE code = :code)")
     suspend fun productExists(code: Long): Boolean
 
+    @Query("SELECT * FROM openfoodfacts WHERE code = :code")
+    suspend fun getProduct(code: Long): OffItem
+
 }

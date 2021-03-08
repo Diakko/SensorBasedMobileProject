@@ -24,7 +24,6 @@ class OffListAdapter : RecyclerView.Adapter<OffListAdapter.MyViewHolder>() {
 
     private val scope = CoroutineScope(Dispatchers.IO)
     private var foodList = emptyList<OffItem>()
-    val mCardView = (R.id.off_card)
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -34,9 +33,9 @@ class OffListAdapter : RecyclerView.Adapter<OffListAdapter.MyViewHolder>() {
 
 
         return MyViewHolder(view).listen { pos, _ ->
-            val item = foodList[pos]
-                Navigation.findNavController(view).navigate(
-                MainFragmentDirections.actionActionHomeToDetailsFragment(item.toString())
+            val ean = foodList[pos].code.toString()
+            Navigation.findNavController(view).navigate(
+                MainFragmentDirections.actionActionHomeToDetailsFragment(ean)
             )
         }
     }
@@ -48,7 +47,9 @@ class OffListAdapter : RecyclerView.Adapter<OffListAdapter.MyViewHolder>() {
         if (currentItem.manufacturing_places.equals("") || currentItem.manufacturing_places == null) {
             holder.itemView.manufacturing_places.text = "Country of origin unknown"
         } else {
-            "Made in: ${currentItem.manufacturing_places}".also { holder.itemView.manufacturing_places.text = it }
+            "Made in: ${currentItem.manufacturing_places}".also {
+                holder.itemView.manufacturing_places.text = it
+            }
         }
 
         // Check if allergens in product
@@ -60,7 +61,9 @@ class OffListAdapter : RecyclerView.Adapter<OffListAdapter.MyViewHolder>() {
             holder.itemView.off_card.setCardBackgroundColor(Color.parseColor("#FFB6C1"))
 
             // Display allergens
-            "Allergens: ${currentItem.allergens_from_ingredients}".also { holder.itemView.allergens_from_ingredients.text = it }
+            "Allergens: ${currentItem.allergens_from_ingredients}".also {
+                holder.itemView.allergens_from_ingredients.text = it
+            }
         }
         "EAN: ${currentItem.code.toString()}".also { holder.itemView.code.text = it }
 
