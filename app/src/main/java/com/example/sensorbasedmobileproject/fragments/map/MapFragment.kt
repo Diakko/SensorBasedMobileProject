@@ -23,7 +23,7 @@ import com.example.sensorbasedmobileproject.R
 import com.example.sensorbasedmobileproject.data.NominatimItem
 import com.example.sensorbasedmobileproject.data.NominatimItemViewModel
 import com.example.sensorbasedmobileproject.model.Nominatim
-import com.example.sensorbasedmobileproject.repository.Repository
+import com.example.sensorbasedmobileproject.repository.ApiRepository
 import com.google.android.gms.location.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -98,7 +98,7 @@ class MapFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val repository = Repository()
+        val repository = ApiRepository()
         val viewModelFactory = ApiViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(ApiViewModel::class.java)
         viewModel.myNominatimResponse.observe(viewLifecycleOwner, Observer { response ->

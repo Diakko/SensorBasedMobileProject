@@ -12,7 +12,6 @@ import com.example.sensorbasedmobileproject.repository.ApiRepository
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import com.example.sensorbasedmobileproject.model.Nominatim
-import com.example.sensorbasedmobileproject.repository.Repository
 
 class ApiViewModel(private val apiRepository: ApiRepository): ViewModel() {
 
@@ -33,12 +32,14 @@ class ApiViewModel(private val apiRepository: ApiRepository): ViewModel() {
         viewModelScope.launch {
             val response: Response<OpenFoodFactResponse> = apiRepository.getOpenFood(ean)
             myOffResponse.value = response
-			
+        }
+    }
+
     // Search for all shops in Finland
     fun getNominatim() {
         for (shops in listOfShops) {
             viewModelScope.launch {
-                val response: Response<ArrayList<Nominatim>> = repository.getNominatim(shops)
+                val response: Response<ArrayList<Nominatim>> = apiRepository.getNominatim(shops)
                 myNominatimResponse.value = response
             }
         }
@@ -48,7 +49,7 @@ class ApiViewModel(private val apiRepository: ApiRepository): ViewModel() {
     fun getNominatimExcluded(excluded: String) {
         for (shops in listOfShops) {
             viewModelScope.launch {
-                val response: Response<ArrayList<Nominatim>> = repository.getExcludedNominatim(shops, excluded)
+                val response: Response<ArrayList<Nominatim>> = apiRepository.getExcludedNominatim(shops, excluded)
                 myNominatimResponse.value = response
             }
         }
@@ -58,7 +59,7 @@ class ApiViewModel(private val apiRepository: ApiRepository): ViewModel() {
     fun getNominatimViewBox(viewBox: String) {
         for (shop in listOfShops) {
             viewModelScope.launch {
-                val response: Response<ArrayList<Nominatim>> = repository.getViewBoxNominatim(shop, viewBox)
+                val response: Response<ArrayList<Nominatim>> = apiRepository.getViewBoxNominatim(shop, viewBox)
                 myNominatimResponse.value = response
             }
             Log.d("VIEWBOX", "Searched for $shop with $viewBox")
