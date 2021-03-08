@@ -12,7 +12,6 @@
     android:focusable="true"
     android:padding="8dp"
     android:id="@+id/off_card"
-    app:cardCornerRadius="15dp"
     app:cardElevation="5dp"
     >
 

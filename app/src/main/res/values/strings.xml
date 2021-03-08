@@ -49,6 +49,9 @@
     <string name="no_allergens">No allergens found from ingredients</string>
 
 
+    // Details
+    <string name="average_nutrients">Average nutrient content per 100g</string>
+
 
 
     // Home fragment

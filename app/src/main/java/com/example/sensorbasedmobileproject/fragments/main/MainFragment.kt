@@ -135,31 +135,23 @@ class MainFragment : Fragment() {
             } else {
 
                 // Product not in local database, proceed with adding into database
-                val ingredientsTextDebug = response.body()?.product?.ingredients_text_debug
-                val imageUrl = response.body()?.product?.image_url
-                val productName = response.body()?.product?.product_name
-                val nutriments = response.body()?.product?.nutriments
-                val allergensFromIngredients = response.body()?.product?.allergens_from_ingredients
-                val manufacturingPlaces = response.body()?.product?.manufacturing_places
-                val ingredientsText = response.body()?.product?.ingredients_text
-
-
                 val offItem = OffItem(
                     0,
                     code,
-                    productName,
-                    ingredientsTextDebug,
-                    imageUrl,
-                    ingredientsText,
-                    allergensFromIngredients,
-                    manufacturingPlaces,
-                    nutriments!!
+                    response.body()?.product?.product_name,
+                    response.body()?.product?.ingredients_text_debug,
+                    response.body()?.product?.image_url,
+                    response.body()?.product?.ingredients_text,
+                    response.body()?.product?.allergens_from_ingredients,
+                    response.body()?.product?.manufacturing_places,
+                    response.body()?.product?.link,
+                    response.body()?.product?.nutriments!!
                 )
 
                 Log.d("DBG", offItem.toString())
                 mOffViewModel.addOffData(offItem)
 
-                Handler(Looper.getMainLooper()).post {
+                launch(Dispatchers.Main) {
                     Toast.makeText(requireContext(), "Successfully added", Toast.LENGTH_LONG).show()
                 }
             }

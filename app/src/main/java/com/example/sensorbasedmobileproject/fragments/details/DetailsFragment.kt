@@ -1,14 +1,10 @@
 package com.example.sensorbasedmobileproject.fragments.details
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.sensorbasedmobileproject.R
 import com.example.sensorbasedmobileproject.data.OffItem
@@ -36,27 +32,21 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
-
         // Get ean from arguments & search DB for item in IO thread
         GlobalScope.launch(context = Dispatchers.IO) {
             val ean = arguments?.getString("ean")
             offItem = viewModel.getOffItem(ean?.toLong()!!)
 
             // Update fragment_details in Main thread
-            Handler(Looper.getMainLooper()).post {
-
-                view.energyKcal100g.text = offItem.nutriments?.energyKcal100g.toString()
-                view.fat100g.text = offItem.nutriments?.fat100g.toString()
-                view.saturatedFat100g.text = offItem.nutriments?.saturatedFat100g.toString()
-                view.carbohydrates100g.text = offItem.nutriments?.carbohydrates100g.toString()
-                view.proteins100g.text = offItem.nutriments?.proteins100g.toString()
-                view.salt100g.text = offItem.nutriments?.salt100g.toString()
+            launch(Dispatchers.Main) {
+                "Energy: ${offItem.nutriments?.energyKcal100g.toString()} kcal".also { view.energyKcal100g.text = it }
+                "Fat: ${offItem.nutriments?.fat100g.toString()} g".also { view.fat100g.text = it }
+                "Saturated grams: ${offItem.nutriments?.saturatedFat100g.toString()} g".also { view.saturatedFat100g.text = it }
+                "Carbohydrates: ${offItem.nutriments?.carbohydrates100g.toString()} g".also { view.carbohydrates100g.text = it }
+                "Proteins: ${offItem.nutriments?.proteins100g.toString()} g".also { view.proteins100g.text = it }
+                "Salt: ${offItem.nutriments?.salt100g.toString()} g".also { view.salt100g.text = it }
+                "Link to product website: \n${offItem.link}".also { view.link.text = it }
             }
-
         }
-
-
     }
 }

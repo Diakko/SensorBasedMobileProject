@@ -16,5 +16,6 @@ data class OffItem(
     val ingredients_text: String?,
     val allergens_from_ingredients: String?,
     val manufacturing_places: String?,
+    val link: String?,
     @Embedded val nutriments: Nutriments?
     )
