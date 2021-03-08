@@ -17,8 +17,8 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
-import com.example.sensorbasedmobileproject.MainViewModel
-import com.example.sensorbasedmobileproject.MainViewModelFactory
+import com.example.sensorbasedmobileproject.ApiViewModel
+import com.example.sensorbasedmobileproject.ApiViewModelFactory
 import com.example.sensorbasedmobileproject.R
 import com.example.sensorbasedmobileproject.data.NominatimItem
 import com.example.sensorbasedmobileproject.data.NominatimItemViewModel
@@ -45,7 +45,7 @@ class MapFragment : Fragment() {
     private lateinit var locationText: TextView
     private lateinit var map: MapView
     private lateinit var viewHere: View
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: ApiViewModel
     private lateinit var mNominatimItemViewModel: NominatimItemViewModel
     private var mNominatimList = emptyList<NominatimItem>()
     private var boundingBox = ""
@@ -99,8 +99,8 @@ class MapFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val repository = Repository()
-        val viewModelFactory = MainViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+        val viewModelFactory = ApiViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(ApiViewModel::class.java)
         viewModel.myNominatimResponse.observe(viewLifecycleOwner, Observer { response ->
             if (response.isSuccessful && !(response.body()?.isEmpty())!!) {
                 insertDataToDatabase(response)

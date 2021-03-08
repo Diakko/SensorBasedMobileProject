@@ -1,5 +1,6 @@
 package com.example.sensorbasedmobileproject.api
 
+import com.example.sensorbasedmobileproject.utils.Constants
 import com.example.sensorbasedmobileproject.utils.Constants.Companion.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -13,7 +14,18 @@ object RetrofitInstance {
             .build()
     }
 
+    private val retrofitNominatim by lazy {
+        Retrofit.Builder()
+            .baseUrl(Constants.NOMINATIM_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
     val api: FineliApi by lazy {
         retrofit.create(FineliApi::class.java)
+    }
+
+    val apiNominatim: NominatimApi by lazy {
+        retrofitNominatim.create(NominatimApi::class.java)
     }
 }

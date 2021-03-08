@@ -11,7 +11,7 @@ import com.example.sensorbasedmobileproject.repository.Repository
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class MainViewModel(private val repository: Repository): ViewModel() {
+class ApiViewModel(private val repository: Repository): ViewModel() {
 
     private val listOfShops = mutableListOf("r-kioski", "alepa", "k-market", "sale", "prisma", "supermarket", "citymarket", "s-market", "lidl", "abc")
     val myResponse: MutableLiveData<Response<ArrayList<Fineli>>> = MutableLiveData()
