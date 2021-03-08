@@ -14,8 +14,8 @@
     <string name="menu_home">Home</string>
     <string name="menu_search">Search</string>
     <string name="menu_map">Map</string>
-
     <string name="main_fragment_text">Just a placeholder.</string>
+
     <string name="profile_fragment_text">Profile Fragment</string>
 
     // Scanning fragment
@@ -43,7 +43,13 @@
     <string name="search_hint">Food you want to search</string>
 
     // OpenFoodFacts Search
-    <string name="search_openfoodfacts_database">EAN you want to search</string>
+    <string name="search_openfoodfacts_database">Search with EAN code</string>
+    <string name="content_image">Product image from Open Food Facts database</string>
+    <string name="allergens_from_ingredients">Allergens</string>
+    <string name="no_allergens">No allergens found from ingredients</string>
+
+
+
 
     // Home fragment
     <string name="welcome_text">Welcome</string>
@@ -61,5 +67,7 @@
     <string name="shared_preference_last_latitude">com.example.w2_d1_location_app.shared_preference_latitude</string>
     <string name="map_point_address">This location address is: %1$s</string>
     <string name="steps_taken">0</string>
+
+
 
 </resources>
