@@ -6,7 +6,7 @@ class NominatimItemRepository(private val nominatimDao: NominatimItemDao) {
 
     val readAllData: LiveData<List<NominatimItem>> = nominatimDao.readAllData()
 
-    suspend fun addNominatimInfo(nominatimItem: NominatimItem){
+    suspend fun addNominatimInfo(nominatimItem: NominatimItem) {
         nominatimDao.addNominatimInfo(nominatimItem)
     }
 

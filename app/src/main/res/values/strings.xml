@@ -21,8 +21,17 @@
     // Scanning fragment
     <string name="scan_barcode">Scan new barcode</string>
 
+    // Profile fragment
+    <string name="add_shopping_list_edit_text_desc">Add item to shopping list</string>
+    <string name="add_button_desc">Push to add item to shopping list</string>
+    <string name="add_amount_desc">Amount of items</string>
+    <string name="clear_button_desc">Clear shopping list</string>
+    <string name="clear_button_text">CLEAR</string>
+    <string name="shopping_list_title">Shopping list:</string>
     // Pedometer
     <string name="steps_target_hint">Enter target steps</string>
+    <string name="steps_text">Steps</string>
+
 
     // Fineli Search
     <string name="search_result">Search result here</string>
@@ -31,7 +40,6 @@
     <string name="start">placeholder</string>
     <string name="stop">placeholder</string>
     <string name="btn_search_fineli">Search</string>
-
     <string name="search_hint">Food you want to search</string>
 
     // Home fragment
@@ -49,5 +57,6 @@
     <string name="shared_preference_last_longitude">com.example.w2_d1_location_app.shared_preference_longitude</string>
     <string name="shared_preference_last_latitude">com.example.w2_d1_location_app.shared_preference_latitude</string>
     <string name="map_point_address">This location address is: %1$s</string>
+    <string name="steps_taken">0</string>
 
 </resources>

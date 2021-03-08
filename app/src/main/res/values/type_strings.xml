@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="type_array">
+        <item>kpl</item>
+        <item>kg</item>
+        <item>g</item>
+        <item>l</item>
+        <item>dl</item>
+        <item>pss</item>
+        <item>prk</item>
+        <item>pkt</item>
+        <item>plo</item>
+    </string-array>
+</resources>

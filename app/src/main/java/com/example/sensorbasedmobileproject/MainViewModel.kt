@@ -25,6 +25,10 @@ class MainViewModel(private val repository: Repository): ViewModel() {
         }
     }
 
+    fun getShoppingList() {
+
+    }
+
     // Search for all shops in Finland
     fun getNominatim() {
         for (shops in listOfShops) {
