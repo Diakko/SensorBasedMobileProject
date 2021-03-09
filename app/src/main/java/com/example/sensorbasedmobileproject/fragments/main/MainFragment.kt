@@ -3,10 +3,8 @@ package com.example.sensorbasedmobileproject.fragments.main
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.text.Editable
-import android.util.Log
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -72,6 +70,7 @@ class MainFragment : Fragment() {
 
         // Set up editText
         editText = view.findViewById(R.id.ean)
+        editText.inputType = InputType.TYPE_CLASS_NUMBER
 
         // If no arguments
         if (arguments?.isEmpty == true) {
@@ -86,10 +85,8 @@ class MainFragment : Fragment() {
         // Observe response
         viewModel.myOffResponse.observe(viewLifecycleOwner, { response ->
             if (response.isSuccessful && response.body()?.status == 1) {
-                Log.d("DBG", response.body()?.product?.allergens_from_ingredients.toString())
                 insertDataToDatabase(response)
             } else {
-                Log.d("DBG", response.errorBody().toString())
                 Toast.makeText(
                     requireContext(),
                     "EAN not found in Open Food Facts API",
@@ -102,7 +99,6 @@ class MainFragment : Fragment() {
         // clear editText and hide keyboard
         editText.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                Log.d("DBG", "Start EAN search")
                 viewModel.getOpenFood(editTextValue.toString())
                 editText.text.clear()
                 hideKeyboard()
@@ -110,6 +106,8 @@ class MainFragment : Fragment() {
             }
             false
         })
+
+        getItems(viewModel)
     }
 
     private fun insertDataToDatabase(response: Response<OpenFoodFactResponse>) {
@@ -123,43 +121,35 @@ class MainFragment : Fragment() {
             // Product is in local database, inform user
             if (exists) {
 
+                // TODO: check that doesn't toast when coming back from details view
                 // Toasts inside GlobalScope need to be done with Handler/Looper
-                Handler(Looper.getMainLooper()).post {
-                    Toast.makeText(
-                        requireContext(),
-                        "Product already in local database",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
+//                launch(Dispatchers.Main) {
+//                    Toast.makeText(
+//                        requireContext(),
+//                        "Product already in local database",
+//                        Toast.LENGTH_LONG
+//                    ).show()
+//                }
 
             } else {
 
                 // Product not in local database, proceed with adding into database
-                val ingredientsTextDebug = response.body()?.product?.ingredients_text_debug
-                val imageUrl = response.body()?.product?.image_url
-                val productName = response.body()?.product?.product_name
-                val nutriments = response.body()?.product?.nutriments
-                val allergensFromIngredients = response.body()?.product?.allergens_from_ingredients
-                val manufacturingPlaces = response.body()?.product?.manufacturing_places
-                val ingredientsText = response.body()?.product?.ingredients_text
-
-
                 val offItem = OffItem(
                     0,
                     code,
-                    productName,
-                    ingredientsTextDebug,
-                    imageUrl,
-                    ingredientsText,
-                    allergensFromIngredients,
-                    manufacturingPlaces,
-                    nutriments!!
+                    response.body()?.product?.product_name,
+                    response.body()?.product?.ingredients_text_debug,
+                    response.body()?.product?.image_url,
+                    response.body()?.product?.ingredients_text,
+                    response.body()?.product?.allergens_from_ingredients,
+                    response.body()?.product?.manufacturing_places,
+                    response.body()?.product?.link,
+                    response.body()?.product?.nutriments!!
                 )
 
-                Log.d("DBG", offItem.toString())
                 mOffViewModel.addOffData(offItem)
 
-                Handler(Looper.getMainLooper()).post {
+                launch(Dispatchers.Main) {
                     Toast.makeText(requireContext(), "Successfully added", Toast.LENGTH_LONG).show()
                 }
             }
@@ -177,3 +167,17 @@ private fun Context.hideKeyboard(view: View) {
     inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
 }
 
+
+private fun getItems(viewModel: ApiViewModel) {
+    val list = listOf(
+        "8076809513388",
+        "6408430011667",
+        "6408430000135",
+        "5000128653572",
+        "20321734")
+
+    for (i in list) {
+        viewModel.getOpenFood(i)
+    }
+
+}

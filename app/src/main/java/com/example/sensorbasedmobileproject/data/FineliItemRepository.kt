@@ -9,4 +9,8 @@ class FineliItemRepository(private val fineliDao: FineliItemDao) {
     suspend fun addFineliInfo(fineliItem: FineliItem){
         fineliDao.addFineliInfo(fineliItem)
     }
+
+    suspend fun getFineliByOffItemName(name: String): List<FineliItem> {
+        return fineliDao.getProduct(name)
+    }
 }

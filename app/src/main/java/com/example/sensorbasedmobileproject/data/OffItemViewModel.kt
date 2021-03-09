@@ -24,6 +24,15 @@ class OffItemViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
+    suspend fun getOffItem(code: Long): OffItem {
+        lateinit var exists: OffItem
+        val job = viewModelScope.launch(Dispatchers.IO) {
+            exists = repository.getOffItem(code)
+        }
+        job.join()
+        return exists
+    }
+
     suspend fun checkIfExists(code: Long): Boolean {
         var exists = false
         val job = viewModelScope.launch(Dispatchers.IO) {

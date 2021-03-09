@@ -13,4 +13,9 @@ class OffItemRepository(private val offItemDao: OffItemDao) {
     suspend fun checkIfExists(code: Long): Boolean {
         return offItemDao.productExists(code)
     }
+
+    suspend fun getOffItem(code: Long): OffItem {
+        return offItemDao.getProduct(code)
+    }
+
 }

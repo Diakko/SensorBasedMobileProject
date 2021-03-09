@@ -10,7 +10,6 @@
     android:focusable="true"
     android:padding="8dp"
     android:id="@+id/off_card"
-    app:cardCornerRadius="15dp"
     app:cardElevation="5dp"
     android:theme="@style/Theme.SensorBasedMobileProject">
 
@@ -85,6 +84,7 @@
             android:layout_gravity="center_horizontal"
             android:adjustViewBounds="true"
             android:background="#8BC34A"
+            android:padding="8dp"
             android:contentDescription="@string/content_image"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="parent"

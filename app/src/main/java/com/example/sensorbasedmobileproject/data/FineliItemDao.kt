@@ -15,4 +15,6 @@ interface FineliItemDao {
     @Query("SELECT * FROM fineli ORDER BY id ASC")
     fun readAllData(): LiveData<List<FineliItem>>
 
+    @Query("SELECT * FROM fineli WHERE en = :name")
+    suspend fun getProduct(name: String): List<FineliItem>
 }

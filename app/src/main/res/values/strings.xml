@@ -46,6 +46,12 @@
     <string name="allergens_from_ingredients">Allergens</string>
     <string name="no_allergens">No allergens found from ingredients</string>
 
+
+
+    // Details
+    <string name="average_nutrients">Average nutrient content per 100g</string>
+
+
     // Home fragment
     <string name="welcome_text">Welcome</string>
     <string name="search_fineli_database">Search Fineli database</string>

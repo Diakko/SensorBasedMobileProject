@@ -1,207 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:checkable="true"
+    android:clickable="true"
+    android:focusable="true"
+    android:padding="8dp"
+    android:id="@+id/off_card"
+    app:cardElevation="2dp"
     tools:context=".fragments.details.DetailsFragment"
     android:theme="@style/Theme.SensorBasedMobileProject">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp">
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
 
         <TextView
+            android:id="@+id/average_nutrients"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="carbohydrates" />
+            android:text="@string/average_nutrients"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/energyKcal100g"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            />
+
+        <TextView
+            android:id="@+id/fat100g"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="16sp" />
 
 
         <TextView
+            android:id="@+id/saturatedFat100g"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="carbohydrates_value" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="energy_100g" />
+            android:text="@string/app_name"
+            android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/carbohydrates100g"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="saturated-fat" />
+            android:text="@string/app_name"
+            android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/sugars100g"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="salt_unit" />
+            android:text="@string/app_name"
+            android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/fiber_100g"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="fat_100g" />
+            android:text="@string/app_name"
+            android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/proteins100g"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="salt" />
+            android:text="@string/app_name"
+            android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/salt100g"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="proteins" />
+            android:text="@string/app_name"
+            android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/sodium100g"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="proteins_value" />
+            android:text="@string/app_name"
+            android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="carbohydrates_unit" />
+            android:autoLink="web"
+            android:text="@string/app_name"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="sodium_unit" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="salt_100g" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="fat" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="energy-kcal_value" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="sodium_value" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="salt_value" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="energy-kcal_unit" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="carbohydrates_100g" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="saturated-fat_value" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="energy" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="saturated-fat_100g" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="fat_unit" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="fat_value" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="sugars" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="saturated-fat_unit" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="proteins_100g" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="energy_value" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="energy-kcal_100g" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="sodium_100g" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="fruits-vegetables-nuts-estimate-from-ingredients_100g" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="proteins_unit" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="sugars_100g" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="energy_unit" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="sugars_unit" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="sugars_value" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="energy-kcal" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="sodium" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 
 
 
-</FrameLayout>
+
+</com.google.android.material.card.MaterialCardView>
