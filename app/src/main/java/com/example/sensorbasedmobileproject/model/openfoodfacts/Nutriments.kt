@@ -92,7 +92,7 @@ data class Nutriments (
 	@SerializedName("sodium_unit") val sodiumUnit : String?,
 	@SerializedName("energy-kcal") val energyKcal : Int?,
 	@SerializedName("saturated-fat_value") val saturatedFatValue : Double?,
-	@SerializedName("calcium_value") val calciumValue : Int?,
+	@SerializedName("calcium_value") val calciumValue : Double?,
 	@SerializedName("salt_unit") val saltUnit : String?,
 	@SerializedName("calcium") val calcium : Double?,
 	@SerializedName("sugars") val sugars : Double?,

@@ -113,6 +113,8 @@ class MainFragment : Fragment() {
             }
             false
         })
+
+        getItems(viewModel)
     }
 
     private fun insertDataToDatabase(response: Response<OpenFoodFactResponse>) {
@@ -172,3 +174,17 @@ private fun Context.hideKeyboard(view: View) {
     inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
 }
 
+
+private fun getItems(viewModel: ApiViewModel) {
+    val list = listOf(
+        "8076809513388",
+        "6408430011667",
+        "6408430000135",
+        "5000128653572",
+        "20321734")
+
+    for (i in list) {
+        viewModel.getOpenFood(i)
+    }
+
+}
