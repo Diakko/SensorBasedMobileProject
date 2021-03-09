@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SensoriPohjainenMobiiliProjekti</string>
+    <string name="camera_button_description">Skannaa viivakoodeja tällä kameranäkymällä</string>
+    <string name="home_button_description">Näpäytä päästäksesi kotinäkymään</string>
+    <string name="profile_button_description">Näpäytä päästäksesi profiilinäkymään</string>
+    <string name="scan_button_description">Näpäytä skannataksesi viivakoodeja</string>
+    <string name="menu_profile">Profiili</string>
+    <string name="menu_camera">Kamera</string>
+    <string name="menu_home">Koti</string>
+    <string name="menu_search">Etsintä</string>
+    <string name="menu_map">Kartta</string>
+    <string name="scan_barcode">Skannaa uusi viivakoodi</string>
+    <string name="add_shopping_list_edit_text_desc">Lisää tämä tuote ostoslistaan</string>
+    <string name="add_button_desc">Paina lisätäksesi tuote ostoslistaan</string>
+    <string name="add_amount_desc">Määrä</string>
+    <string name="clear_button_desc">Tyhjennä ostoslista</string>
+    <string name="clear_button_text">Tyhjennä</string>
+    <string name="shopping_list_title">Ostoslista:</string>
+    <string name="steps_text">Askeleet</string>
+    <string name="search_result">Etsintätulos tänne</string>
+    <string name="button_search">Etsi</string>
+    <string name="btn_search_fineli">Etsi</string>
+    <string name="search_hint">Ruoka, jota haluat etsiä</string>
+    <string name="search_open_food_facts_database">Etsi EAN-koodilla</string>
+    <string name="content_image">Tuotekuva Open Food Facts tietokannasta</string>
+    <string name="allergens_from_ingredients">Allergeenit</string>
+    <string name="no_allergens">Ei allergeenejä löytynyt ainesosista</string>
+    <string name="welcome_text">Tervetuloa</string>
+    <string name="search_fineli_database">Etsi Finelin tietokannasta</string>
+    <string name="address_location">Osoiteen: %1$s leveyspiiri: %2$s ja pituuspiiri: %3$s</string>
+    <string name="map_point_address">Tämän sijainnin osoite on %1$s</string>
+    <string name="amount">kpl</string>
+    <string name="weight_large">kg</string>
+    <string name="weight_small">g</string>
+    <string name="volume_large">l</string>
+    <string name="volume_medium">dl</string>
+    <string name="volume_small">ml</string>
+    <string name="bag">pss</string>
+    <string name="can">prk</string>
+    <string name="packet">pkt</string>
+    <string name="bottle">plo</string>
+    <string name="add_item_toast">Täyttää molemmat nimi ja määrä</string>
+    <string name="menu_details">Tarkemmat tiedot</string>
+</resources>

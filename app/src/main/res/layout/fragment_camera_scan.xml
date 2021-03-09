@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:orientation="vertical"
-    android:background="@color/design_default_color_primary_variant">
+    android:theme="@style/Theme.SensorBasedMobileProject">
 
     <TextView
         android:layout_width="wrap_content"
