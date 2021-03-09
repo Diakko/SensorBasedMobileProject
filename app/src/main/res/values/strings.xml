@@ -62,11 +62,11 @@
 
     // String Array
     <string name="amount">pcs</string>
-    <string name="weight_large">lb</string>
-    <string name="weight_small">oz</string>
-    <string name="volume_large">gal</string>
-    <string name="volume_medium">pt</string>
-    <string name="volume_small">fl</string>
+    <string name="weight_large">kg</string>
+    <string name="weight_small">g</string>
+    <string name="volume_large">l</string>
+    <string name="volume_medium">dl</string>
+    <string name="volume_small">ml</string>
     <string name="bag">bag</string>
     <string name="can">can</string>
     <string name="packet">pkg</string>
