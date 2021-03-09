@@ -84,7 +84,7 @@ data class Product (
 	@SerializedName("allergens") val allergens : String,
 	@SerializedName("debug_param_sorted_langs") val debug_param_sorted_langs : List<String>,
 	@SerializedName("nucleotides_tags") val nucleotides_tags : List<String>,
-	@SerializedName("nutrition_score_warning_fruits_vegetables_nuts_estimate_from_ingredients_value") val nutrition_score_warning_fruits_vegetables_nuts_estimate_from_ingredients_value : Int,
+	@SerializedName("nutrition_score_warning_fruits_vegetables_nuts_estimate_from_ingredients_value") val nutrition_score_warning_fruits_vegetables_nuts_estimate_from_ingredients_value : Double,
 	@SerializedName("data_quality_errors_tags") val data_quality_errors_tags : List<String>,
 	@SerializedName("emb_codes_debug_tags") val emb_codes_debug_tags : List<String>,
 	@SerializedName("nutriscore_grade") val nutriscore_grade : String,
