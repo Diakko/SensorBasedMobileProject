@@ -3,12 +3,8 @@ package com.example.sensorbasedmobileproject.fragments.main
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.text.Editable
 import android.text.InputType
-import android.text.InputType.TYPE_CLASS_PHONE
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -74,7 +70,7 @@ class MainFragment : Fragment() {
 
         // Set up editText
         editText = view.findViewById(R.id.ean)
-        editText.inputType = InputType.TYPE_CLASS_NUMBER;
+        editText.inputType = InputType.TYPE_CLASS_NUMBER
 
         // If no arguments
         if (arguments?.isEmpty == true) {

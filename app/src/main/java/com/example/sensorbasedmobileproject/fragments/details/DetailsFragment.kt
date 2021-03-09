@@ -16,10 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sensorbasedmobileproject.ApiViewModel
 import com.example.sensorbasedmobileproject.ApiViewModelFactory
 import com.example.sensorbasedmobileproject.R
-import com.example.sensorbasedmobileproject.data.FineliItem
-import com.example.sensorbasedmobileproject.data.FineliItemViewModel
-import com.example.sensorbasedmobileproject.data.OffItem
-import com.example.sensorbasedmobileproject.data.OffItemViewModel
+import com.example.sensorbasedmobileproject.data.*
 import com.example.sensorbasedmobileproject.fragments.search.ListAdapter
 import com.example.sensorbasedmobileproject.model.Fineli
 import com.example.sensorbasedmobileproject.repository.ApiRepository
@@ -64,8 +61,8 @@ class DetailsFragment : Fragment() {
 
         // Fineli viewmodel
         mFineliViewModel = ViewModelProvider(this).get(FineliItemViewModel::class.java)
-        mFineliViewModel.readAllData.observe(viewLifecycleOwner, {
-            adapter.setData(it)
+        mFineliViewModel.readAllData.observe(viewLifecycleOwner, Observer { fineli ->
+            adapter.setData(fineli)
         })
 
         return view
@@ -110,15 +107,8 @@ class DetailsFragment : Fragment() {
             // Do the Fineli Call
             viewModel.getFineliFood(offItem.product_name.toString())
 
-            val listOfFineliItems = offItem.product_name?.let {
-                mFineliViewModel.getFineliByOffItemName(it)
-            }
 
-            if (listOfFineliItems != null) {
-                for (i in listOfFineliItems) {
-                    Log.d("DBG", i.toString())
-                }
-            }
+
 
             // Update fragment_details in Main thread
             launch(Dispatchers.Main) {
@@ -169,13 +159,8 @@ class DetailsFragment : Fragment() {
 
     private fun insertDataToDatabase(response: Response<ArrayList<Fineli>>) {
 
-        if (response.body()?.size!! > 1) {
-            for (i in response.body()!!) {
-
-            }
-
-        }
-
+        // Check first that item isnt allready in the db
+        // Loop through the array also
         val fineli = FineliItem(
             0,
             response.body()?.get(0)?.id,
