@@ -128,14 +128,15 @@ class MainFragment : Fragment() {
             // Product is in local database, inform user
             if (exists) {
 
+                // TODO: check that doesn't toast when coming back from details view
                 // Toasts inside GlobalScope need to be done with Handler/Looper
-                Handler(Looper.getMainLooper()).post {
-                    Toast.makeText(
-                        requireContext(),
-                        "Product already in local database",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
+//                launch(Dispatchers.Main) {
+//                    Toast.makeText(
+//                        requireContext(),
+//                        "Product already in local database",
+//                        Toast.LENGTH_LONG
+//                    ).show()
+//                }
 
             } else {
 
