@@ -86,6 +86,7 @@
             android:layout_gravity="center_horizontal"
             android:adjustViewBounds="true"
             android:background="#8BC34A"
+            android:padding="8dp"
             android:contentDescription="@string/content_image"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -39,13 +39,47 @@ class DetailsFragment : Fragment() {
 
             // Update fragment_details in Main thread
             launch(Dispatchers.Main) {
-                "Energy: ${offItem.nutriments?.energyKcal100g.toString()} kcal".also { view.energyKcal100g.text = it }
+                "Energy: ${offItem.nutriments?.energyKcal100g.toString()} kcal".also {
+                    view.energyKcal100g.text = it
+                }
                 "Fat: ${offItem.nutriments?.fat100g.toString()} g".also { view.fat100g.text = it }
-                "Saturated grams: ${offItem.nutriments?.saturatedFat100g.toString()} g".also { view.saturatedFat100g.text = it }
-                "Carbohydrates: ${offItem.nutriments?.carbohydrates100g.toString()} g".also { view.carbohydrates100g.text = it }
-                "Proteins: ${offItem.nutriments?.proteins100g.toString()} g".also { view.proteins100g.text = it }
-                "Salt: ${offItem.nutriments?.salt100g.toString()} g".also { view.salt100g.text = it }
-                "Link to product website: \n${offItem.link}".also { view.link.text = it }
+                "- Saturated fat: ${offItem.nutriments?.saturatedFat100g.toString()} g".also {
+                    view.saturatedFat100g.text = it
+                }
+                "Carbohydrates: ${offItem.nutriments?.carbohydrates100g.toString()} g".also {
+                    view.carbohydrates100g.text = it
+                }
+
+                "- Sugars: ${offItem.nutriments?.sugars100g.toString()} g".also {
+                    view.sugars100g.text = it
+                }
+
+                if (offItem.nutriments?.fiber_100g.toString()
+                        .equals("") || offItem.nutriments?.fiber_100g == null
+                ) {
+                    view.fiber_100g.visibility = View.GONE
+                } else {
+                    "Fibers: ${offItem.nutriments?.fiber_100g.toString()} g".also {
+                        view.fiber_100g.text = it
+                    }
+                }
+
+                "Proteins: ${offItem.nutriments?.proteins100g.toString()} g".also {
+                    view.proteins100g.text = it
+                }
+                "Salt: ${offItem.nutriments?.salt100g.toString()} g".also {
+                    view.salt100g.text = it
+                }
+                "- Sodium: ${offItem.nutriments?.sodium100g.toString()} g".also {
+                    view.sodium100g.text = it
+                }
+
+
+                if (offItem.link.equals("") || offItem.link == null) {
+                    view.link.visibility = View.GONE
+                } else {
+                    "Link to product website: \n${offItem.link}".also { view.link.text = it }
+                }
             }
         }
     }
