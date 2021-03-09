@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SensorBasedMobileProject</string>
+    <string name="camera_button_description">Skanna streckkoder med den här kamerasidan</string>
+    <string name="home_button_description">Klicka för att komma till startsidan</string>
+    <string name="profile_button_description">Klicka för att komma till profilsidan</string>
+    <string name="scan_button_description">Tryck för att skanna streckkod</string>
+    <string name="menu_profile">Profil</string>
+    <string name="menu_camera">Kamera</string>
+    <string name="menu_home">Hem</string>
+    <string name="menu_search">Sök</string>
+    <string name="menu_map">Karta</string>
+    <string name="scan_barcode">Skanna ny streckkod</string>
+    <string name="add_shopping_list_edit_text_desc">Lägg till denna artikel i inköpslistan </string>
+    <string name="add_button_desc">Tryck för att lägga till artikel i inköpslistan</string>
+    <string name="add_amount_desc">Antal</string>
+    <string name="clear_button_desc">Rensa inköpslistan</string>
+    <string name="clear_button_text">RENSA</string>
+    <string name="shopping_list_title">Inköpslista:</string>
+    <string name="steps_text">Steg</string>
+    <string name="search_result">Sökresultat här</string>
+    <string name="button_search">Sök</string>
+    <string name="btn_search_fineli">Sök</string>
+    <string name="search_hint">Mat du vill söka efter</string>
+    <string name="search_open_food_facts_database">Sök med EAN-kod</string>
+    <string name="content_image">Produktbild från Open Food Facts-databasen</string>
+    <string name="allergens_from_ingredients">Allergener</string>
+    <string name="no_allergens">Inga allergener hittades från ingredienser</string>
+    <string name="welcome_text">Välkommen</string>
+    <string name="search_fineli_database">Sök i Fineli-databasen</string>
+    <string name="address_location">Adress: %1$s ligger på latitud: %2$s och longitud: %3$s</string>
+    <string name="map_point_address">"Denna platsadress är: %1$s "</string>
+    <string name="amount">st</string>
+    <string name="weight_large">kg</string>
+    <string name="weight_small">g</string>
+    <string name="volume_large">l</string>
+    <string name="volume_medium">dl</string>
+    <string name="volume_small">ml</string>
+    <string name="bag">påse</string>
+    <string name="can">burk</string>
+    <string name="bottle">fläska</string>
+    <string name="packet">paket</string>
+    <string name="add_item_toast">Fyll både artikelnamn och belopp!</string>
+    <string name="menu_details">detaljer</string>
+</resources>

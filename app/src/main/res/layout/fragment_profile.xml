@@ -5,12 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
-    android:background="@color/design_default_color_primary_variant"
+    android:theme="@style/Theme.SensorBasedMobileProject"
     tools:context=".fragments.profile.ProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@color/design_default_color_primary_variant"
+        android:layout_marginTop="2dp"
         android:id="@+id/relative_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,7 +25,7 @@
             app:cpb_background_progressbar_color="#b6bbd8"
             app:cpb_background_progressbar_width="5dp"
             app:cpb_progress_direction="to_right"
-            app:cpb_progressbar_color="#3f51b5"
+            app:cpb_progressbar_color="@color/teal_light"
             app:cpb_progressbar_width="10dp"
             app:cpb_round_border="false"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -38,10 +37,11 @@
             android:id="@+id/text_view_steps_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:layout_below="@id/text_view_steps_taken"
             android:layout_centerInParent="true"
             android:text="@string/steps_text"
-            android:textColor="@color/design_default_color_on_primary"
             android:textSize="15sp"
             app:layout_constraintBottom_toTopOf="@+id/text_view_steps_taken"
             app:layout_constraintEnd_toEndOf="parent"
@@ -52,8 +52,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:text="@string/steps_taken"
-            android:textColor="@color/design_default_color_on_primary"
             android:textSize="40sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +65,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="55dp"
         android:orientation="horizontal">
 
         <TextView
@@ -72,7 +73,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-
+            android:textColor="@color/white"
             android:gravity="center_vertical"
             android:text="@string/shopping_list_title"
             android:paddingHorizontal="15dp"
@@ -84,6 +85,8 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:contentDescription="@string/clear_button_desc"
+            android:backgroundTint="@color/teal_dark"
+            android:textColor="@color/black"
             android:layout_weight="1"
             android:text="@string/clear_button_text" />
     </LinearLayout>
@@ -99,7 +102,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:orientation="horizontal"
         android:layout_marginBottom="5dp">
 
@@ -110,8 +113,11 @@
             android:layout_height="match_parent"
             android:layout_weight="5"
             android:ems="10"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:textAlignment="center"
-            android:inputType="textPersonName"
+            android:inputType="text"
+            android:imeOptions="actionDone"
             android:hint="@string/add_shopping_list_edit_text_desc"
             android:autofillHints="Shopping List Item" />
 
@@ -124,27 +130,32 @@
             <EditText
                 android:id="@+id/edit_text_shopping_list_item_amount"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="55dp"
                 android:autofillHints="Amount"
-                android:contentDescription="@string/add_amount_desc"
+                android:hint="@string/add_amount_desc"
                 android:ems="10"
+                android:textColor="@color/white"
                 android:inputType="number"
                 android:labelFor="@+id/type_spinner"
+                android:imeOptions="actionDone"
                 android:textAlignment="center" />
 
             <Spinner
                 android:id="@+id/type_spinner"
                 android:layout_width="match_parent"
-                android:layout_height="20dp" />
+                android:textColor="@color/white"
+                android:layout_height="25dp" />
         </LinearLayout>
 
         <ImageButton
             android:background="@drawable/border"
+            android:layout_gravity="center_vertical"
             android:id="@+id/add_button"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:src="@drawable/sharp_add_black_36"
+            android:backgroundTint="@color/teal_dark"
             android:contentDescription="@string/add_button_desc" />
 
 

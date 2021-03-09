@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/design_default_color_primary_variant"
     android:layout_marginHorizontal="5dp"
     android:layout_marginTop="5dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:theme="@style/Theme.SensorBasedMobileProject">
 
     <TextView
         android:id="@+id/fineli_id"
@@ -16,7 +16,7 @@
         android:layout_marginTop="3dp"
         android:text="@string/nr"
         android:textSize="16sp"
-        android:textColor="@color/design_default_color_on_primary"
+        android:textColor="@color/design_default_color_on_secondary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,7 +27,7 @@
         android:layout_marginStart="24dp"
         android:text="@string/main_fragment_text"
         android:textSize="16sp"
-        android:textColor="@color/design_default_color_on_primary"
+        android:textColor="@color/design_default_color_on_secondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fineli_id"
@@ -41,7 +41,7 @@
         android:layout_marginBottom="5dp"
         android:text="@string/main_fragment_text"
         android:textSize="16sp"
-        android:textColor="@color/design_default_color_on_primary"
+        android:textColor="@color/design_default_color_on_secondary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fineli_name" />
 </androidx.constraintlayout.widget.ConstraintLayout>

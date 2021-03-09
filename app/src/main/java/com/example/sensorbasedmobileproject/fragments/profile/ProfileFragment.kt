@@ -1,5 +1,6 @@
 package com.example.sensorbasedmobileproject.fragments.profile
 
+import android.app.Activity
 import android.content.Context
 import android.hardware.Sensor
 import android.hardware.SensorEvent
@@ -10,6 +11,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -23,10 +26,8 @@ import com.example.sensorbasedmobileproject.data.ShoppingListItemViewModel
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class ProfileFragment : Fragment(), SensorEventListener, AdapterView.OnItemSelectedListener {
 
@@ -58,6 +59,10 @@ class ProfileFragment : Fragment(), SensorEventListener, AdapterView.OnItemSelec
         stepsProgressBar = fragmentView.findViewById(R.id.circular_progress_bar)
         stepsProgressBar.progressMax = 10000F // default 9000 steps target
 
+        // Shopping List
+        val shoppingListItemEditText = fragmentView.findViewById<EditText>(R.id.edit_text_shopping_list_item)
+        val shoppingListItemAmountEditText = fragmentView.findViewById<EditText>(R.id.edit_text_shopping_list_item_amount)
+
         // Recyclerview
         val recyclerAdapter =  ShoppingListAdapter(requireContext())
         recyclerView = fragmentView.findViewById(R.id.recyclerview)
@@ -68,14 +73,42 @@ class ProfileFragment : Fragment(), SensorEventListener, AdapterView.OnItemSelec
         val addButton = fragmentView.findViewById<ImageButton>(R.id.add_button)
 
         addButton.setOnClickListener() {
-            if (shoppingListDatabase != null) {
-                GlobalScope.launch {
-                    shoppingListItem = fragmentView.findViewById<EditText>(R.id.edit_text_shopping_list_item).text.toString()
-                    shoppingListItemAmount = fragmentView.findViewById<EditText>(R.id.edit_text_shopping_list_item_amount).text.toString().toInt()
-                    shoppingListDatabase!!.shoppingListItemDao().insertShoppingListData(ShoppingListItem(0, shoppingListItem, shoppingListItemAmount, shoppingListItemType))
-                }
+            if (shoppingListItemAmountEditText.text.isNotEmpty() || shoppingListItemEditText.text.isNotEmpty()) {
+                if (shoppingListDatabase != null) {
+                        GlobalScope.launch {
+                                shoppingListItem = shoppingListItemEditText.text.toString()
+                                shoppingListItemAmount =
+                                    shoppingListItemAmountEditText.text.toString().toInt()
+                                shoppingListItemAmountEditText.text.clear()
+                                shoppingListItemEditText.text.clear()
+                                shoppingListDatabase!!.shoppingListItemDao()
+                                    .insertShoppingListData(ShoppingListItem(0,
+                                        shoppingListItem,
+                                        shoppingListItemAmount,
+                                        shoppingListItemType))
+
+                        }
+                    }
+            } else {
+                Toast.makeText(requireContext(), R.string.add_item_toast, Toast.LENGTH_LONG).show()
             }
         }
+
+        // Keyboard hidings
+        shoppingListItemAmountEditText.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                hideKeyboard()
+                return@OnEditorActionListener true
+            }
+            false
+        })
+        shoppingListItemEditText.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                hideKeyboard()
+                return@OnEditorActionListener true
+            }
+            false
+        })
 
         // Clear button
         val clearButton = fragmentView.findViewById<Button>(R.id.clear_button)
@@ -93,12 +126,14 @@ class ProfileFragment : Fragment(), SensorEventListener, AdapterView.OnItemSelec
             recyclerAdapter.setData(shoppingListItem)
         })
 
+
         // Spinner item
         spinner = fragmentView.findViewById(R.id.type_spinner)
         spinner.onItemSelectedListener = this
 
         ArrayAdapter.createFromResource(requireContext(), R.array.type_array, android.R.layout.simple_spinner_item).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.solidColor
             spinner.adapter = adapter
         }
 
@@ -133,6 +168,15 @@ class ProfileFragment : Fragment(), SensorEventListener, AdapterView.OnItemSelec
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+    }
+
+    private fun Fragment.hideKeyboard() {
+        view?.let { activity?.hideKeyboard(it) }
+    }
+    private fun Context.hideKeyboard(view: View) {
+        val inputMethodManager =
+            getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
     // Spinner adapter overrides

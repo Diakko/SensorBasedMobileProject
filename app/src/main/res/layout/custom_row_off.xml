@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -13,7 +11,7 @@
     android:padding="8dp"
     android:id="@+id/off_card"
     app:cardElevation="5dp"
-    >
+    android:theme="@style/Theme.SensorBasedMobileProject">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:theme="@style/Theme.SensorBasedMobileProject"
+    >
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -14,7 +16,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/my_navigation_items" />
+        app:menu="@menu/my_navigation_items"
+        app:backgroundTint="@color/teal_dark"
+        app:itemIconTint="@color/black"
+        app:itemTextColor="@color/black"
+        />
 
 
 

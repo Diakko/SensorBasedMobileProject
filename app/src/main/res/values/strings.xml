@@ -2,11 +2,10 @@
     <string name="app_name">SensorBasedMobileProject</string>
 
     // Button Descriptions
-    <string name="camera_button_description">Scan barcodes with this camera button</string>
-    <string name="home_button_description">Click to get to home view</string>
+    <string name="camera_button_description">Scan barcodes with this camera page</string>
+    <string name="home_button_description">Click to get to home page</string>
     <string name="profile_button_description">Click to get to profile page</string>
     <string name="scan_button_description">Push to scan barcode</string>
-
 
     // Menu Items
     <string name="menu_profile">Profile</string>
@@ -14,44 +13,43 @@
     <string name="menu_home">Home</string>
     <string name="menu_search">Search</string>
     <string name="menu_map">Map</string>
-    <string name="main_fragment_text">Just a placeholder.</string>
-
-    <string name="profile_fragment_text">Profile Fragment</string>
+    <string name="menu_details">Details</string>
+    <string name="main_fragment_text" translatable="false">Just a placeholder.</string>
 
     // Scanning fragment
     <string name="scan_barcode">Scan new barcode</string>
 
     // Profile fragment
-    <string name="add_shopping_list_edit_text_desc">Add item to shopping list</string>
+    <string name="add_shopping_list_edit_text_desc">Add this item to shopping list</string>
     <string name="add_button_desc">Push to add item to shopping list</string>
-    <string name="add_amount_desc">Amount of items</string>
+    <string name="add_amount_desc">Amount</string>
     <string name="clear_button_desc">Clear shopping list</string>
     <string name="clear_button_text">CLEAR</string>
     <string name="shopping_list_title">Shopping list:</string>
-    // Pedometer
-    <string name="steps_target_hint">Enter target steps</string>
-    <string name="steps_text">Steps</string>
+    <string name="add_item_toast">Fill both item name and amount!</string>
 
+    // Pedometer
+    <string name="steps_text">Steps</string>
 
     // Fineli Search
     <string name="search_result">Search result here</string>
     <string name="button_search">Search</string>
-    <string name="name">placeholder</string>
-    <string name="start">placeholder</string>
-    <string name="stop">placeholder</string>
+    <string name="name" translatable="false">placeholder</string>
+    <string name="start" translatable="false">placeholder</string>
+    <string name="stop" translatable="false">placeholder</string>
     <string name="btn_search_fineli">Search</string>
     <string name="search_hint">Food you want to search</string>
 
     // OpenFoodFacts Search
-    <string name="search_openfoodfacts_database">Search with EAN code</string>
+    <string name="search_open_food_facts_database">Search with EAN code</string>
     <string name="content_image">Product image from Open Food Facts database</string>
     <string name="allergens_from_ingredients">Allergens</string>
     <string name="no_allergens">No allergens found from ingredients</string>
 
 
+
     // Details
     <string name="average_nutrients">Average nutrient content per 100g</string>
-
 
 
     // Home fragment
@@ -59,18 +57,25 @@
     <string name="search_fineli_database">Search Fineli database</string>
 
     // Fineli recyclerview custom row
-    <string name="nr">1</string>
+    <string name="nr" translatable="false">1</string>
 
     // Map
     <string name="address_location">Address: %1$s is in latitude: %2$s and longitude: %3$s</string>
-    <string name="address_last_location">Last Address: %1$s is in latitude: %2$s and longitude: %3$s</string>
-    <string name="distance_locations">Distance between last and present location is %1$s meters</string>
-    <string name="shared_pref">shared_preferences</string>
-    <string name="shared_preference_last_longitude">com.example.w2_d1_location_app.shared_preference_longitude</string>
-    <string name="shared_preference_last_latitude">com.example.w2_d1_location_app.shared_preference_latitude</string>
+    <string name="shared_pref" translatable="false">shared_preferences</string>
+    <string name="shared_preference_last_longitude" translatable="false">com.example.w2_d1_location_app.shared_preference_longitude</string>
+    <string name="shared_preference_last_latitude" translatable="false">com.example.w2_d1_location_app.shared_preference_latitude</string>
     <string name="map_point_address">This location address is: %1$s</string>
-    <string name="steps_taken">0</string>
+    <string name="steps_taken" translatable="false">0</string>
 
-
-
+    // String Array
+    <string name="amount">pcs</string>
+    <string name="weight_large">kg</string>
+    <string name="weight_small">g</string>
+    <string name="volume_large">l</string>
+    <string name="volume_medium">dl</string>
+    <string name="volume_small">ml</string>
+    <string name="bag">bag</string>
+    <string name="can">can</string>
+    <string name="packet">pkg</string>
+    <string name="bottle">btl</string>
 </resources>

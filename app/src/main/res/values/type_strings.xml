@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="type_array">
-        <item>kpl</item>
-        <item>kg</item>
-        <item>g</item>
-        <item>l</item>
-        <item>dl</item>
-        <item>pss</item>
-        <item>prk</item>
-        <item>pkt</item>
-        <item>plo</item>
+        <item>@string/amount</item>
+        <item>@string/weight_large</item>
+        <item>@string/weight_small</item>
+        <item>@string/volume_large</item>
+        <item>@string/volume_medium</item>
+        <item>@string/volume_small</item>
+        <item>@string/can</item>
+        <item>@string/packet</item>
+        <item>@string/bottle</item>
     </string-array>
 </resources>
