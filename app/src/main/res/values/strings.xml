@@ -13,7 +13,7 @@
     <string name="menu_home">Home</string>
     <string name="menu_search">Search</string>
     <string name="menu_map">Map</string>
-    <string name="profile_fragment_text">Profile Fragment</string>
+    <string name="menu_details">Details</string>
     <string name="main_fragment_text" translatable="false">Just a placeholder.</string>
 
     // Scanning fragment
@@ -22,10 +22,11 @@
     // Profile fragment
     <string name="add_shopping_list_edit_text_desc">Add this item to shopping list</string>
     <string name="add_button_desc">Push to add item to shopping list</string>
-    <string name="add_amount_desc">Amount of items</string>
+    <string name="add_amount_desc">Amount</string>
     <string name="clear_button_desc">Clear shopping list</string>
     <string name="clear_button_text">CLEAR</string>
     <string name="shopping_list_title">Shopping list:</string>
+    <string name="add_item_toast">Fill both item name and amount!</string>
 
     // Pedometer
     <string name="steps_text">Steps</string>

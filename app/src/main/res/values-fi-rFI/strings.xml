@@ -10,11 +10,10 @@
     <string name="menu_home">Koti</string>
     <string name="menu_search">Etsintä</string>
     <string name="menu_map">Kartta</string>
-    <string name="profile_fragment_text">Profiiliosanen</string>
     <string name="scan_barcode">Skannaa uusi viivakoodi</string>
     <string name="add_shopping_list_edit_text_desc">Lisää tämä tuote ostoslistaan</string>
     <string name="add_button_desc">Paina lisätäksesi tuote ostoslistaan</string>
-    <string name="add_amount_desc">Tuotteiden määrä</string>
+    <string name="add_amount_desc">Määrä</string>
     <string name="clear_button_desc">Tyhjennä ostoslista</string>
     <string name="clear_button_text">Tyhjennä</string>
     <string name="shopping_list_title">Ostoslista:</string>
@@ -41,4 +40,6 @@
     <string name="can">prk</string>
     <string name="packet">pkt</string>
     <string name="bottle">plo</string>
+    <string name="add_item_toast">Täyttää molemmat nimi ja määrä</string>
+    <string name="menu_details">Tarkemmat tiedot</string>
 </resources>

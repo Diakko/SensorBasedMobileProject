@@ -73,18 +73,28 @@ class ProfileFragment : Fragment(), SensorEventListener, AdapterView.OnItemSelec
         val addButton = fragmentView.findViewById<ImageButton>(R.id.add_button)
 
         addButton.setOnClickListener() {
-            if (shoppingListDatabase != null) {
-                GlobalScope.launch {
-                    shoppingListItem = shoppingListItemEditText.text.toString()
-                    shoppingListItemAmount = shoppingListItemAmountEditText.text.toString().toInt()
-                    shoppingListItemAmountEditText.text.clear()
-                    shoppingListItemEditText.text.clear()
+            if (shoppingListItemAmountEditText.text.isNotEmpty() || shoppingListItemEditText.text.isNotEmpty()) {
+                if (shoppingListDatabase != null) {
+                        GlobalScope.launch {
+                                shoppingListItem = shoppingListItemEditText.text.toString()
+                                shoppingListItemAmount =
+                                    shoppingListItemAmountEditText.text.toString().toInt()
+                                shoppingListItemAmountEditText.text.clear()
+                                shoppingListItemEditText.text.clear()
+                                shoppingListDatabase!!.shoppingListItemDao()
+                                    .insertShoppingListData(ShoppingListItem(0,
+                                        shoppingListItem,
+                                        shoppingListItemAmount,
+                                        shoppingListItemType))
 
-                    shoppingListDatabase!!.shoppingListItemDao().insertShoppingListData(ShoppingListItem(0, shoppingListItem, shoppingListItemAmount, shoppingListItemType))
-                }
+                        }
+                    }
+            } else {
+                Toast.makeText(requireContext(), R.string.add_item_toast, Toast.LENGTH_LONG).show()
             }
         }
 
+        // Keyboard hidings
         shoppingListItemAmountEditText.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 hideKeyboard()
@@ -123,6 +133,7 @@ class ProfileFragment : Fragment(), SensorEventListener, AdapterView.OnItemSelec
 
         ArrayAdapter.createFromResource(requireContext(), R.array.type_array, android.R.layout.simple_spinner_item).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.solidColor
             spinner.adapter = adapter
         }
 

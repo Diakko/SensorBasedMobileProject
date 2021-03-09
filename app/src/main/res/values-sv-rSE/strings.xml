@@ -10,11 +10,10 @@
     <string name="menu_home">Hem</string>
     <string name="menu_search">Sök</string>
     <string name="menu_map">Karta</string>
-    <string name="profile_fragment_text">Profilfragment</string>
     <string name="scan_barcode">Skanna ny streckkod</string>
     <string name="add_shopping_list_edit_text_desc">Lägg till denna artikel i inköpslistan </string>
     <string name="add_button_desc">Tryck för att lägga till artikel i inköpslistan</string>
-    <string name="add_amount_desc">Antal artiklar</string>
+    <string name="add_amount_desc">Antal</string>
     <string name="clear_button_desc">Rensa inköpslistan</string>
     <string name="clear_button_text">RENSA</string>
     <string name="shopping_list_title">Inköpslista:</string>
@@ -41,4 +40,6 @@
     <string name="can">burk</string>
     <string name="bottle">fläska</string>
     <string name="packet">paket</string>
+    <string name="add_item_toast">Fyll både artikelnamn och belopp!</string>
+    <string name="menu_details">detaljer</string>
 </resources>

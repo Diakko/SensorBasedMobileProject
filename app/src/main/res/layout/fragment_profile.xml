@@ -65,7 +65,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="55dp"
         android:orientation="horizontal">
 
         <TextView
@@ -102,7 +102,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:orientation="horizontal"
         android:layout_marginBottom="5dp">
 
@@ -130,9 +130,9 @@
             <EditText
                 android:id="@+id/edit_text_shopping_list_item_amount"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="55dp"
                 android:autofillHints="Amount"
-                android:contentDescription="@string/add_amount_desc"
+                android:hint="@string/add_amount_desc"
                 android:ems="10"
                 android:textColor="@color/white"
                 android:inputType="number"
@@ -144,14 +144,15 @@
                 android:id="@+id/type_spinner"
                 android:layout_width="match_parent"
                 android:textColor="@color/white"
-                android:layout_height="20dp" />
+                android:layout_height="25dp" />
         </LinearLayout>
 
         <ImageButton
             android:background="@drawable/border"
+            android:layout_gravity="center_vertical"
             android:id="@+id/add_button"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:src="@drawable/sharp_add_black_36"
             android:backgroundTint="@color/teal_dark"
