@@ -16,7 +16,7 @@ class ShoppingListItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemV
 
 class ShoppingListAdapter(context: Context) : RecyclerView.Adapter<ShoppingListItemViewHolder>() {
 
-    private val colors = mutableListOf("#FF6200EE", "#FF3700B3")
+    private val colors = mutableListOf("#FFE3FE", "#B4AEE8")
 
     private var shoppingList = emptyList<ShoppingListItem>()
 
