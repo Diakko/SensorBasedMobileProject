@@ -24,6 +24,15 @@ class FineliItemViewModel(application: Application): AndroidViewModel(applicatio
         }
     }
 
+    suspend fun getFineliByOffItemName(name: String): List<FineliItem> {
+        lateinit var listOfFineliItems: List<FineliItem>
+        val job = viewModelScope.launch(Dispatchers.IO) {
+            listOfFineliItems = repository.getFineliByOffItemName(name)
+        }
+        job.join()
+        return listOfFineliItems
+    }
+
 
 
 }

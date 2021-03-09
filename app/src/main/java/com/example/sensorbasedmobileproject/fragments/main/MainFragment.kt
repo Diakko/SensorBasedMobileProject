@@ -89,10 +89,8 @@ class MainFragment : Fragment() {
         // Observe response
         viewModel.myOffResponse.observe(viewLifecycleOwner, { response ->
             if (response.isSuccessful && response.body()?.status == 1) {
-                Log.d("DBG", response.body()?.product?.allergens_from_ingredients.toString())
                 insertDataToDatabase(response)
             } else {
-                Log.d("DBG", response.errorBody().toString())
                 Toast.makeText(
                     requireContext(),
                     "EAN not found in Open Food Facts API",
@@ -105,7 +103,6 @@ class MainFragment : Fragment() {
         // clear editText and hide keyboard
         editText.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                Log.d("DBG", "Start EAN search")
                 viewModel.getOpenFood(editTextValue.toString())
                 editText.text.clear()
                 hideKeyboard()
@@ -154,7 +151,6 @@ class MainFragment : Fragment() {
                     response.body()?.product?.nutriments!!
                 )
 
-                Log.d("DBG", offItem.toString())
                 mOffViewModel.addOffData(offItem)
 
                 launch(Dispatchers.Main) {

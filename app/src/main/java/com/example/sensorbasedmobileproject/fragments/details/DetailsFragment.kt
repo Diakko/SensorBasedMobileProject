@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sensorbasedmobileproject.ApiViewModel
 import com.example.sensorbasedmobileproject.ApiViewModelFactory
@@ -36,7 +38,6 @@ class DetailsFragment : Fragment() {
     private lateinit var viewModel: ApiViewModel
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -44,6 +45,16 @@ class DetailsFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_details, container, false)
         offViewModel = ViewModelProvider(this).get(OffItemViewModel::class.java)
+
+        // Set toolbar backbutton listener
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true /* enabled by default */) {
+                override fun handleOnBackPressed() {
+                    requireView().findNavController().navigate(R.id.action_global_action_home)
+                }
+            }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
 
         // Recyclerview
         val adapter = ListAdapter()
@@ -53,8 +64,8 @@ class DetailsFragment : Fragment() {
 
         // Fineli viewmodel
         mFineliViewModel = ViewModelProvider(this).get(FineliItemViewModel::class.java)
-        mFineliViewModel.readAllData.observe(viewLifecycleOwner, Observer { fineli ->
-            adapter.setData(fineli)
+        mFineliViewModel.readAllData.observe(viewLifecycleOwner, {
+            adapter.setData(it)
         })
 
         return view
@@ -63,24 +74,33 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         // TODO: Navigate back with the back button
         val toolbar = (activity as AppCompatActivity).supportActionBar
         toolbar?.title = "Product details"
+
 
         // Set up viewModel stuffs
         val repository = ApiRepository()
         val viewModelFactory = ApiViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(ApiViewModel::class.java)
 
+
         // Observe response
         viewModel.myFineliResponse.observe(viewLifecycleOwner, Observer { response ->
             if (response.isSuccessful && !(response.body()?.isEmpty())!!) {
                 insertDataToDatabase(response)
+                // TODO: insert GET data to adapter to show here
+                Log.d("DBG", response.body().toString())
+
             } else {
                 Log.d("DBG", response.errorBody().toString())
-                Toast.makeText(requireContext(), "Keyword not found in Fineli API", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(),
+                    "Keyword not found in Fineli API",
+                    Toast.LENGTH_LONG).show()
             }
         })
+
 
         // Get ean from arguments & search DB for item in IO thread
         GlobalScope.launch(context = Dispatchers.IO) {
@@ -89,6 +109,16 @@ class DetailsFragment : Fragment() {
 
             // Do the Fineli Call
             viewModel.getFineliFood(offItem.product_name.toString())
+
+            val listOfFineliItems = offItem.product_name?.let {
+                mFineliViewModel.getFineliByOffItemName(it)
+            }
+
+            if (listOfFineliItems != null) {
+                for (i in listOfFineliItems) {
+                    Log.d("DBG", i.toString())
+                }
+            }
 
             // Update fragment_details in Main thread
             launch(Dispatchers.Main) {
@@ -139,6 +169,13 @@ class DetailsFragment : Fragment() {
 
     private fun insertDataToDatabase(response: Response<ArrayList<Fineli>>) {
 
+        if (response.body()?.size!! > 1) {
+            for (i in response.body()!!) {
+
+            }
+
+        }
+
         val fineli = FineliItem(
             0,
             response.body()?.get(0)?.id,
@@ -168,5 +205,6 @@ class DetailsFragment : Fragment() {
         mFineliViewModel.addFineliData(fineli)
         Toast.makeText(requireContext(), "Successfully added", Toast.LENGTH_LONG).show()
     }
+
 
 }

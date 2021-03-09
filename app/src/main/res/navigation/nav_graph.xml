@@ -54,6 +54,11 @@
         tools:layout="@layout/fragment_details" >
         <argument android:name="ean"
             app:argType="string" />
+        <action
+            android:id="@+id/action_detailsFragment_to_action_home"
+            app:destination="@id/action_home" />
     </fragment>
+
+    <action android:id="@+id/action_global_action_home" app:destination="@id/action_home"/>
 
 </navigation>
