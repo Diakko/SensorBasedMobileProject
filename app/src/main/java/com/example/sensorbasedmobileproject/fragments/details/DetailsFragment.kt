@@ -1,3 +1,11 @@
+/**
+ * Description: Fragment for displaying detailed information of the products nutriment data
+ *
+ * Course: Sensor Based Mobile Applications TX00CK66-3009
+ * Name: Ville Pystynen
+ * Student number: 1607999
+ */
+
 package com.example.sensorbasedmobileproject.fragments.details
 
 import android.os.Bundle
@@ -54,15 +62,15 @@ class DetailsFragment : Fragment() {
             val ean = arguments?.getString("ean")
             offItem = offViewModel.getOffItem(ean?.toLong()!!)
 
-            // Update fragment_details in Main thread
+            // Set detail texts in the Main thread
             launch(Dispatchers.Main) {
-
                 view.energyKcal100g.text = getString(R.string.energy, offItem.nutriments?.energyKcal100g.toString())
                 view.fat100g.text = getString(R.string.fat, offItem.nutriments?.fat100g.toString())
                 view.saturatedFat100g.text = getString(R.string.sat_fat, offItem.nutriments?.saturatedFat100g.toString())
                 view.carbohydrates100g.text = getString(R.string.carbs, offItem.nutriments?.carbohydrates100g.toString())
                 view.sugars100g.text = getString(R.string.sugars, offItem.nutriments?.sugars100g.toString())
 
+                // show data only if exists
                 if (offItem.nutriments?.fiber_100g.toString().equals("") || offItem.nutriments?.fiber_100g == null) {
                     view.fiber_100g.visibility = GONE
                 } else {
@@ -73,6 +81,7 @@ class DetailsFragment : Fragment() {
                 view.salt100g.text = getString(R.string.salt, offItem.nutriments?.salt100g.toString())
                 view.sodium100g.text = getString(R.string.sodium, offItem.nutriments?.sodium100g.toString())
 
+                // show data only if exists
                 if (offItem.link.equals("") || offItem.link == null) {
                     view.link.visibility = GONE
                 } else {

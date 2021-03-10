@@ -1,3 +1,12 @@
+/**
+ * Description: Main entry point for the application
+ * - Handles the bottom tab navigator
+ *
+ * Course: Sensor Based Mobile Applications TX00CK66-3009
+ * Name: Ville Pystynen
+ * Student number: 1607999
+ */
+
 package com.example.sensorbasedmobileproject
 
 import android.Manifest
@@ -32,7 +41,6 @@ class MainActivity : AppCompatActivity() {
                 arrayOf(Manifest.permission.ACTIVITY_RECOGNITION), ACTIVITY_SERVICE_ID)
         }
 
-
         // Navigation
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav_menu)
         val navController = findNavController(R.id.nav_host_fragment)
@@ -48,13 +56,10 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         bottomNavigationView.setupWithNavController(navController)
-
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, @Nullable data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

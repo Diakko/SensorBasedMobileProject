@@ -1,3 +1,15 @@
+/**
+ * Description:
+ *
+ * ListAdapter for MainFragments recyclerview
+ * - Handles navigation to product details
+ * - Populates viewholders with product detail data
+ *
+ * Course: Sensor Based Mobile Applications TX00CK66-3009
+ * Name: Ville Pystynen
+ * Student number: 1607999
+ */
+
 package com.example.sensorbasedmobileproject.fragments.main
 
 import android.graphics.BitmapFactory
@@ -13,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sensorbasedmobileproject.R
 import com.example.sensorbasedmobileproject.data.OffItem
 import kotlinx.android.synthetic.main.custom_row_off.view.*
+import kotlinx.android.synthetic.main.custom_row_off.view.off_card
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -31,7 +44,7 @@ class OffListAdapter : RecyclerView.Adapter<OffListAdapter.MyViewHolder>() {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.custom_row_off, parent, false)
 
-
+        // Returns a viewholder with navigation to product details
         return MyViewHolder(view).listen { pos, _ ->
             val ean = foodList[pos].code.toString()
             Navigation.findNavController(view).navigate(
@@ -41,35 +54,43 @@ class OffListAdapter : RecyclerView.Adapter<OffListAdapter.MyViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        // Set the date for the search
+        val sdf = SimpleDateFormat("dd.MM.yyyy")
+        val currentDate = sdf.format(Date()).toString()
+        holder.itemView.date.text =
+            holder.itemView.context.getString(R.string.date_of_search, currentDate)
+
+        // Get the current item in the list of items
         val currentItem = foodList[position]
         holder.itemView.product_name.text = currentItem.product_name
-        val sdf = SimpleDateFormat("dd.MM.yyyy")
-        val currentDate = sdf.format(Date())
-
-        "Date of search: $currentDate".also { holder.itemView.date.text = it }
-
 
         if (currentItem.manufacturing_places.equals("") || currentItem.manufacturing_places == null) {
-            holder.itemView.manufacturing_places.text = "Country of origin unknown"
+            holder.itemView.manufacturing_places.text =
+                holder.itemView.context.getString(R.string.coo)
         } else {
-            "Made in: ${currentItem.manufacturing_places}".also {
-                holder.itemView.manufacturing_places.text = it
-            }
+            holder.itemView.manufacturing_places.text =
+                holder.itemView.context.getString(R.string.made_in,
+                    currentItem.manufacturing_places)
         }
 
         // Check if allergens in product
         if (currentItem.allergens_from_ingredients.equals("")) {
-            holder.itemView.allergens_from_ingredients.text = "No allergens found"
+
+            // No allergens found
+            holder.itemView.allergens_from_ingredients.text = holder.itemView.context.getString(R.string.no_allergens_found)
+
         } else {
+
             // If allergens found, set image background color to RED and background light pink
             holder.itemView.off_card.product_image.setBackgroundColor(Color.RED)
             holder.itemView.off_card.setCardBackgroundColor(Color.parseColor("#FFB6C1"))
 
             // Display allergens
-            "Allergens: ${currentItem.allergens_from_ingredients}".also {
-                holder.itemView.allergens_from_ingredients.text = it
-            }
+            holder.itemView.allergens_from_ingredients.text =
+                holder.itemView.context.getString(R.string.allergens_found,
+                    currentItem.allergens_from_ingredients)
         }
+
         "EAN: ${currentItem.code.toString()}".also { holder.itemView.code.text = it }
 
         // If image_url is provided, get the image and display it
@@ -77,9 +98,11 @@ class OffListAdapter : RecyclerView.Adapter<OffListAdapter.MyViewHolder>() {
             val imageView = holder.itemView.findViewById<ImageView>(R.id.product_image)
             val url = URL(currentItem.image_url.toString())
 
+            // Get image in a coroutine
             scope.launch(Dispatchers.IO) {
                 launch {
                     val bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+                    // Set image in Main thread
                     Handler(Looper.getMainLooper()).post {
                         imageView.setImageBitmap(bmp)
                     }
@@ -103,5 +126,4 @@ class OffListAdapter : RecyclerView.Adapter<OffListAdapter.MyViewHolder>() {
         }
         return this
     }
-
 }

@@ -1,3 +1,18 @@
+/**
+ * Description:
+ *
+ * Fragment for searching Open Food Facts API via
+ * 1) scanning a barcode or
+ * 2) entering an ean code to the search field
+ *
+ * - Displays found items in a recyclerview
+ * - Navigate to product details by clicking an item
+ *
+ * Course: Sensor Based Mobile Applications TX00CK66-3009
+ * Name: Ville Pystynen
+ * Student number: 1607999
+ */
+
 package com.example.sensorbasedmobileproject.fragments.main
 
 import android.app.Activity
@@ -48,13 +63,13 @@ class MainFragment : Fragment() {
 
         val view: View = inflater.inflate(R.layout.fragment_main, container, false)
 
-        // Recyclerview
+        // Recyclerview setup
         val adapter = OffListAdapter()
         val recyclerView = view.recyclerview
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        // Off viewmodel
+        // OffItem viewmodel setup
         mOffViewModel = ViewModelProvider(this).get(OffItemViewModel::class.java)
         mOffViewModel.readAllData.observe(viewLifecycleOwner, { off ->
             adapter.setData(off)
@@ -74,7 +89,7 @@ class MainFragment : Fragment() {
             )
         }
 
-        // Set up viewModel stuffs
+        // API viewmodel setup
         val repository = ApiRepository()
         val viewModelFactory = ApiViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(ApiViewModel::class.java)
@@ -83,7 +98,7 @@ class MainFragment : Fragment() {
         editText = view.findViewById(R.id.ean)
         editText.inputType = InputType.TYPE_CLASS_NUMBER
 
-        // If no arguments
+        // If no arguments, search is empty
         if (arguments?.isEmpty == true) {
             editTextValue = editText.text
         } else {
@@ -91,7 +106,6 @@ class MainFragment : Fragment() {
             val ean = arguments?.getString("ean")
             viewModel.getOpenFood(ean.toString())
         }
-
 
         // Observe response
         viewModel.myOffResponse.observe(viewLifecycleOwner, { response ->
@@ -118,6 +132,7 @@ class MainFragment : Fragment() {
             false
         })
 
+        // TODO: remove from final product. This method gets some products for debugging purposes.
         getItems(viewModel)
     }
 
@@ -133,7 +148,7 @@ class MainFragment : Fragment() {
             if (exists) {
 
                 // TODO: check that doesn't toast when coming back from details view
-                // Toasts inside GlobalScope need to be done with Handler/Looper
+                // Toasts inside GlobalScope need to be done with coroutines
 //                launch(Dispatchers.Main) {
 //                    Toast.makeText(
 //                        requireContext(),
@@ -168,6 +183,7 @@ class MainFragment : Fragment() {
     }
 }
 
+// For hiding the soft keyboard
 private fun Fragment.hideKeyboard() {
     view?.let { activity?.hideKeyboard(it) }
 }
@@ -178,7 +194,7 @@ private fun Context.hideKeyboard(view: View) {
     inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
 }
 
-
+// Helper method for getting product data from Open Food Facts
 private fun getItems(viewModel: ApiViewModel) {
     val list = listOf(
         "8076809513388",
