@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
@@ -11,12 +11,15 @@
     android:padding="8dp"
     android:id="@+id/off_card"
     app:cardElevation="5dp"
+    style="@style/MyCardView"
     android:theme="@style/Theme.SensorBasedMobileProject">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/border"
+        >
 
 
         <TextView
@@ -29,6 +32,7 @@
             android:layout_marginEnd="8dp"
             android:text="@string/main_fragment_text"
             android:textSize="24sp"
+            android:background="@drawable/border"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/product_image"
             app:layout_constraintTop_toTopOf="parent" />
@@ -43,6 +47,7 @@
             android:layout_marginEnd="8dp"
             android:text="@string/main_fragment_text"
             android:textSize="16sp"
+            android:background="@drawable/border"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/product_image"
             app:layout_constraintTop_toBottomOf="@+id/product_name" />
@@ -57,6 +62,7 @@
             android:layout_marginEnd="8dp"
             android:text="@string/allergens_from_ingredients"
             android:textSize="16sp"
+            android:background="@drawable/border"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/product_image"
             app:layout_constraintTop_toBottomOf="@+id/manufacturing_places" />
@@ -72,6 +78,7 @@
             android:layout_marginBottom="8dp"
             android:text="@string/main_fragment_text"
             android:textSize="16sp"
+            android:background="@drawable/border"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/product_image"
@@ -83,7 +90,7 @@
             android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
             android:adjustViewBounds="true"
-            android:background="#8BC34A"
+            android:src="@drawable/border"
             android:padding="8dp"
             android:contentDescription="@string/content_image"
             android:scaleType="fitCenter"

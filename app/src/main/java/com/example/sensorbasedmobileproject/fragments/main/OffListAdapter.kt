@@ -55,6 +55,8 @@ class OffListAdapter : RecyclerView.Adapter<OffListAdapter.MyViewHolder>() {
         // Check if allergens in product
         if (currentItem.allergens_from_ingredients.equals("")) {
             holder.itemView.allergens_from_ingredients.text = "No allergens found"
+            holder.itemView.off_card.product_image.setBackgroundColor(Color.parseColor("#8BC34A"))
+            holder.itemView.off_card.product_image.clipToOutline = true
         } else {
             // If allergens found, set image background color to RED and background light pink
             holder.itemView.off_card.product_image.setBackgroundColor(Color.RED)

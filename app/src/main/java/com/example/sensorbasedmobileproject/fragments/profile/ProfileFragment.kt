@@ -73,7 +73,7 @@ class ProfileFragment : Fragment(), SensorEventListener, AdapterView.OnItemSelec
         val addButton = fragmentView.findViewById<ImageButton>(R.id.add_button)
 
         addButton.setOnClickListener() {
-            if (shoppingListItemAmountEditText.text.isNotEmpty() || shoppingListItemEditText.text.isNotEmpty()) {
+            if (shoppingListItemAmountEditText.text.isNotEmpty() && shoppingListItemEditText.text.isNotEmpty()) {
                 if (shoppingListDatabase != null) {
                         GlobalScope.launch {
                                 shoppingListItem = shoppingListItemEditText.text.toString()

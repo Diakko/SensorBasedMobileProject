@@ -23,6 +23,4 @@ class ShoppingListItemViewModel(application: Application): AndroidViewModel(appl
             repository.addShoppingListInfo(shoppingListItem)
         }
     }
-
-
 }

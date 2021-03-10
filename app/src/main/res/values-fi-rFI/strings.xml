@@ -40,6 +40,6 @@
     <string name="can">prk</string>
     <string name="packet">pkt</string>
     <string name="bottle">plo</string>
-    <string name="add_item_toast">Täyttää molemmat nimi ja määrä</string>
+    <string name="add_item_toast">Täytä molemmat nimi ja määrä</string>
     <string name="menu_details">Tarkemmat tiedot</string>
 </resources>
