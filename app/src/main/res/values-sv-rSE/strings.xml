@@ -42,4 +42,9 @@
     <string name="packet">paket</string>
     <string name="add_item_toast">Fyll både artikelnamn och belopp!</string>
     <string name="menu_details">detaljer</string>
+    <string name="date_of_search">"Datum: "</string>
+    <string name="allergens">"Allergener: "</string>
+    <string name="average_nutrients">Genomsnittligt näringsinnehåll per 100 g</string>
+    <string name="no_allergens_found">Inga allergener</string>
+    <string name="made_in">Ursprungsland</string>
 </resources>

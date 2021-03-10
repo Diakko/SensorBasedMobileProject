@@ -4,6 +4,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Handler
 import android.os.Looper
+import android.provider.Settings.Global.getString
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.net.URL
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class OffListAdapter : RecyclerView.Adapter<OffListAdapter.MyViewHolder>() {
@@ -43,6 +46,11 @@ class OffListAdapter : RecyclerView.Adapter<OffListAdapter.MyViewHolder>() {
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = foodList[position]
         holder.itemView.product_name.text = currentItem.product_name
+        val sdf = SimpleDateFormat("dd.MM.yyyy")
+        val currentDate = sdf.format(Date())
+
+        "Date of search: $currentDate".also { holder.itemView.date.text = it }
+
 
         if (currentItem.manufacturing_places.equals("") || currentItem.manufacturing_places == null) {
             holder.itemView.manufacturing_places.text = "Country of origin unknown"

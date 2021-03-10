@@ -42,4 +42,9 @@
     <string name="bottle">plo</string>
     <string name="add_item_toast">Täyttää molemmat nimi ja määrä</string>
     <string name="menu_details">Tarkemmat tiedot</string>
+    <string name="date_of_search">"Hakupäivämäärä: "</string>
+    <string name="allergens">"Allergeenit: "</string>
+    <string name="average_nutrients">Keskimääräinen ravintosisältö per 100g</string>
+    <string name="no_allergens_found">Ei allergeenejä</string>
+    <string name="made_in">Valmistuspaikka</string>
 </resources>

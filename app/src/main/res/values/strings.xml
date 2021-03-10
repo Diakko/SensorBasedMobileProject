@@ -46,10 +46,17 @@
     <string name="allergens_from_ingredients">Allergens</string>
     <string name="no_allergens">No allergens found from ingredients</string>
 
+    // custom_row_off
+    <string name="date_of_search">Date of search</string>
+    <string name="allergens">Allergens</string>
+
 
 
     // Details
     <string name="average_nutrients">Average nutrient content per 100g</string>
+    <string name="no_allergens_found">No allergens found </string>
+    <string name="made_in">Made in</string>
+
 
 
     // Home fragment
