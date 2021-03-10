@@ -42,4 +42,6 @@
     <string name="bottle">plo</string>
     <string name="add_item_toast">Täytä molemmat nimi ja määrä</string>
     <string name="menu_details">Tarkemmat tiedot</string>
+    <string name="unknown_country">Alkuperämaa ei tiedossa</string>
+    <string name="average_nutrients">Keskimääräinen ravintoainekoostumus 100 g:ssa</string>
 </resources>

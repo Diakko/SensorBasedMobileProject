@@ -6,4 +6,10 @@
     <color name="teal_dark">#B4AEE8</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="red_200">#EF9A9A</color>
+    <color name="red_400">#EF5350</color>
+    <color name="red_500">#F44336</color>
+    <color name="green_200">#A5D6A7</color>
+    <color name="green_400">#66BB6A</color>
+    <color name="green_500">#4CAF50</color>
 </resources>
