@@ -1,4 +1,5 @@
-# SensorBasedMobileProject
+# AN ANDROID APP
+## FOR GETTING INFO FROM FOOD PRODUCTS BY SCANNING THE BAR CODE WITH YOUR PHONE
 A school project for the course "Sensor Based Mobile Applications" (course info here: 
 https://opinto-opas.metropolia.fi/en/realization/TX00CK66-3009)
 
