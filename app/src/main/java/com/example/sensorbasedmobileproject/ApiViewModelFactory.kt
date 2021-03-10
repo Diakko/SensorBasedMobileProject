@@ -1,3 +1,11 @@
+/**
+ * Description: Returns API viewmodels
+ *
+ * Course: Sensor Based Mobile Applications TX00CK66-3009
+ * Name: Ville Pystynen
+ * Student number: 1607999
+ */
+
 package com.example.sensorbasedmobileproject
 
 import androidx.lifecycle.ViewModel

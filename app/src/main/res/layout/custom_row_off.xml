@@ -2,6 +2,7 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
@@ -19,10 +20,26 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         android:background="@drawable/border"
         android:theme="@style/Theme.SensorBasedMobileProjectMainFragment"
         >
 
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Date of search: 12.03.2021"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/product_image"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="141dp" />
 
         <TextView
             android:id="@+id/product_name"
@@ -30,17 +47,18 @@
             android:layout_height="wrap_content"
             android:layout_gravity="fill"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:background="@drawable/border"
             android:text="@string/main_fragment_text"
             android:textColor="?colorAccent"
             android:textSize="24sp"
+
             android:padding="3dp"
             android:background="@drawable/border_textview"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/product_image_card"
             app:layout_constraintTop_toTopOf="parent"
             android:theme="@style/Theme.SensorBasedMobileProjectMainFragment" />
+
 
         <TextView
             android:id="@+id/manufacturing_places"
@@ -50,6 +68,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:background="@drawable/border"
             android:text="@string/main_fragment_text"
             android:textColor="?colorAccent"
             android:textSize="16sp"
@@ -68,6 +87,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+
             android:textColor="?colorAccent"
             android:text="@string/allergens_from_ingredients"
             android:textSize="16sp"
@@ -86,6 +106,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
+            android:background="@drawable/border"
             android:text="@string/main_fragment_text"
             android:textColor="?colorAccent"
             android:textSize="16sp"

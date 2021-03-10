@@ -1,3 +1,11 @@
+/**
+ * Description: ViewModel setup for Fineli
+ *
+ * Course: Sensor Based Mobile Applications TX00CK66-3009
+ * Name: Ville Pystynen
+ * Student number: 1607999
+ */
+
 package com.example.sensorbasedmobileproject.data
 
 import android.app.Application
@@ -18,21 +26,10 @@ class FineliItemViewModel(application: Application): AndroidViewModel(applicatio
         readAllData = repository.readAllData
     }
 
+    // Add FineliItem to database
     fun addFineliData(fineliItem: FineliItem) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addFineliInfo(fineliItem)
         }
     }
-
-    suspend fun getFineliByOffItemName(name: String): List<FineliItem> {
-        lateinit var listOfFineliItems: List<FineliItem>
-        val job = viewModelScope.launch(Dispatchers.IO) {
-            listOfFineliItems = repository.getFineliByOffItemName(name)
-        }
-        job.join()
-        return listOfFineliItems
-    }
-
-
-
 }

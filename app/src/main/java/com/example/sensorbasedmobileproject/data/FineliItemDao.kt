@@ -1,3 +1,11 @@
+/**
+ * Description: DAO for making queries into FineliItemDatabase
+ *
+ * Course: Sensor Based Mobile Applications TX00CK66-3009
+ * Name: Ville Pystynen
+ * Student number: 1607999
+ */
+
 package com.example.sensorbasedmobileproject.data
 
 import androidx.lifecycle.LiveData

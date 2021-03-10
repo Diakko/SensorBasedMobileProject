@@ -1,3 +1,10 @@
+/**
+ * Description: Interface for Fineli API queries
+ *
+ * Course: Sensor Based Mobile Applications TX00CK66-3009
+ * Name: Ville Pystynen
+ * Student number: 1607999
+ */
 
 package com.example.sensorbasedmobileproject.api
 

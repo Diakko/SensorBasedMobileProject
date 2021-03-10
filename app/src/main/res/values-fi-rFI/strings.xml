@@ -42,6 +42,25 @@
     <string name="bottle">plo</string>
     <string name="add_item_toast">Täytä molemmat nimi ja määrä</string>
     <string name="menu_details">Tarkemmat tiedot</string>
+    <string name="date_of_search">Hakupäivämäärä: %1$s</string>
+    <string name="allergens">Allergeenit: %1$s</string>
+    <string name="average_nutrients">Keskimääräinen ravintosisältö per 100g</string>
+    <string name="no_allergens_found">Ei allergeenejä</string>
+    <string name="made_in">Valmistuspaikka: %1$s</string>
+    <string name="product_details">Tuotteen tiedot</string>
+    <string name="energy">Energia: %1$s kcal</string>
+    <string name="fat">Rasva: %1$s g</string>
+    <string name="sat_fat">- joista tyydyttynyttä: %1$s g</string>
+    <string name="carbs">Hiilihydraatit: %1$s g</string>
+    <string name="sugars">Sokeri: %1$s g</string>
+    <string name="fibers">- Kuidut: %1$s g</string>
+    <string name="proteins">Proteiinit: %1$s g</string>
+    <string name="salt">Suola: %1$s g</string>
+    <string name="sodium">- josta natriumia: %1$s g</string>
+    <string name="link">Linkki valmistajan tuotesivulle: %1$s</string>
+    <string name="coo">Alkuperämaa tuntematon</string>
+    <string name="allergens_found">Allergeenit: %1$s</string>
     <string name="unknown_country">Alkuperämaa ei tiedossa</string>
     <string name="average_nutrients">Keskimääräinen ravintoainekoostumus 100 g:ssa</string>
+
 </resources>

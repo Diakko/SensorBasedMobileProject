@@ -42,6 +42,24 @@
     <string name="packet">paket</string>
     <string name="add_item_toast">Fyll både artikelnamn och belopp!</string>
     <string name="menu_details">detaljer</string>
+    <string name="date_of_search">Datum: %1$s</string>
+    <string name="allergens">Allergener: %1$s</string>
+    <string name="average_nutrients">Genomsnittligt näringsinnehåll per 100 g</string>
+    <string name="no_allergens_found">Inga allergener</string>
+    <string name="made_in">Ursprungsland %1$s</string>
+    <string name="energy">Energi: %1$s</string>
+    <string name="fat">Fat: %1$s g</string>
+    <string name="sat_fat">- Saturated fat: %1$s g</string>
+    <string name="carbs">Carbohydrates: %1$s g</string>
+    <string name="sugars">%1$s</string>
+    <string name="fibers">- Fibers: %1$s g</string>
+    <string name="proteins">Proteins: %1$s g</string>
+    <string name="salt">Salt: %1$s g</string>
+    <string name="sodium">- Sodium: %1$s g</string>
+    <string name="link">Länken: %1$s</string>
+    <string name="product_details">Produkt information</string>
+    <string name="coo">Vet inte landet</string>
+    <string name="allergens_found">Allergener: %1$s</string>
     <string name="average_nutrients">Genomsnittligt näringsinnehåll per 100 g</string>
     <string name="unknown_country">"Ursprungsland okänt "</string>
 </resources>

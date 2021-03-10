@@ -47,10 +47,31 @@
     <string name="no_allergens">No allergens found from ingredients</string>
     <string name="unknown_country">Country of origin unknown</string>
 
+    // custom_row_off
+    <string name="date_of_search">Date of search: %1$s</string>
+    <string name="allergens">Allergens: %1$s</string>
+
 
 
     // Details
+    <string name="product_details">Product details</string>
+    <string name="energy">Energy: %1$s kcal</string>
+    <string name="fat">Fat: %1$s g</string>
+    <string name="sat_fat">- Saturated fat: %1$s g</string>
+    <string name="carbs">Carbohydrates: %1$s g</string>
+    <string name="sugars">Sugars: %1$s g</string>
+    <string name="fibers">- Fibers: %1$s g</string>
+    <string name="proteins">Proteins: %1$s g</string>
+    <string name="salt">Salt: %1$s g</string>
+    <string name="sodium">- Sodium: %1$s g</string>
+    <string name="coo">Country of origin: unknown</string>
+    <string name="allergens_found">Allergens: %1$s</string>
     <string name="average_nutrients">Average nutrient content per 100g</string>
+    <string name="no_allergens_found">No allergens found </string>
+    <string name="made_in">Made in %1$s</string>
+    <string name="link">"Link to product website:
+        %1$s"</string>
+
 
 
     // Home fragment
