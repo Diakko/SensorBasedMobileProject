@@ -95,7 +95,6 @@ class OffListAdapter(private val context: Context) : RecyclerView.Adapter<OffLis
         if (currentItem.allergens_from_ingredients.equals("")) {
             // No allergens found
             holder.itemView.allergens_from_ingredients.text = holder.itemView.context.getString(R.string.no_allergens_found)
-            holder.itemView.allergens_from_ingredients.text = R.string.no_allergens.toString()
             holder.itemView.off_card.product_image.setBackgroundColor(noErrorColor)
             holder.itemView.off_card.setBackgroundColor(onNoErrorColor)
 
