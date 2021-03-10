@@ -21,7 +21,7 @@ import com.example.sensorbasedmobileproject.fragments.search.ListAdapter
 import com.example.sensorbasedmobileproject.model.Fineli
 import com.example.sensorbasedmobileproject.repository.ApiRepository
 import kotlinx.android.synthetic.main.fragment_details.view.*
-import kotlinx.android.synthetic.main.fragment_details.view.recyclerview
+//import kotlinx.android.synthetic.main.fragment_details.view.recyclerview
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -31,8 +31,8 @@ class DetailsFragment : Fragment() {
 
     private lateinit var offViewModel: OffItemViewModel
     private lateinit var offItem: OffItem
-    private lateinit var mFineliViewModel: FineliItemViewModel
-    private lateinit var viewModel: ApiViewModel
+//    private lateinit var mFineliViewModel: FineliItemViewModel
+//    private lateinit var viewModel: ApiViewModel
 
 
     override fun onCreateView(
@@ -54,16 +54,16 @@ class DetailsFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
 
         // Recyclerview
-        val adapter = ListAdapter()
-        val recyclerView = view.recyclerview
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+//        val adapter = ListAdapter()
+//        val recyclerView = view.recyclerview
+//        recyclerView.adapter = adapter
+//        recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         // Fineli viewmodel
-        mFineliViewModel = ViewModelProvider(this).get(FineliItemViewModel::class.java)
-        mFineliViewModel.readAllData.observe(viewLifecycleOwner, Observer { fineli ->
-            adapter.setData(fineli)
-        })
+//        mFineliViewModel = ViewModelProvider(this).get(FineliItemViewModel::class.java)
+//        mFineliViewModel.readAllData.observe(viewLifecycleOwner, Observer { fineli ->
+//            adapter.setData(fineli)
+//        })
 
         return view
     }
@@ -78,25 +78,25 @@ class DetailsFragment : Fragment() {
 
 
         // Set up viewModel stuffs
-        val repository = ApiRepository()
-        val viewModelFactory = ApiViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(ApiViewModel::class.java)
+//        val repository = ApiRepository()
+//        val viewModelFactory = ApiViewModelFactory(repository)
+//        viewModel = ViewModelProvider(this, viewModelFactory).get(ApiViewModel::class.java)
 
 
         // Observe response
-        viewModel.myFineliResponse.observe(viewLifecycleOwner, Observer { response ->
-            if (response.isSuccessful && !(response.body()?.isEmpty())!!) {
-                insertDataToDatabase(response)
-                // TODO: insert GET data to adapter to show here
-                Log.d("DBG", response.body().toString())
-
-            } else {
-                Log.d("DBG", response.errorBody().toString())
-                Toast.makeText(requireContext(),
-                    "Keyword not found in Fineli API",
-                    Toast.LENGTH_LONG).show()
-            }
-        })
+//        viewModel.myFineliResponse.observe(viewLifecycleOwner, Observer { response ->
+//            if (response.isSuccessful && !(response.body()?.isEmpty())!!) {
+//                insertDataToDatabase(response)
+//                // TODO: insert GET data to adapter to show here
+//                Log.d("DBG", response.body().toString())
+//
+//            } else {
+//                Log.d("DBG", response.errorBody().toString())
+//                Toast.makeText(requireContext(),
+//                    "Keyword not found in Fineli API",
+//                    Toast.LENGTH_LONG).show()
+//            }
+//        })
 
 
         // Get ean from arguments & search DB for item in IO thread
@@ -105,7 +105,7 @@ class DetailsFragment : Fragment() {
             offItem = offViewModel.getOffItem(ean?.toLong()!!)
 
             // Do the Fineli Call
-            viewModel.getFineliFood(offItem.product_name.toString())
+//            viewModel.getFineliFood(offItem.product_name.toString())
 
 
 
@@ -156,40 +156,40 @@ class DetailsFragment : Fragment() {
             }
         }
     }
-
-    private fun insertDataToDatabase(response: Response<ArrayList<Fineli>>) {
-
-        // Check first that item isnt allready in the db
-        // Loop through the array also
-        val fineli = FineliItem(
-            0,
-            response.body()?.get(0)?.id,
-            response.body()?.get(0)?.energy,
-            response.body()?.get(0)?.energyKcal,
-            response.body()?.get(0)?.fat,
-            response.body()?.get(0)?.protein,
-            response.body()?.get(0)?.carbohydrate,
-            response.body()?.get(0)?.alcohol,
-            response.body()?.get(0)?.organicAcids,
-            response.body()?.get(0)?.sugarAlcohol,
-            response.body()?.get(0)?.saturatedFat,
-            response.body()?.get(0)?.fiber,
-            response.body()?.get(0)?.sugar,
-            response.body()?.get(0)?.salt,
-            response.body()?.get(0)?.ediblePortion,
-            response.body()?.get(0)?.type,
-            response.body()?.get(0)?.name,
-            response.body()?.get(0)?.preparationMethod,
-            response.body()?.get(0)?.specialDiets,
-            response.body()?.get(0)?.themes,
-            response.body()?.get(0)?.units,
-            response.body()?.get(0)?.ingredientClass,
-            response.body()?.get(0)?.functionClass
-        )
-
-        mFineliViewModel.addFineliData(fineli)
-        Toast.makeText(requireContext(), "Successfully added", Toast.LENGTH_LONG).show()
-    }
+//
+//    private fun insertDataToDatabase(response: Response<ArrayList<Fineli>>) {
+//
+//        // Check first that item isnt allready in the db
+//        // Loop through the array also
+//        val fineli = FineliItem(
+//            0,
+//            response.body()?.get(0)?.id,
+//            response.body()?.get(0)?.energy,
+//            response.body()?.get(0)?.energyKcal,
+//            response.body()?.get(0)?.fat,
+//            response.body()?.get(0)?.protein,
+//            response.body()?.get(0)?.carbohydrate,
+//            response.body()?.get(0)?.alcohol,
+//            response.body()?.get(0)?.organicAcids,
+//            response.body()?.get(0)?.sugarAlcohol,
+//            response.body()?.get(0)?.saturatedFat,
+//            response.body()?.get(0)?.fiber,
+//            response.body()?.get(0)?.sugar,
+//            response.body()?.get(0)?.salt,
+//            response.body()?.get(0)?.ediblePortion,
+//            response.body()?.get(0)?.type,
+//            response.body()?.get(0)?.name,
+//            response.body()?.get(0)?.preparationMethod,
+//            response.body()?.get(0)?.specialDiets,
+//            response.body()?.get(0)?.themes,
+//            response.body()?.get(0)?.units,
+//            response.body()?.get(0)?.ingredientClass,
+//            response.body()?.get(0)?.functionClass
+//        )
+//
+//        mFineliViewModel.addFineliData(fineli)
+//        Toast.makeText(requireContext(), "Successfully added", Toast.LENGTH_LONG).show()
+//    }
 
 
 }

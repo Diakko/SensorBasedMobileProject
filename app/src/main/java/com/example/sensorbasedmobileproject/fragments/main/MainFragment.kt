@@ -15,6 +15,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sensorbasedmobileproject.ApiViewModel
 import com.example.sensorbasedmobileproject.ApiViewModelFactory
@@ -23,6 +24,7 @@ import com.example.sensorbasedmobileproject.data.OffItem
 import com.example.sensorbasedmobileproject.data.OffItemViewModel
 import com.example.sensorbasedmobileproject.model.openfoodfacts.OpenFoodFactResponse
 import com.example.sensorbasedmobileproject.repository.ApiRepository
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.custom_row_off.view.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_search_off.view.*
@@ -37,6 +39,7 @@ class MainFragment : Fragment() {
     private lateinit var viewModel: ApiViewModel
     private lateinit var mOffViewModel: OffItemViewModel
     private lateinit var editTextValue: Editable
+    private lateinit var fabScan: FloatingActionButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,6 +65,14 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Set up FAB
+        fabScan = view.findViewById(R.id.floatingActionButton)
+        fabScan.setOnClickListener {
+            Navigation.findNavController(view).navigate(
+                MainFragmentDirections.actionActionHomeToActionCamera()
+            )
+        }
 
         // Set up viewModel stuffs
         val repository = ApiRepository()
