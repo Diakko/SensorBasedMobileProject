@@ -12,6 +12,8 @@
 
 package com.example.sensorbasedmobileproject.fragments.main
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Handler
@@ -20,6 +22,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sensorbasedmobileproject.R
@@ -33,7 +36,7 @@ import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
 
-class OffListAdapter : RecyclerView.Adapter<OffListAdapter.MyViewHolder>() {
+class OffListAdapter(private val context: Context) : RecyclerView.Adapter<OffListAdapter.MyViewHolder>() {
 
     private val scope = CoroutineScope(Dispatchers.IO)
     private var foodList = emptyList<OffItem>()
@@ -53,6 +56,7 @@ class OffListAdapter : RecyclerView.Adapter<OffListAdapter.MyViewHolder>() {
         }
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         // Set the date for the search
         val sdf = SimpleDateFormat("dd.MM.yyyy")
@@ -67,23 +71,38 @@ class OffListAdapter : RecyclerView.Adapter<OffListAdapter.MyViewHolder>() {
         if (currentItem.manufacturing_places.equals("") || currentItem.manufacturing_places == null) {
             holder.itemView.manufacturing_places.text =
                 holder.itemView.context.getString(R.string.coo)
+
         } else {
             holder.itemView.manufacturing_places.text =
                 holder.itemView.context.getString(R.string.made_in,
                     currentItem.manufacturing_places)
         }
 
+        // Getting colors according to theme
+        val typedValue = TypedValue()
+        val theme = context.theme
+        theme.resolveAttribute(R.attr.colorError, typedValue, true)
+        val errorColor = typedValue.data
+        theme.resolveAttribute(R.attr.colorOnBackground, typedValue, true)
+        val noErrorColor = typedValue.data
+        theme.resolveAttribute(R.attr.colorOnError, typedValue, true)
+        val onErrorColor = typedValue.data
+        theme.resolveAttribute(R.attr.colorOnSurface, typedValue, true)
+        val onNoErrorColor = typedValue.data
+
         // Check if allergens in product
         if (currentItem.allergens_from_ingredients.equals("")) {
-
             // No allergens found
             holder.itemView.allergens_from_ingredients.text = holder.itemView.context.getString(R.string.no_allergens_found)
+            holder.itemView.allergens_from_ingredients.text = R.string.no_allergens.toString()
+            holder.itemView.off_card.product_image.setBackgroundColor(noErrorColor)
+            holder.itemView.off_card.setBackgroundColor(onNoErrorColor)
 
         } else {
 
             // If allergens found, set image background color to RED and background light pink
-            holder.itemView.off_card.product_image.setBackgroundColor(Color.RED)
-            holder.itemView.off_card.setCardBackgroundColor(Color.parseColor("#FFB6C1"))
+            holder.itemView.off_card.product_image.setBackgroundColor(errorColor)
+            holder.itemView.off_card.setBackgroundColor(onErrorColor)
 
             // Display allergens
             holder.itemView.allergens_from_ingredients.text =

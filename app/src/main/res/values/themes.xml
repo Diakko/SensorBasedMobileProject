@@ -9,6 +9,11 @@
         <item name="colorSecondary">@color/teal_light</item>
         <item name="colorSecondaryVariant">@color/teal_dark</item>
         <item name="colorOnSecondary">@color/black</item>
+        <item name="colorAccent">@color/black</item>
+        <item name="colorOnBackground">@color/green_500</item>
+        <item name="colorOnSurface">@color/green_200</item>
+        <item name="colorError">@color/red_500</item>
+        <item name="colorOnError">@color/red_200</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/purple_light</item>
         <item name="android:textColorPrimary">@color/white</item>
@@ -27,7 +32,11 @@
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_light</item>
         <item name="colorSecondaryVariant">@color/teal_dark</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorAccent">@color/black</item>
+        <item name="colorOnBackground">@color/green_500</item>
+        <item name="colorError">@color/red_500</item>
+        <item name="colorOnError">@color/red_200</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/purple_light</item>
         <item name="android:textColorPrimary">@color/white</item>
@@ -43,6 +52,10 @@
         <item name="android:textColorPrimary">@color/white</item>
         <item name="android:textColorSecondary">@color/black</item>
         <item name="android:background">@color/purple_light</item>
+    </style>
+
+    <style name="TextViewBackgroundStyle" parent="">
+        <item name="android:background">@color/white</item>
     </style>
     // Spinner Style
     <style name="mySpinnerItemSelectedStyle" parent="Widget.AppCompat.TextView.SpinnerItem">

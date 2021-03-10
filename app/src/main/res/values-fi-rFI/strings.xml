@@ -40,7 +40,7 @@
     <string name="can">prk</string>
     <string name="packet">pkt</string>
     <string name="bottle">plo</string>
-    <string name="add_item_toast">Täyttää molemmat nimi ja määrä</string>
+    <string name="add_item_toast">Täytä molemmat nimi ja määrä</string>
     <string name="menu_details">Tarkemmat tiedot</string>
     <string name="date_of_search">Hakupäivämäärä: %1$s</string>
     <string name="allergens">Allergeenit: %1$s</string>
@@ -60,4 +60,7 @@
     <string name="link">Linkki valmistajan tuotesivulle: %1$s</string>
     <string name="coo">Alkuperämaa tuntematon</string>
     <string name="allergens_found">Allergeenit: %1$s</string>
+    <string name="unknown_country">Alkuperämaa ei tiedossa</string>
+    <string name="average_nutrients">Keskimääräinen ravintoainekoostumus 100 g:ssa</string>
+
 </resources>

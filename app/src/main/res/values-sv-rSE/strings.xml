@@ -60,4 +60,6 @@
     <string name="product_details">Produkt information</string>
     <string name="coo">Vet inte landet</string>
     <string name="allergens_found">Allergener: %1$s</string>
+    <string name="average_nutrients">Genomsnittligt näringsinnehåll per 100 g</string>
+    <string name="unknown_country">"Ursprungsland okänt "</string>
 </resources>

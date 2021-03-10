@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.shopping_list_item_row.view.*
 
 class ShoppingListItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-class ShoppingListAdapter(context: Context) : RecyclerView.Adapter<ShoppingListItemViewHolder>() {
+class ShoppingListAdapter() : RecyclerView.Adapter<ShoppingListItemViewHolder>() {
 
     private val colors = mutableListOf("#FFE3FE", "#B4AEE8")
 

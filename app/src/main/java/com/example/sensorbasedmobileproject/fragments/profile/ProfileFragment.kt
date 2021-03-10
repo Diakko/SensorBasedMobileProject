@@ -29,7 +29,7 @@ import kotlinx.android.synthetic.main.fragment_search.view.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class ProfileFragment : Fragment(), SensorEventListener, AdapterView.OnItemSelectedListener {
+class ProfileFragment() : Fragment(), SensorEventListener, AdapterView.OnItemSelectedListener {
 
     private var sensorManager: SensorManager? = null
     private var running = false
@@ -64,7 +64,7 @@ class ProfileFragment : Fragment(), SensorEventListener, AdapterView.OnItemSelec
         val shoppingListItemAmountEditText = fragmentView.findViewById<EditText>(R.id.edit_text_shopping_list_item_amount)
 
         // Recyclerview
-        val recyclerAdapter =  ShoppingListAdapter(requireContext())
+        val recyclerAdapter =  ShoppingListAdapter()
         recyclerView = fragmentView.findViewById(R.id.recyclerview)
         recyclerView.adapter = recyclerAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -73,7 +73,7 @@ class ProfileFragment : Fragment(), SensorEventListener, AdapterView.OnItemSelec
         val addButton = fragmentView.findViewById<ImageButton>(R.id.add_button)
 
         addButton.setOnClickListener() {
-            if (shoppingListItemAmountEditText.text.isNotEmpty() || shoppingListItemEditText.text.isNotEmpty()) {
+            if (shoppingListItemAmountEditText.text.isNotEmpty() && shoppingListItemEditText.text.isNotEmpty()) {
                 if (shoppingListDatabase != null) {
                         GlobalScope.launch {
                                 shoppingListItem = shoppingListItemEditText.text.toString()

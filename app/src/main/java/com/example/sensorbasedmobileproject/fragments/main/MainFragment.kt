@@ -65,6 +65,7 @@ class MainFragment : Fragment() {
 
         // Recyclerview setup
         val adapter = OffListAdapter()
+
         val recyclerView = view.recyclerview
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
