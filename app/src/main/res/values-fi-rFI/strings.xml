@@ -44,7 +44,6 @@
     <string name="menu_details">Tarkemmat tiedot</string>
     <string name="date_of_search">Hakupäivämäärä: %1$s</string>
     <string name="allergens">Allergeenit: %1$s</string>
-    <string name="average_nutrients">Keskimääräinen ravintosisältö per 100g</string>
     <string name="no_allergens_found">Ei allergeenejä</string>
     <string name="made_in">Valmistuspaikka: %1$s</string>
     <string name="product_details">Tuotteen tiedot</string>
@@ -62,5 +61,4 @@
     <string name="allergens_found">Allergeenit: %1$s</string>
     <string name="unknown_country">Alkuperämaa ei tiedossa</string>
     <string name="average_nutrients">Keskimääräinen ravintoainekoostumus 100 g:ssa</string>
-
 </resources>

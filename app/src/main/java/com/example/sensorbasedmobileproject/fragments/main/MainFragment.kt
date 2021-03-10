@@ -64,7 +64,7 @@ class MainFragment : Fragment() {
         val view: View = inflater.inflate(R.layout.fragment_main, container, false)
 
         // Recyclerview setup
-        val adapter = OffListAdapter()
+        val adapter = context?.let { OffListAdapter(it) }
 
         val recyclerView = view.recyclerview
         recyclerView.adapter = adapter
@@ -73,7 +73,7 @@ class MainFragment : Fragment() {
         // OffItem viewmodel setup
         mOffViewModel = ViewModelProvider(this).get(OffItemViewModel::class.java)
         mOffViewModel.readAllData.observe(viewLifecycleOwner, { off ->
-            adapter.setData(off)
+            adapter?.setData(off)
         })
 
         return view
