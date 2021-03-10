@@ -45,8 +45,9 @@ It gets data from these web services:
 This app uses the following third party librabries:
 - [ZXing ("zebra crossing")](https://github.com/zxing/zxing)
 - [Retrofit](https://square.github.io/retrofit/)
+- [osmdroid](https://github.com/osmdroid/osmdroid)
 
-The OpenFoodFacts API response data classes were made with [http://www.json2kotlin.com]
+The OpenFoodFacts API response data classes were made with http://www.json2kotlin.com
 
 
 ### License
