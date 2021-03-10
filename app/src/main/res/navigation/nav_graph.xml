@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_action_home_to_detailsFragment"
             app:destination="@id/menu_details" />
+        <action
+            android:id="@+id/action_action_home_to_action_camera"
+            app:destination="@id/action_camera" />
     </fragment>
 
     <fragment
