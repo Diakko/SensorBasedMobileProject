@@ -21,29 +21,30 @@ Ville Pystynen and Matias Hätönen
 ### INGREDIENTS
 
 This app makes use of the following sensors:
-- GPS
-- Camera
 - Step counter
+- Camera
+- GPS
 
 It uses the following Android system's basic components:
-- Acticity and service
-- Fragments
 - Room Database for persistence
-- LiveData
-- ViewModel
-- Coroutines
+- [JetPack Navigation](https://developer.android.com/guide/navigation)
 - RecyclerView
+- Coroutines
+- ViewModel
+- Fragments
+- LiveData
+- Activity
+- Service
 - Intents
 - Views
-- [JetPack Navigation](https://developer.android.com/guide/navigation)
 
 It gets data from these web services:
 - [Open Food Facts API](https://world.openfoodfacts.org/)
 - [Nominatim API](https://nominatim.openstreetmaps.org/)
 
 This app uses the following third party librabries:
-- [Retrofit](https://square.github.io/retrofit/)
 - [ZXing ("zebra crossing")](https://github.com/zxing/zxing)
+- [Retrofit](https://square.github.io/retrofit/)
 
 ### License
 [GNU GPL2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
