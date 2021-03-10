@@ -46,5 +46,8 @@ This app uses the following third party librabries:
 - [ZXing ("zebra crossing")](https://github.com/zxing/zxing)
 - [Retrofit](https://square.github.io/retrofit/)
 
+The OpenFoodFacts API response data classes were made with [http://www.json2kotlin.com]
+
+
 ### License
 [GNU GPL2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
