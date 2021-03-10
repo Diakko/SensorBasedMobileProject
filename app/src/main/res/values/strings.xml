@@ -53,6 +53,22 @@
 
 
     // Details
+    <string name="product_details">Product details</string>
+    <string name="energy">Energy: %1$s kcal</string>
+    <string name="fat">Fat: %1$s g</string>
+    <string name="sat_fat">- Saturated fat: %1$s g</string>
+    <string name="carbs">Carbohydrates: %1$s g</string>
+    <string name="sugars">Sugars: %1$s g</string>
+    <string name="fibers">- Fibers: %1$s g</string>
+    <string name="proteins">Proteins: %1$s g</string>
+    <string name="salt">Salt: %1$s g</string>
+    <string name="sodium">- Sodium: %1$s g</string>
+    <string name="link">Link to product website: \n%1$s g</string>
+
+
+
+
+
     <string name="average_nutrients">Average nutrient content per 100g</string>
     <string name="no_allergens_found">No allergens found </string>
     <string name="made_in">Made in</string>

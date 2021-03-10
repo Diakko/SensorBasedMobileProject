@@ -1,3 +1,11 @@
+/**
+ * Description: Room Database for OffItems
+ *
+ * Course: Sensor Based Mobile Applications TX00CK66-3009
+ * Name: Ville Pystynen
+ * Student number: 1607999
+ */
+
 package com.example.sensorbasedmobileproject.data
 
 import android.content.Context
@@ -12,12 +20,15 @@ import com.example.sensorbasedmobileproject.utils.Converters
 
 abstract class OffItemDatabase : RoomDatabase() {
 
+    // Get DAO
     abstract fun offDao(): OffItemDao
 
+    // Singleton
     companion object {
         @Volatile
         private var INSTANCE: OffItemDatabase? = null
 
+        // Returns the instance to be used
         fun getDatabase(context: Context): OffItemDatabase {
             val tempInstance = INSTANCE
             if (tempInstance != null) {

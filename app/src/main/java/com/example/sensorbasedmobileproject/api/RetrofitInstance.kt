@@ -1,5 +1,12 @@
-package com.example.sensorbasedmobileproject.api
+/**
+ * Description: Retrofit instances for making API calls
+ *
+ * Course: Sensor Based Mobile Applications TX00CK66-3009
+ * Name: Ville Pystynen
+ * Student number: 1607999
+ */
 
+package com.example.sensorbasedmobileproject.api
 
 import com.example.sensorbasedmobileproject.utils.Constants.Companion.BASE_URL_FINELI
 import com.example.sensorbasedmobileproject.utils.Constants.Companion.BASE_URL_OPEN_FOOD_FACTS

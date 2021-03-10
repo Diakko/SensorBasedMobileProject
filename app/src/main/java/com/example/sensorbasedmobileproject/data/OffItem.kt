@@ -1,3 +1,11 @@
+/**
+ * Description: Room Database entity for data from Open Food Facts API
+ *
+ * Course: Sensor Based Mobile Applications TX00CK66-3009
+ * Name: Ville Pystynen
+ * Student number: 1607999
+ */
+
 package com.example.sensorbasedmobileproject.data
 
 import androidx.room.Embedded
