@@ -41,7 +41,7 @@
     <string name="bottle">fläska</string>
     <string name="packet">paket</string>
     <string name="add_item_toast">Fyll både artikelnamn och belopp!</string>
-    <string name="menu_details">detaljer</string>
+    <string name="menu_details">Detaljer</string>
     <string name="date_of_search">Datum: %1$s</string>
     <string name="allergens">Allergener: %1$s</string>
     <string name="no_allergens_found">Inga allergener</string>
@@ -61,6 +61,7 @@
     <string name="allergens_found">Allergener: %1$s</string>
     <string name="average_nutrients">Genomsnittligt näringsinnehåll per 100 g</string>
     <string name="unknown_country">"Ursprungsland okänt "</string>
+    <string name="menu_shopping_list">"Inköpslista "</string>
     <string name="otherCerealProducts">andra spannmålsprodukter</string>
     <string name="oats">havre</string>
     <string name="kamutGrain">kamutkorn</string>

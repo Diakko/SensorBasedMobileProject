@@ -5,13 +5,9 @@
         android:title="@string/menu_home"
         android:icon="@drawable/home_icon" />
 
-    <item android:id="@+id/action_search"
-        android:title="@string/menu_search"
-        android:icon="@drawable/ic_baseline_find_in_page_24" />
-
-    <item android:id="@+id/action_camera"
-        android:title="@string/menu_camera"
-        android:icon="@drawable/camera_icon" />
+    <item android:id="@+id/action_shopping_list"
+        android:title="@string/menu_shopping_list"
+        android:icon="@drawable/shopping_icon" />
 
     <item android:id="@+id/action_map"
         android:title="@string/menu_map"

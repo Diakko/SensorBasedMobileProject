@@ -15,7 +15,7 @@
     <string name="add_button_desc">Paina lisätäksesi tuote ostoslistaan</string>
     <string name="add_amount_desc">Määrä</string>
     <string name="clear_button_desc">Tyhjennä ostoslista</string>
-    <string name="clear_button_text">Tyhjennä</string>
+    <string name="clear_button_text">TYHJENNÄ</string>
     <string name="shopping_list_title">Ostoslista:</string>
     <string name="steps_text">Askeleet</string>
     <string name="search_result">Etsintätulos tänne</string>
@@ -61,6 +61,7 @@
     <string name="allergens_found">Allergeenit: %1$s</string>
     <string name="unknown_country">Alkuperämaa ei tiedossa</string>
     <string name="average_nutrients">Keskimääräinen ravintoainekoostumus 100 g:ssa</string>
+    <string name="menu_shopping_list">Ostoslista</string>
     <string name="wheat">vehnä</string>
     <string name="rye">ruis</string>
     <string name="barley">ohra</string>

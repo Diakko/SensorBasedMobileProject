@@ -64,5 +64,10 @@
     </fragment>
 
     <action android:id="@+id/action_global_action_home" app:destination="@id/action_home"/>
+    <fragment
+        android:id="@+id/action_shopping_list"
+        android:name="com.example.sensorbasedmobileproject.fragments.shopping_list.ShoppingListFragment"
+        android:label="@string/menu_shopping_list"
+        tools:layout="@layout/fragment_shopping_list" />
 
 </navigation>

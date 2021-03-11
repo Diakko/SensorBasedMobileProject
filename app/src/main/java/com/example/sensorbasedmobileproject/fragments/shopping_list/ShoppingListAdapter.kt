@@ -1,12 +1,11 @@
-package com.example.sensorbasedmobileproject.fragments.profile
+package com.example.sensorbasedmobileproject.fragments.shopping_list
 
 import android.content.Context
-import android.graphics.Color
 import android.graphics.Paint
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sensorbasedmobileproject.R
 import com.example.sensorbasedmobileproject.data.ShoppingListItem
@@ -14,9 +13,7 @@ import kotlinx.android.synthetic.main.shopping_list_item_row.view.*
 
 class ShoppingListItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-class ShoppingListAdapter() : RecyclerView.Adapter<ShoppingListItemViewHolder>() {
-
-    private val colors = mutableListOf("#FFE3FE", "#B4AEE8")
+class ShoppingListAdapter(private val contextHere: Context) : RecyclerView.Adapter<ShoppingListItemViewHolder>() {
 
     private var shoppingList = emptyList<ShoppingListItem>()
 
@@ -29,10 +26,22 @@ class ShoppingListAdapter() : RecyclerView.Adapter<ShoppingListItemViewHolder>()
     }
 
     override fun onBindViewHolder(holder: ShoppingListItemViewHolder, positionShoppingList: Int) {
+
+        // Colors
+        val typedValue = TypedValue()
+        val theme = contextHere.theme
+        theme.resolveAttribute(R.attr.colorSecondary, typedValue, true)
+        val colorOne = typedValue.data
+        theme.resolveAttribute(R.attr.colorSecondaryVariant, typedValue, true)
+        val colorTwo = typedValue.data
+        val colors = mutableListOf(colorOne, colorTwo)
+        val radius = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2f, contextHere.resources.displayMetrics)
         val currentItem = shoppingList[positionShoppingList]
         holder.itemView.text_view.text = currentItem.toString()
         holder.itemView.text_view.paintFlags = 0
-        holder.itemView.setBackgroundColor(Color.parseColor(colors[positionShoppingList % 2]))
+        holder.itemView.shopping_list_card_view.setCardBackgroundColor(colors[positionShoppingList % 2])
+        holder.itemView.shopping_list_card_view.radius = radius
+
 
         holder.itemView.setOnClickListener {
             if (holder.itemView.text_view.paintFlags > 0 && Paint.STRIKE_THRU_TEXT_FLAG > 0) {
@@ -40,9 +49,7 @@ class ShoppingListAdapter() : RecyclerView.Adapter<ShoppingListItemViewHolder>()
             } else {
                 holder.itemView.text_view.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
             }
-
         }
-
     }
 
     fun setData(shoppingList: List<ShoppingListItem>) {

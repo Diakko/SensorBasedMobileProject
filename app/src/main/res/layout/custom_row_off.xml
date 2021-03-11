@@ -20,7 +20,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:background="@drawable/border"
         android:theme="@style/Theme.SensorBasedMobileProjectMainFragment"
         >
@@ -35,7 +34,9 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:text="@string/date_of_search"
+            android:textColor="?colorAccent"
             android:textSize="16sp"
+            android:background="@drawable/border_textview"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/product_image_card"
             app:layout_constraintTop_toTopOf="parent" />
