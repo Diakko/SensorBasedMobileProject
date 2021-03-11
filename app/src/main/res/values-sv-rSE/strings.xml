@@ -81,4 +81,5 @@
     <string name="lupine">lupin</string>
     <string name="sulfur">sulfiten</string>
     <string name="set_your_allergies_here">Sät dina allergener här</string>
+    <string name="allergies_button_text">Sät allergener</string>
 </resources>
