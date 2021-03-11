@@ -70,10 +70,10 @@ class OffListAdapter(private val context: Context) :
             val map: Map<String, *> = sharedPref.all
 
             for ((k) in map) {
-                allergenList.add(k)
+                allergenList.add(k.toLowerCase())
             }
         } else {
-            Log.d("DBG allergenlist", allergenList.toString())
+            Log.d("DBG allergenList", allergenList.toString())
         }
 
         // Set the date for the search
@@ -123,19 +123,24 @@ class OffListAdapter(private val context: Context) :
 
         } else {
 
-            Log.d("DBG, allergen", currentItem.allergens_from_ingredients)
-            allergenList.forEach {
-                if (it.equals(currentItem.allergens_from_ingredients, false)) {
-                    // If allergens found, set image background color to RED and background light pink
-                    holder.itemView.off_card.product_image.setBackgroundColor(errorColor)
-                    holder.itemView.off_card.setCardBackgroundColor(onErrorColor)
-                    holder.itemView.off_card.radius = radius
-                } else {
-                    holder.itemView.off_card.product_image.setBackgroundColor(noErrorColor)
-                    holder.itemView.off_card.setCardBackgroundColor(onNoErrorColor)
-                    holder.itemView.off_card.radius = radius
+            // Compare list of allergens to current items allergen in lowercase
+                allergenList.forEach{
+                    if (it.contains(currentItem.allergens_from_ingredients.toLowerCase())) {
+
+                        // If allergens found, set image background color to RED and background light pink
+                        holder.itemView.off_card.product_image.setBackgroundColor(errorColor)
+                        holder.itemView.off_card.setCardBackgroundColor(onErrorColor)
+                        holder.itemView.off_card.radius = radius
+
+                    } else {
+
+                        // No allergens, no hätä
+                        holder.itemView.off_card.product_image.setBackgroundColor(noErrorColor)
+                        holder.itemView.off_card.setCardBackgroundColor(onNoErrorColor)
+                        holder.itemView.off_card.radius = radius
+                    }
+
                 }
-            }
 
 
             // Display allergens
