@@ -9,11 +9,10 @@
     tools:context=".fragments.profile.ProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_marginTop="10dp"
+        android:layout_marginVertical="10dp"
         android:id="@+id/relative_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -68,6 +67,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginHorizontal="5dp"
         android:orientation="vertical"
         android:gravity="center">
 
@@ -83,7 +83,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/set_your_allergies_here"
+                android:gravity="center"
+                android:textColor="@color/white"
                 android:textSize="24sp"
+                android:background="@drawable/border"
                 />
 
 
@@ -246,8 +249,10 @@
             <Button
                 android:id="@+id/button"
                 android:layout_width="200dp"
+                android:backgroundTint="@color/teal_light"
+                android:textColor="@color/black"
                 android:layout_height="wrap_content"
-                android:text="Set allergies"
+                android:text="@string/allergies_button_text"
                 />
         </LinearLayout>
 
