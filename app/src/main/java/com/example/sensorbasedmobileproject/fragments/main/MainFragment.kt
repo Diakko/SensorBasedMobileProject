@@ -207,7 +207,7 @@ private fun getItems(viewModel: ApiViewModel) {
         "0000651511016",
         "8850206010028",
         "5201360585816",
-        "20321734")
+        "6408180735486")
 
     for (i in list) {
         viewModel.getOpenFood(i)

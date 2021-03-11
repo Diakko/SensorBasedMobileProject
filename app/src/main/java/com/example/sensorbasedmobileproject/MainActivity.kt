@@ -10,7 +10,9 @@
 package com.example.sensorbasedmobileproject
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.MenuItem
@@ -23,6 +25,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.sensorbasedmobileproject.utils.Constants.Companion.ALLERGY_PREFERENCES
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -33,6 +36,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Initialize shared preferences for allergy preferences
+        val sharedPref = getSharedPreferences(ALLERGY_PREFERENCES, Context.MODE_PRIVATE)
+
+
 
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACTIVITY_RECOGNITION) != PackageManager.PERMISSION_GRANTED

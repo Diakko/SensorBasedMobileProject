@@ -23,20 +23,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sensorbasedmobileproject.R
-import com.example.sensorbasedmobileproject.data.AllergenItem
-import com.example.sensorbasedmobileproject.data.AllergenItemViewModel
 import com.example.sensorbasedmobileproject.data.OffItem
-import com.google.android.material.internal.ContextUtils.getActivity
+import com.example.sensorbasedmobileproject.utils.Constants
 import kotlinx.android.synthetic.main.custom_row_off.view.*
-import kotlinx.android.synthetic.main.custom_row_off.view.off_card
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.net.URL
 import java.text.SimpleDateFormat
@@ -47,13 +41,15 @@ class OffListAdapter(private val context: Context) :
 
     private val scope = CoroutineScope(Dispatchers.IO)
     private var foodList = emptyList<OffItem>()
-    private lateinit var allergenItemViewModel: AllergenItemViewModel
+    private var allergenList = mutableListOf<String>()
+
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.custom_row_off, parent, false)
+
 
         // Returns a viewholder with navigation to product details
         return MyViewHolder(view).listen { pos, _ ->
@@ -66,6 +62,20 @@ class OffListAdapter(private val context: Context) :
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+
+        if (allergenList.size == 0) {
+            // Get shared preferences reference
+            val sharedPref =
+                context.getSharedPreferences(Constants.ALLERGY_PREFERENCES, Context.MODE_PRIVATE)
+            val map: Map<String, *> = sharedPref.all
+
+            for ((k) in map) {
+                allergenList.add(k.toLowerCase())
+            }
+        } else {
+            Log.d("DBG allergenList", allergenList.toString())
+        }
+
         // Set the date for the search
         val sdf = SimpleDateFormat("dd.MM.yyyy")
         val currentDate = sdf.format(Date()).toString()
@@ -98,48 +108,9 @@ class OffListAdapter(private val context: Context) :
         theme.resolveAttribute(R.attr.colorOnSurface, typedValue, true)
         val onNoErrorColor = typedValue.data
 
-        val radius = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 6f, context.resources.displayMetrics)
-
-        // Initialize viewmodel
-        // TODO: allergenItemViewModel = ViewModelProvider(getActivity(context) as Fragment).get(AllergenItemViewModel::class.java)
-
-        // Get user allergies
-//        GlobalScope.launch(context = Dispatchers.IO) {
-//
-//            // Check if exists
-//            val exists = allergenItemViewModel.checkIfExists()
-//
-//            if (exists) {
-//                // Get allergenItem
-//                var allergenItem = allergenItemViewModel.getAllergenItem()
-//
-//                val listOfAllergens = mutableListOf<String>()
-//
-//                if (allergenItem.wheat) {listOfAllergens.add("wheat")}
-//                if (allergenItem.rye) {listOfAllergens.add("rye")}
-//                if (allergenItem.barley) {listOfAllergens.add("barley")}
-//                if (allergenItem.spelt) {listOfAllergens.add("spelt")}
-//                if (allergenItem.kamutGrain) {listOfAllergens.add("kamutGrain")}
-//                if (allergenItem.oats) {listOfAllergens.add("oats")}
-//                if (allergenItem.otherCerealProducts) {listOfAllergens.add("otherCerealProducts")}
-//                if (allergenItem.fish) {listOfAllergens.add("fish") }
-//                if (allergenItem.crustacean) {listOfAllergens.add("crustacean") }
-//                if (allergenItem.mollusc) {listOfAllergens.add("mollusc")}
-//                if (allergenItem.egg) {listOfAllergens.add("egg")}
-//                if (allergenItem.nuts) {listOfAllergens.add("nuts") }
-//                if (allergenItem.soy) {listOfAllergens.add("soy")}
-//                if (allergenItem.milk) {listOfAllergens.add("milk") }
-//                if (allergenItem.celery) {listOfAllergens.add("celery") }
-//                if (allergenItem.mustard) {listOfAllergens.add("mustard")}
-//                if (allergenItem.lupine) {listOfAllergens.add("lupine") }
-//                if (allergenItem.sulfur) {listOfAllergens.add("sulfur")}
-//
-//                Log.d("DBG list", listOfAllergens.toString())
-//
-//
-//            }
-//        }
-
+        val radius = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+            6f,
+            context.resources.displayMetrics)
 
         // Check if allergens in product
         if (currentItem.allergens_from_ingredients!!.isEmpty()) {
@@ -150,11 +121,39 @@ class OffListAdapter(private val context: Context) :
             holder.itemView.off_card.setCardBackgroundColor(onNoErrorColor)
             holder.itemView.off_card.radius = radius
 
-        } else {
 
-            // If allergens found, set image background color to RED and background light pink
-            holder.itemView.off_card.product_image.setBackgroundColor(errorColor)
-            holder.itemView.off_card.setCardBackgroundColor(onErrorColor)
+        } else if (allergenList.size > 0) {
+
+            // If allergens in allergen list
+            // Compare list of allergens to current items allergen in lowercase
+            allergenList.forEach {
+                if (it in (currentItem.allergens_from_ingredients.toLowerCase())) {
+                    Log.d("DBG matchaa", it + " = " + currentItem.allergens_from_ingredients.toLowerCase())
+                    // If allergens found, set image background color to RED and background light pink
+                    holder.itemView.off_card.product_image.setBackgroundColor(errorColor)
+                    holder.itemView.off_card.setCardBackgroundColor(onErrorColor)
+                    holder.itemView.off_card.radius = radius
+
+                } else {
+                    Log.d("DBG ei matchaa", it + " = " + currentItem.allergens_from_ingredients)
+
+                    // No allergens, no hätä
+                    holder.itemView.off_card.product_image.setBackgroundColor(noErrorColor)
+                    holder.itemView.off_card.setCardBackgroundColor(onNoErrorColor)
+                    holder.itemView.off_card.radius = radius
+                }
+            }
+
+            // Display allergens
+            holder.itemView.allergens_from_ingredients.text =
+                holder.itemView.context.getString(R.string.allergens_found,
+                    currentItem.allergens_from_ingredients)
+
+        } else {
+            // If allergenlist is empty
+            // No allergens, no hätä
+            holder.itemView.off_card.product_image.setBackgroundColor(noErrorColor)
+            holder.itemView.off_card.setCardBackgroundColor(onNoErrorColor)
             holder.itemView.off_card.radius = radius
 
             // Display allergens

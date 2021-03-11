@@ -14,5 +14,6 @@ class Constants {
         const val BASE_URL_FINELI = "https://www.fineli.fi/fineli/api/v1/"
         const val BASE_URL_OPEN_FOOD_FACTS = "https://world.openfoodfacts.org/"
         const val NOMINATIM_URL = "https://nominatim.openstreetmap.org/"
+        const val ALLERGY_PREFERENCES = "SensorBasedAllergyPreferences"
     }
 }
