@@ -17,7 +17,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.sensorbasedmobileproject.R
 import com.example.sensorbasedmobileproject.data.AllergenItem
 import com.example.sensorbasedmobileproject.data.AllergenItemViewModel
-import com.example.sensorbasedmobileproject.data.OffItemViewModel
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 
 class ProfileFragment() : Fragment(), SensorEventListener {
