@@ -89,18 +89,21 @@ class OffListAdapter(private val context: Context) : RecyclerView.Adapter<OffLis
         theme.resolveAttribute(R.attr.colorOnSurface, typedValue, true)
         val onNoErrorColor = typedValue.data
 
+        val radius = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 6f, context.resources.displayMetrics)
         // Check if allergens in product
-        if (currentItem.allergens_from_ingredients.equals("")) {
+        if (currentItem.allergens_from_ingredients!!.isEmpty()) {
             // No allergens found
             holder.itemView.allergens_from_ingredients.text = holder.itemView.context.getString(R.string.no_allergens_found)
             holder.itemView.off_card.product_image.setBackgroundColor(noErrorColor)
-            holder.itemView.off_card.setBackgroundColor(onNoErrorColor)
+            holder.itemView.off_card.setCardBackgroundColor(onNoErrorColor)
+            holder.itemView.off_card.radius = radius
 
         } else {
 
             // If allergens found, set image background color to RED and background light pink
             holder.itemView.off_card.product_image.setBackgroundColor(errorColor)
-            holder.itemView.off_card.setBackgroundColor(onErrorColor)
+            holder.itemView.off_card.setCardBackgroundColor(onErrorColor)
+            holder.itemView.off_card.radius = radius
 
             // Display allergens
             holder.itemView.allergens_from_ingredients.text =

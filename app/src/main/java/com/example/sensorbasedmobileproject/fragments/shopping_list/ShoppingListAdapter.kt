@@ -35,11 +35,13 @@ class ShoppingListAdapter(private val contextHere: Context) : RecyclerView.Adapt
         theme.resolveAttribute(R.attr.colorSecondaryVariant, typedValue, true)
         val colorTwo = typedValue.data
         val colors = mutableListOf(colorOne, colorTwo)
-
+        val radius = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2f, contextHere.resources.displayMetrics)
         val currentItem = shoppingList[positionShoppingList]
         holder.itemView.text_view.text = currentItem.toString()
         holder.itemView.text_view.paintFlags = 0
-        holder.itemView.setBackgroundColor(colors[positionShoppingList % 2])
+        holder.itemView.shopping_list_card_view.setCardBackgroundColor(colors[positionShoppingList % 2])
+        holder.itemView.shopping_list_card_view.radius = radius
+
 
         holder.itemView.setOnClickListener {
             if (holder.itemView.text_view.paintFlags > 0 && Paint.STRIKE_THRU_TEXT_FLAG > 0) {

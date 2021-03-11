@@ -13,6 +13,7 @@
         android:id="@+id/recyclerview"
         android:layout_width="366dp"
         android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="96dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +61,8 @@
         android:clickable="true"
         android:src="@drawable/ic_barcode_scan"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/camera_button_description" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
