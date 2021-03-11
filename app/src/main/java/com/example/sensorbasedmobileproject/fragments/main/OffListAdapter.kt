@@ -112,6 +112,11 @@ class OffListAdapter(private val context: Context) :
             6f,
             context.resources.displayMetrics)
 
+        val _1 = "Has allergenes, and matches user added allergens"
+        val _2 = "Has allergenes, doesn't match user added allergens"
+        val _3 = "Has no allergens"
+
+
         // Check if allergens in product
         if (currentItem.allergens_from_ingredients!!.isEmpty()) {
             // No allergens found
@@ -124,20 +129,24 @@ class OffListAdapter(private val context: Context) :
 
         } else if (allergenList.size > 0) {
 
-            // If allergens in allergen list
-            // Compare list of allergens to current items allergen in lowercase
+            // Iterate trough the user added allergens
             allergenList.forEach {
+
+                // If user added allergen is a substring of the allergens from ingredients
                 if (it in (currentItem.allergens_from_ingredients.toLowerCase())) {
+
                     Log.d("DBG matchaa", it + " = " + currentItem.allergens_from_ingredients.toLowerCase())
+
                     // If allergens found, set image background color to RED and background light pink
                     holder.itemView.off_card.product_image.setBackgroundColor(errorColor)
                     holder.itemView.off_card.setCardBackgroundColor(onErrorColor)
                     holder.itemView.off_card.radius = radius
 
                 } else {
+
                     Log.d("DBG ei matchaa", it + " = " + currentItem.allergens_from_ingredients)
 
-                    // No allergens, no hätä
+                    // This sets the non matching items as green
                     holder.itemView.off_card.product_image.setBackgroundColor(noErrorColor)
                     holder.itemView.off_card.setCardBackgroundColor(onNoErrorColor)
                     holder.itemView.off_card.radius = radius

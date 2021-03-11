@@ -107,11 +107,15 @@
             android:layout_marginTop="16dp"
             />
 
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:id="@+id/recyclerview"-->
-<!--            android:layout_marginTop="16dp"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent" />-->
+        <ImageView
+            android:layout_marginTop="16dp"
+
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            app:srcCompat="@drawable/ic_menu_mapmode" />
 
     </LinearLayout>
 
