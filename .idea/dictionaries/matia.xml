@@ -5,13 +5,18 @@
       <w>allergenlist</w>
       <w>barcodes</w>
       <w>boundingbox</w>
+      <w>carbs</w>
       <w>citymarket</w>
       <w>countrycodes</w>
       <w>fineli</w>
+      <w>hätönen</w>
+      <w>kamut</w>
       <w>kioski</w>
+      <w>livedata</w>
       <w>mollusc</w>
       <w>nominatim</w>
       <w>prisma</w>
+      <w>pystynen</w>
       <w>sensorbasedmobileproject</w>
       <w>shoppinglist</w>
       <w>textview</w>

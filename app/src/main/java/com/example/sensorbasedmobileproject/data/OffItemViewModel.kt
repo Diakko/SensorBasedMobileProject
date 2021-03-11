@@ -1,5 +1,5 @@
 /**
- * Description: ViewModel setup for Open Food Facts
+ * Description: View Model setup for Open Food Facts
  *
  * Course: Sensor Based Mobile Applications TX00CK66-3009
  * Name: Ville Pystynen

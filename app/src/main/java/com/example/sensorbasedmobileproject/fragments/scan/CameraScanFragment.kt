@@ -1,3 +1,16 @@
+/**
+ * Description:
+ *
+ * Fragment for scanning bar-codes and returning bar code info to main fragment for EAN-search
+ *
+ * - Uses intent integrator to switch to camera view and to return scanned bar code
+ *
+ * Course: Sensor Based Mobile Applications TX00CK66-3009
+ * Name: Matias Hätönen
+ * Student number: 1902011
+ *
+ */
+
 package com.example.sensorbasedmobileproject.fragments.scan
 
 import android.content.Intent

@@ -70,22 +70,23 @@
             android:layout_height="match_parent"
             android:id="@+id/type_spinner"
             android:textColor="@color/white"
+            android:dropDownWidth="60dp"
             />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageButton
-            android:background="@drawable/border_spinner"
-            android:layout_gravity="center_vertical"
             android:id="@+id/add_button"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
             android:layout_marginHorizontal="5dp"
-            android:padding="5dp"
-            android:src="@drawable/sharp_add_black_36"
+            android:layout_weight="1"
+            android:background="@drawable/border_spinner"
             android:backgroundTint="@color/teal_dark"
-            android:contentDescription="@string/add_button_desc" />
+            android:contentDescription="@string/add_button_desc"
+            android:padding="5dp"
+            android:src="@drawable/plus_icon" />
     </LinearLayout>
 
         <Button

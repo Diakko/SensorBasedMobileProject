@@ -71,18 +71,12 @@
         android:orientation="vertical"
         android:gravity="center">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:gravity="center">
-
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/set_your_allergies_here"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:textColor="@color/white"
                 android:textSize="24sp"
@@ -90,7 +84,6 @@
                 />
 
 
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
