@@ -103,24 +103,28 @@
                 android:id="@+id/wheat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="@string/wheat" />
 
             <CheckBox
                 android:id="@+id/rye"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="@string/rye" />
 
             <CheckBox
                 android:id="@+id/barley"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="@string/barley" />
 
             <CheckBox
                 android:id="@+id/spelt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="@string/spelt" />
 
 
@@ -128,6 +132,7 @@
                 android:id="@+id/kamutGrain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="@string/kamutGrain" />
 
         </LinearLayout>
@@ -144,24 +149,28 @@
                 android:id="@+id/oats"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="@string/oats" />
 
             <CheckBox
                 android:id="@+id/otherCerealProducts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="@string/otherCerealProducts" />
 
             <CheckBox
                 android:id="@+id/fish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="@string/fish" />
 
             <CheckBox
                 android:id="@+id/crustacean"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="@string/crustacean" />
 
         </LinearLayout>
@@ -178,30 +187,35 @@
                 android:id="@+id/mollusc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="@string/mollusc"/>
 
             <CheckBox
                 android:id="@+id/egg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="@string/egg" />
 
             <CheckBox
                 android:id="@+id/nuts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="@string/nuts" />
 
             <CheckBox
                 android:id="@+id/soy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="@string/soy" />
 
             <CheckBox
                 android:id="@+id/milk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="@string/milk" />
         </LinearLayout>
 
@@ -216,6 +230,7 @@
                 android:id="@+id/celery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="@string/celery" />
 
 
@@ -223,18 +238,21 @@
                 android:id="@+id/mustard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="@string/mustard" />
 
             <CheckBox
                 android:id="@+id/lupine"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="@string/lupine" />
 
             <CheckBox
                 android:id="@+id/sulfur"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="@string/sulfur" />
         </LinearLayout>
 
