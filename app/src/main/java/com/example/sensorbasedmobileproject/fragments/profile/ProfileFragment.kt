@@ -7,6 +7,7 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,9 @@ import com.example.sensorbasedmobileproject.R
 import com.example.sensorbasedmobileproject.data.AllergenItem
 import com.example.sensorbasedmobileproject.data.AllergenItemViewModel
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class ProfileFragment() : Fragment(), SensorEventListener {
 
@@ -49,11 +53,17 @@ class ProfileFragment() : Fragment(), SensorEventListener {
 
         loadData()
         resetSteps()
+
+        // Checkbox state init?
+
+
         return fragmentView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        var exists: Boolean
 
         var _1 = false
         var _2 = false
@@ -92,6 +102,76 @@ class ProfileFragment() : Fragment(), SensorEventListener {
         val mustard = view.findViewById<CheckBox>(R.id.mustard)
         val lupine = view.findViewById<CheckBox>(R.id.lupine)
         val sulfur = view.findViewById<CheckBox>(R.id.sulfur)
+
+        // Get allergies and check boxes accordingly
+        GlobalScope.launch(context = Dispatchers.IO) {
+            // Check if exists
+            exists = allergenItemViewModel.checkIfExists()
+
+            if (exists) {
+
+                val allergenItem = allergenItemViewModel.getAllergenItem()
+
+                GlobalScope.launch(context = Dispatchers.Main) {
+                    if (allergenItem.wheat) {
+                        wheat.isChecked
+                    }
+                    Log.d("DGB what", wheat.toString())
+                    if (allergenItem.rye) {
+                        rye.isChecked
+                    }
+                    if (allergenItem.barley) {
+                        barley.isChecked
+                    }
+                    if (allergenItem.spelt) {
+                        spelt.isChecked
+                    }
+                    if (allergenItem.kamutGrain) {
+                        kamutGrain.isChecked
+                    }
+                    if (allergenItem.oats) {
+                        oats.isChecked
+                    }
+                    if (allergenItem.otherCerealProducts) {
+                        otherCerealProducts.isChecked
+                    }
+                    if (allergenItem.fish) {
+                        fish.isChecked
+                    }
+                    if (allergenItem.crustacean) {
+                        crustacean.isChecked
+                    }
+                    if (allergenItem.mollusc) {
+                        mollusc.isChecked
+                    }
+                    if (allergenItem.egg) {
+                        egg.isChecked
+                    }
+                    if (allergenItem.nuts) {
+                        nuts.isChecked
+                    }
+                    if (allergenItem.soy) {
+                        soy.isChecked
+                    }
+                    if (allergenItem.milk) {
+                        milk.isChecked
+                    }
+                    if (allergenItem.celery) {
+                        celery.isChecked
+                    }
+                    if (allergenItem.mustard) {
+                        mustard.isChecked
+                    }
+                    if (allergenItem.lupine) {
+                        lupine.isChecked
+                    }
+                    if (allergenItem.sulfur) {
+                        sulfur.isChecked
+                    }
+                }
+            }
+        }
+
         val button = view.findViewById<Button>(R.id.button)
 
         button.setOnClickListener {
@@ -151,10 +231,41 @@ class ProfileFragment() : Fragment(), SensorEventListener {
             }
 
             // create allergenItem
-            val allergenItem = AllergenItem(0,_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18)
-            allergenItemViewModel.addAllergenData(allergenItem)
-        }
+            val allergenItem = AllergenItem(0,
+                _1,
+                _2,
+                _3,
+                _4,
+                _5,
+                _6,
+                _7,
+                _8,
+                _9,
+                _10,
+                _11,
+                _12,
+                _13,
+                _14,
+                _15,
+                _16,
+                _17,
+                _18)
 
+            GlobalScope.launch(context = Dispatchers.IO) {
+                // Check if exists
+                exists = allergenItemViewModel.checkIfExists()
+                if (!exists) {
+                    // If not, add
+                    Log.d("DBG add", allergenItem.toString())
+                    allergenItemViewModel.addAllergenData(allergenItem)
+                } else {
+                    // If exists, delete and add new
+                    Log.d("DBG update", allergenItem.toString())
+                    allergenItemViewModel.clearDB()
+                    allergenItemViewModel.addAllergenData(allergenItem)
+                }
+            }
+        }
     }
 
     override fun onResume() {

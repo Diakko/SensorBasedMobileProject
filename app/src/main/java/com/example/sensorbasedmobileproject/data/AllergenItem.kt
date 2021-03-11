@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "allergenlist")
 data class AllergenItem(
-    @PrimaryKey(autoGenerate = true) val id: Long,
+    @PrimaryKey val id: Int,
     val wheat: Boolean,
     val rye: Boolean,
     val barley: Boolean,
