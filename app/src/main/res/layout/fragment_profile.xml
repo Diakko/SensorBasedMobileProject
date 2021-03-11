@@ -13,6 +13,7 @@
         android:id="@+id/relative_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -37,11 +38,11 @@
             android:id="@+id/text_view_steps_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
             android:layout_below="@id/text_view_steps_taken"
             android:layout_centerInParent="true"
             android:text="@string/steps_text"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:textSize="15sp"
             app:layout_constraintBottom_toTopOf="@+id/text_view_steps_taken"
             app:layout_constraintEnd_toEndOf="parent"
@@ -52,16 +53,206 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:text="@string/steps_taken"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            android:text="@string/steps_taken"
             android:textSize="40sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/set_your_allergies_here"
+                android:textSize="24sp"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <CheckBox
+                android:id="@+id/wheat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/wheat" />
+
+            <CheckBox
+                android:id="@+id/rye"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rye" />
+
+            <CheckBox
+                android:id="@+id/barley"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/barley" />
+
+            <CheckBox
+                android:id="@+id/spelt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/spelt" />
+
+
+            <CheckBox
+                android:id="@+id/kamutGrain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/kamutGrain" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+
+            <CheckBox
+                android:id="@+id/oats"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/oats" />
+
+            <CheckBox
+                android:id="@+id/otherCerealProducts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/otherCerealProducts" />
+
+            <CheckBox
+                android:id="@+id/fish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fish" />
+
+            <CheckBox
+                android:id="@+id/crustacean"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/crustacean" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <CheckBox
+                android:id="@+id/mollusc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mollusc"/>
+
+            <CheckBox
+                android:id="@+id/egg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/egg" />
+
+            <CheckBox
+                android:id="@+id/nuts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nuts" />
+
+            <CheckBox
+                android:id="@+id/soy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/soy" />
+
+            <CheckBox
+                android:id="@+id/milk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/milk" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <CheckBox
+                android:id="@+id/celery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/celery" />
+
+
+            <CheckBox
+                android:id="@+id/mustard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mustard" />
+
+            <CheckBox
+                android:id="@+id/lupine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lupine" />
+
+            <CheckBox
+                android:id="@+id/sulfur"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sulfur" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Set allergies"
+                />
+        </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+

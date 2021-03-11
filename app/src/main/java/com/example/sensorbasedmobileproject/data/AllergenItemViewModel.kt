@@ -23,4 +23,36 @@ class AllergenItemViewModel(application: Application): AndroidViewModel(applicat
             repository.addAllergenInfo(allergenItem)
         }
     }
+
+    fun updateAllergenData(allergenItem: AllergenItem){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateAllergenInfo(allergenItem)
+        }
+    }
+
+    fun clearDB(){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.clearDB()
+        }
+    }
+
+    // Get one AllergenItem
+    suspend fun getAllergenItem(): AllergenItem {
+        lateinit var exists: AllergenItem
+        val job = viewModelScope.launch(Dispatchers.IO) {
+            exists = repository.getAllergyItem()
+        }
+        job.join()
+        return exists
+    }
+
+    // Check if exists by Ean code
+    suspend fun checkIfExists(): Boolean {
+        var exists = false
+        val job = viewModelScope.launch(Dispatchers.IO) {
+            exists = repository.checkIfExists()
+        }
+        job.join()
+        return exists
+    }
 }

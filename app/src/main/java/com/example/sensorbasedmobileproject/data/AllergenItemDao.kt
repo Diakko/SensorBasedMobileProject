@@ -15,7 +15,16 @@ interface AllergenItemDao {
     @Delete
     fun deleteAllergens(allergenItem: AllergenItem)
 
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun updateAllergens(allergenItem: AllergenItem)
+
     @Query("DELETE FROM allergenlist")
     fun clearAllergens()
+
+    @Query("SELECT EXISTS (SELECT 1 FROM allergenlist WHERE id = 0)")
+    suspend fun productExists(): Boolean
+
+    @Query("SELECT * FROM allergenlist WHERE id = 0")
+    suspend fun getItem(): AllergenItem
 
 }
