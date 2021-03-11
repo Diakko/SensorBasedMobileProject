@@ -1,3 +1,17 @@
+/**
+ * Description:
+ *
+ * Fragment for users own "profile"
+ *
+ * - Users daily steps displayed as number as well as observable ring. Max amount set to 9000 atm.
+ * - Choose allergens with checkboxes and input them into Livedata to be used in scans on main fragment (WIP)
+ *
+ * Course: Sensor Based Mobile Applications TX00CK66-3009
+ * Name: Matias Hätönen
+ * Student number: 1902011
+ *
+ */
+
 package com.example.sensorbasedmobileproject.fragments.profile
 
 import android.app.Activity

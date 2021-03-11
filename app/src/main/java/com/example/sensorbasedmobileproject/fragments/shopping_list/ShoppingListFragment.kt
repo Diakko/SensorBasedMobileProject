@@ -1,3 +1,18 @@
+/**
+ * Description:
+ *
+ * Fragment for shopping list
+ *
+ * - Input shopping list item and amount with edit text and choose type with spinner.
+ * - Displays shopping list items in recycler view
+ * - Shopping list items can be stroke through to indicate it's already picked up and cleared after usage.
+ *
+ * Course: Sensor Based Mobile Applications TX00CK66-3009
+ * Name: Matias Hätönen
+ * Student number: 1902011
+ *
+ */
+
 package com.example.sensorbasedmobileproject.fragments.shopping_list
 
 import android.app.Activity
@@ -111,8 +126,10 @@ class ShoppingListFragment : Fragment(), AdapterView.OnItemSelectedListener {
         spinner = fragmentView.findViewById(R.id.type_spinner)
         spinner.onItemSelectedListener = this
 
+
         ArrayAdapter.createFromResource(requireContext(), R.array.type_array, android.R.layout.simple_spinner_item).also { adapter ->
             adapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item)
+
             spinner.adapter = adapter
         }
 

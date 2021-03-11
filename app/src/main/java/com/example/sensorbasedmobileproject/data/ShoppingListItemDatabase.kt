@@ -1,3 +1,11 @@
+/**
+ * Description: Room database for shopping list items
+ *
+ * Course: Sensor Based Mobile Applications TX00CK66-3009
+ * Name: Matias Hätönen
+ * Student number: 1902011
+ */
+
 package com.example.sensorbasedmobileproject.data
 
 import android.content.Context
@@ -7,8 +15,11 @@ import androidx.room.RoomDatabase
 
 @Database(entities = [(ShoppingListItem::class)], version = 1)
 abstract class ShoppingListItemDatabase: RoomDatabase() {
+
+    // Get DAO
     abstract fun shoppingListItemDao(): ShoppingListItemDao
 
+    // Singleton
     companion object {
         private var sInstance: ShoppingListItemDatabase? = null
         @Synchronized

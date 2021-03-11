@@ -1,3 +1,16 @@
+/**
+ * Description:
+ *
+ * ListAdapter for shopping lists recycler view
+ * - Handles clicks on item to strike through and
+ * - Populates view holders with shopping list item.
+ *
+ * Course: Sensor Based Mobile Applications TX00CK66-3009
+ * Name: Matias Hätönen
+ * Student number: 1902011
+ */
+
+
 package com.example.sensorbasedmobileproject.fragments.shopping_list
 
 import android.content.Context
@@ -56,5 +69,6 @@ class ShoppingListAdapter(private val contextHere: Context) : RecyclerView.Adapt
         this.shoppingList = shoppingList
         notifyDataSetChanged()
     }
+
 
 }

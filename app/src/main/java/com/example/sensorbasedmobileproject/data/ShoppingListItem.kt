@@ -1,3 +1,11 @@
+/**
+ * Description: Room Database entity for shopping list item
+ *
+ * Course: Sensor Based Mobile Applications TX00CK66-3009
+ * Name: Matias Hätönen
+ * Student number: 1902011
+ */
+
 package com.example.sensorbasedmobileproject.data
 
 import androidx.room.Entity

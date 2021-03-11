@@ -1,3 +1,11 @@
+/**
+ * Description: DAO for making queries into AllergenItemDatabase
+ *
+ * Course: Sensor Based Mobile Applications TX00CK66-3009
+ * Name: Matias Hätönen
+ * Student number: 1902011
+ */
+
 package com.example.sensorbasedmobileproject.data
 
 import androidx.lifecycle.LiveData

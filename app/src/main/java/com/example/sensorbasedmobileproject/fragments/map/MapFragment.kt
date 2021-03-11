@@ -1,3 +1,19 @@
+/**
+ * Description:
+ *
+ * Fragment for map which shows nearby shops
+ *
+ * - Automatically get location from GPS, sends api call for nominatim api with a view box centered on user.
+ * - Gets nearby shops (about 15 km max location difference) and displays them on the map.
+ * - Clicking on a shop icon, displays shop information
+ * - TODO: Navigation to location with osmbonuspack and link in marker to google search with shop name.
+ *
+ * Course: Sensor Based Mobile Applications TX00CK66-3009
+ * Name: Matias Hätönen
+ * Student number: 1902011
+ *
+ */
+
 package com.example.sensorbasedmobileproject.fragments.map
 
 import android.content.pm.PackageManager

@@ -1,7 +1,12 @@
-package com.example.sensorbasedmobileproject.model
+/**
+ * Description: Data class for the Nominatim model
+ *
+ * Course: Sensor Based Mobile Applications TX00CK66-3009
+ * Name: Matias Hätönen
+ * Student number: 1902011
+ */
 
-import com.google.gson.annotations.SerializedName
-import java.net.URL
+package com.example.sensorbasedmobileproject.model
 
 data class Nominatim (
 
