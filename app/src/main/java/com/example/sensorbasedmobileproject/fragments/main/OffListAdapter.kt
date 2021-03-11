@@ -124,24 +124,23 @@ class OffListAdapter(private val context: Context) :
         } else {
 
             // Compare list of allergens to current items allergen in lowercase
-                allergenList.forEach{
-                    if (it.contains(currentItem.allergens_from_ingredients.toLowerCase())) {
+            allergenList.forEach {
+                if (it.contains(currentItem.allergens_from_ingredients.toLowerCase())) {
+                    Log.d("DBG vertaa ", it.toString() + " = " + currentItem.allergens_from_ingredients.toLowerCase())
+                    // If allergens found, set image background color to RED and background light pink
+                    holder.itemView.off_card.product_image.setBackgroundColor(errorColor)
+                    holder.itemView.off_card.setCardBackgroundColor(onErrorColor)
+                    holder.itemView.off_card.radius = radius
 
-                        // If allergens found, set image background color to RED and background light pink
-                        holder.itemView.off_card.product_image.setBackgroundColor(errorColor)
-                        holder.itemView.off_card.setCardBackgroundColor(onErrorColor)
-                        holder.itemView.off_card.radius = radius
+                } else {
 
-                    } else {
-
-                        // No allergens, no hätä
-                        holder.itemView.off_card.product_image.setBackgroundColor(noErrorColor)
-                        holder.itemView.off_card.setCardBackgroundColor(onNoErrorColor)
-                        holder.itemView.off_card.radius = radius
-                    }
-
+                    // No allergens, no hätä
+                    holder.itemView.off_card.product_image.setBackgroundColor(noErrorColor)
+                    holder.itemView.off_card.setCardBackgroundColor(onNoErrorColor)
+                    holder.itemView.off_card.radius = radius
                 }
 
+            }
 
             // Display allergens
             holder.itemView.allergens_from_ingredients.text =
