@@ -61,4 +61,23 @@
     <string name="allergens_found">Allergeenit: %1$s</string>
     <string name="unknown_country">Alkuperämaa ei tiedossa</string>
     <string name="average_nutrients">Keskimääräinen ravintoainekoostumus 100 g:ssa</string>
+    <string name="wheat">vehnä</string>
+    <string name="rye">ruis</string>
+    <string name="barley">ohra</string>
+    <string name="spelt">speltti</string>
+    <string name="kamutGrain">kamut-vilja</string>
+    <string name="oats">kaura</string>
+    <string name="otherCerealProducts">muut viljatuotteet</string>
+    <string name="fish">kala</string>
+    <string name="crustacean">äyriäiset</string>
+    <string name="mollusc">nilviäiset</string>
+    <string name="egg">muna</string>
+    <string name="nuts">pähkinät</string>
+    <string name="soy">soija</string>
+    <string name="milk">maito</string>
+    <string name="celery">selleri</string>
+    <string name="mustard">sinappi</string>
+    <string name="lupine">lupiini</string>
+    <string name="sulfur">sulfiitit</string>
+    <string name="set_your_allergies_here">Aseta allergiatietosi tässä</string>
 </resources>

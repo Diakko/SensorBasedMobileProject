@@ -78,7 +78,7 @@ class SearchFragment : Fragment() {
 
         // Listen to editText and on complete do search via viewModels getFood(),
         // clear editText and hide keyboard
-        editText.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
+        editText.setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 viewModel.getFineliFood(editTextValue.toString())
                 editText.text.clear()

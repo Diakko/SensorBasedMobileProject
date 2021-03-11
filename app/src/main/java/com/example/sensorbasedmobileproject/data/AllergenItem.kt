@@ -6,7 +6,13 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "allergenlist")
 data class AllergenItem(
     @PrimaryKey(autoGenerate = true) val id: Long,
-    val cereal: Boolean,
+    val wheat: Boolean,
+    val rye: Boolean,
+    val barley: Boolean,
+    val spelt: Boolean,
+    val kamutGrain: Boolean,
+    val oats: Boolean,
+    val otherCerealProducts: Boolean,
     val fish: Boolean,
     val crustacean: Boolean,
     val mollusc: Boolean,
