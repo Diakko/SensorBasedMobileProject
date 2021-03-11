@@ -52,6 +52,25 @@
     <string name="allergens">Allergens: %1$s</string>
 
 
+    // Allergens
+    <string name="wheat">wheat</string>
+    <string name="rye">rye</string>
+    <string name="barley">barley</string>
+    <string name="spelt">spelt</string>
+    <string name="kamutGrain">kamut grain</string>
+    <string name="oats">oats</string>
+    <string name="otherCerealProducts">other cereal products</string>
+    <string name="fish">fish</string>
+    <string name="crustacean">crustacean</string>
+    <string name="mollusc">mollusc</string>
+    <string name="egg">egg</string>
+    <string name="nuts">nuts</string>
+    <string name="soy">soy</string>
+    <string name="milk">milk</string>
+    <string name="celery">celery</string>
+    <string name="mustard">mustard</string>
+    <string name="lupine">lupine</string>
+    <string name="sulfur">sulfur</string>
 
     // Details
     <string name="product_details">Product details</string>
@@ -100,4 +119,5 @@
     <string name="can">can</string>
     <string name="packet">pkg</string>
     <string name="bottle">btl</string>
+    <string name="set_your_allergies_here">Set your allergies here</string>
 </resources>

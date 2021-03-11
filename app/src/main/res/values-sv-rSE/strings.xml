@@ -61,4 +61,22 @@
     <string name="allergens_found">Allergener: %1$s</string>
     <string name="average_nutrients">Genomsnittligt näringsinnehåll per 100 g</string>
     <string name="unknown_country">"Ursprungsland okänt "</string>
+    <string name="otherCerealProducts">andra spannmålsprodukter</string>
+    <string name="oats">havre</string>
+    <string name="kamutGrain">kamutkorn</string>
+    <string name="spelt">spelt</string>
+    <string name="barley">korn</string>
+    <string name="rye">råg</string>
+    <string name="wheat">vete</string>
+    <string name="fish">fisk</string>
+    <string name="crustacean">skaldjur</string>
+    <string name="mollusc">blötdjur</string>
+    <string name="egg">ägg</string>
+    <string name="nuts">nötter</string>
+    <string name="milk">mjölk</string>
+    <string name="celery">seller</string>
+    <string name="soy">soja</string>
+    <string name="mustard">senap</string>
+    <string name="lupine">lupin</string>
+    <string name="sulfur">sulfiten</string>
 </resources>
