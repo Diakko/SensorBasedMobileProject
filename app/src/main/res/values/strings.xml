@@ -14,15 +14,17 @@
     <string name="menu_search">Search</string>
     <string name="menu_map">Map</string>
     <string name="menu_details">Details</string>
+    <string name="menu_shopping_list">Shopping List</string>
+
     <string name="main_fragment_text" translatable="false">Just a placeholder.</string>
 
     // Scanning fragment
     <string name="scan_barcode">Scan new barcode</string>
 
     // Profile fragment
-    <string name="add_shopping_list_edit_text_desc">Add this item to shopping list</string>
+    <string name="add_shopping_list_edit_text_desc"><font size="12">Add this item to shopping list</font></string>
     <string name="add_button_desc">Push to add item to shopping list</string>
-    <string name="add_amount_desc">Amount</string>
+    <string name="add_amount_desc"><font size="12">Amount</font></string>
     <string name="clear_button_desc">Clear shopping list</string>
     <string name="clear_button_text">CLEAR</string>
     <string name="shopping_list_title">Shopping list:</string>
@@ -52,7 +54,6 @@
     <string name="allergens">Allergens: %1$s</string>
 
 
-
     // Details
     <string name="product_details">Product details</string>
     <string name="energy">Energy: %1$s kcal</string>
@@ -71,7 +72,6 @@
     <string name="made_in">Made in %1$s</string>
     <string name="link">"Link to product website:
         %1$s"</string>
-
 
 
     // Home fragment
