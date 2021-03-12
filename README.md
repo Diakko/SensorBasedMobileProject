@@ -46,7 +46,7 @@ It gets data from these web services:
 - [Open Food Facts API](https://world.openfoodfacts.org/)
 - [Nominatim API](https://nominatim.openstreetmaps.org/)
 
-This app uses the following third party librabries:
+This app uses the following third party libraries:
 - [ZXing ("zebra crossing")](https://github.com/zxing/zxing)
 - [Retrofit](https://square.github.io/retrofit/)
 - [osmdroid](https://github.com/osmdroid/osmdroid)
