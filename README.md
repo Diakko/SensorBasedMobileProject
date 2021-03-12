@@ -13,7 +13,7 @@ You can check if the product contains any ingredients that aren't good for your 
 Download, open with Android Studio and start in the emulator
 
 ### Where users can get help with your project
-You can contact the developers at ville.pystynen@metropolia.fi and matias.hatonen@metropolia.fi
+You can contact the developers at `ville.pystynen@metropolia.fi` and `matias.hatonen@metropolia.fi`
 
 ### Who maintains and contributes to the project
 Ville Pystynen and Matias Hätönen
@@ -39,6 +39,9 @@ It uses the following Android system's basic components:
 - Intents
 - Views
 
+The app is localized in Finnish, English (US) and in Swedish.
+Accessibility was also considered in the design and development process. 
+
 It gets data from these web services:
 - [Open Food Facts API](https://world.openfoodfacts.org/)
 - [Nominatim API](https://nominatim.openstreetmaps.org/)
@@ -49,7 +52,6 @@ This app uses the following third party librabries:
 - [osmdroid](https://github.com/osmdroid/osmdroid)
 
 The OpenFoodFacts API response data classes were made with http://www.json2kotlin.com
-
 
 ### License
 [GNU GPL2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
