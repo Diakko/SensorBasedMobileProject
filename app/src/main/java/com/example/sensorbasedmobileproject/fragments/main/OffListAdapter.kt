@@ -4,6 +4,8 @@
  * ListAdapter for MainFragments recyclerview
  * - Handles navigation to product details
  * - Populates viewholders with product detail data
+ * - Handles the logic of coloring the recyclerview cards
+ * according to user added allergens
  *
  * Course: Sensor Based Mobile Applications TX00CK66-3009
  * Name: Ville Pystynen
@@ -112,55 +114,37 @@ class OffListAdapter(private val context: Context) :
             6f,
             context.resources.displayMetrics)
 
-        // Check if allergens in product
-        if (currentItem.allergens_from_ingredients!!.isEmpty()) {
-            // No allergens found
-            holder.itemView.allergens_from_ingredients.text =
-                holder.itemView.context.getString(R.string.no_allergens_found)
-            holder.itemView.off_card.product_image.setBackgroundColor(noErrorColor)
-            holder.itemView.off_card.setCardBackgroundColor(onNoErrorColor)
-            holder.itemView.off_card.radius = radius
+        // All cards are green
+        holder.itemView.allergens_from_ingredients.text =
+            holder.itemView.context.getString(R.string.no_allergens_found)
+        holder.itemView.off_card.product_image.setBackgroundColor(noErrorColor)
+        holder.itemView.off_card.setCardBackgroundColor(onNoErrorColor)
+        holder.itemView.off_card.radius = radius
 
+        // Except user added allergens
+        if (allergenList.size > 0) {
 
-        } else if (allergenList.size > 0) {
-
-            // If allergens in allergen list
-            // Compare list of allergens to current items allergen in lowercase
+            // Iterate trough the user added allergens
             allergenList.forEach {
-                if (it in (currentItem.allergens_from_ingredients.toLowerCase())) {
-                    Log.d("DBG matchaa", it + " = " + currentItem.allergens_from_ingredients.toLowerCase())
+
+                // If user added allergen is a substring of the allergens from ingredients
+                if (it in (currentItem.allergens_from_ingredients?.toLowerCase())!!) {
+
+                    Log.d("DBG matchaa",
+                        it + " = " + currentItem.allergens_from_ingredients?.toLowerCase())
+
                     // If allergens found, set image background color to RED and background light pink
                     holder.itemView.off_card.product_image.setBackgroundColor(errorColor)
                     holder.itemView.off_card.setCardBackgroundColor(onErrorColor)
                     holder.itemView.off_card.radius = radius
-
-                } else {
-                    Log.d("DBG ei matchaa", it + " = " + currentItem.allergens_from_ingredients)
-
-                    // No allergens, no hätä
-                    holder.itemView.off_card.product_image.setBackgroundColor(noErrorColor)
-                    holder.itemView.off_card.setCardBackgroundColor(onNoErrorColor)
-                    holder.itemView.off_card.radius = radius
                 }
             }
-
-            // Display allergens
-            holder.itemView.allergens_from_ingredients.text =
-                holder.itemView.context.getString(R.string.allergens_found,
-                    currentItem.allergens_from_ingredients)
-
-        } else {
-            // If allergenlist is empty
-            // No allergens, no hätä
-            holder.itemView.off_card.product_image.setBackgroundColor(noErrorColor)
-            holder.itemView.off_card.setCardBackgroundColor(onNoErrorColor)
-            holder.itemView.off_card.radius = radius
-
-            // Display allergens
-            holder.itemView.allergens_from_ingredients.text =
-                holder.itemView.context.getString(R.string.allergens_found,
-                    currentItem.allergens_from_ingredients)
         }
+
+        // Display allergens
+        holder.itemView.allergens_from_ingredients.text =
+            holder.itemView.context.getString(R.string.allergens_found,
+                currentItem.allergens_from_ingredients)
 
         "EAN: ${currentItem.code.toString()}".also { holder.itemView.code.text = it }
 

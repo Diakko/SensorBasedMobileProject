@@ -21,6 +21,8 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -33,6 +35,8 @@ import androidx.fragment.app.Fragment
 import com.example.sensorbasedmobileproject.R
 import com.example.sensorbasedmobileproject.utils.Constants
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 
 class ProfileFragment : Fragment(), SensorEventListener {
 
@@ -111,14 +115,14 @@ class ProfileFragment : Fragment(), SensorEventListener {
             lupine,
             sulfur)
 
-        // Hae share prefsistä truet ja aseta boxes checked
+        // Get shared preferences and if true, make checkbox status "Checked"
         // TODO: jostain syystä ei toimi, kun painaa profiilitabia,
         // TODO: niin checkatut boksit näyttää siltä että olisivat valittuja
         checkboxes.forEach {
             val name = it.text.toString()
             val value = sharedPref?.getBoolean(name, false)
             if (value == true) {
-                it.isChecked=true
+                it.isChecked = true
                 it.toggle()
             }
         }
@@ -139,7 +143,15 @@ class ProfileFragment : Fragment(), SensorEventListener {
                 }
             }
 
-            Log.d("DBG checked", checked.toString())
+            // Notify user that the allergens are set
+            Handler(Looper.getMainLooper()).post {
+                Toast.makeText(
+                    requireContext(),
+                    "Allergens set",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+
 
         }
 
@@ -203,8 +215,8 @@ class ProfileFragment : Fragment(), SensorEventListener {
     }
 
     private fun setBoxesChecked(list: MutableList<CheckBox>) {
-        list.forEach{
-            it.isChecked=true
+        list.forEach {
+            it.isChecked = true
         }
     }
 }

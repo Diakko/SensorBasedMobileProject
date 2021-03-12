@@ -8,12 +8,16 @@
 
 package com.example.sensorbasedmobileproject.fragments.details
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.*
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -24,6 +28,7 @@ import kotlinx.android.synthetic.main.fragment_details.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.net.URL
 
 class DetailsFragment : Fragment() {
 
@@ -86,6 +91,24 @@ class DetailsFragment : Fragment() {
                     view.link.visibility = GONE
                 } else {
                     view.link.text = getString(R.string.link, offItem.link)
+                }
+
+                // If image_url is provided, get the image and display it
+                if (offItem.image_url != null) {
+                    val imageView = view.findViewById<ImageView>(R.id.imageView)
+                    val url = URL(offItem.image_url.toString())
+
+                    // Get image in a coroutine
+                    GlobalScope.launch(Dispatchers.IO) {
+                        launch {
+                            val bmp =
+                                BitmapFactory.decodeStream(url.openConnection().getInputStream())
+                            // Set image in Main thread
+                            Handler(Looper.getMainLooper()).post {
+                                imageView.setImageBitmap(bmp)
+                            }
+                        }
+                    }
                 }
             }
         }
