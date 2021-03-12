@@ -10,7 +10,7 @@ The idea behind this app is to be able to scan a food product at your local groc
 You can check if the product contains any ingredients that aren't good for your health or the product contains allergens that you wont enjoy.
 
 ### How users can get started with the project
-Download, open with Android Studio and start in the emulator
+Download, open with Android Studio and start in the emulator or in your Android device
 
 ### Where users can get help with your project
 You can contact the developers at `ville.pystynen@metropolia.fi` and `matias.hatonen@metropolia.fi`
