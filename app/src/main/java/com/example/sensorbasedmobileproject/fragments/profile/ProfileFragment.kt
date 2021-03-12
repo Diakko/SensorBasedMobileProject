@@ -123,7 +123,7 @@ class ProfileFragment : Fragment(), SensorEventListener {
             val value = sharedPref?.getBoolean(name, false)
             if (value == true) {
                 it.isChecked = true
-                it.toggle()
+                it.jumpDrawablesToCurrentState()
             }
         }
 
