@@ -13,7 +13,7 @@ You can check if the product contains any ingredients that aren't good for your 
 Download, open with Android Studio and start in the emulator
 
 ### Where users can get help with your project
-You can contact the developers at `ville.pystynen@metropolia.fi` and `matias.hatonen@metropolia.fi
+You can contact the developers at `ville.pystynen@metropolia.fi` and `matias.hatonen@metropolia.fi`
 
 ### Who maintains and contributes to the project
 Ville Pystynen and Matias Hätönen
@@ -54,7 +54,7 @@ This app uses the following third party libraries:
 The OpenFoodFacts API response data classes were made with http://www.json2kotlin.com
 
 
-[Demo video here](https://www.youtube.com/watch?v=mHMcfrbAZeI 
+Watch the [demo video here](https://www.youtube.com/watch?v=mHMcfrbAZeI 
 "Solita Dev Academy 2021 programming assignment")
 
 ### License
