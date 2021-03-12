@@ -54,7 +54,7 @@ This app uses the following third party librabries:
 The OpenFoodFacts API response data classes were made with http://www.json2kotlin.com
 
 
-[![Demo video here]](https://www.youtube.com/watch?v=mHMcfrbAZeI 
+[Demo video here](https://www.youtube.com/watch?v=mHMcfrbAZeI 
 "Solita Dev Academy 2021 programming assignment")
 
 ### License
