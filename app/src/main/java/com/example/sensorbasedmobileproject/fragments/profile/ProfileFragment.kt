@@ -4,7 +4,7 @@
  * Fragment for users own "profile"
  *
  * - Users daily steps displayed as number as well as observable ring. Max amount set to 9000 atm.
- * - Choose allergens with checkboxes and input them into Livedata to be used in scans on main fragment (WIP)
+ * - Choose allergens with checkboxes and use the shared preferences to save them and steps.
  *
  * Course: Sensor Based Mobile Applications TX00CK66-3009
  * Name: Matias Hätönen
@@ -116,13 +116,14 @@ class ProfileFragment : Fragment(), SensorEventListener {
             sulfur)
 
         // Get shared preferences and if true, make checkbox status "Checked"
-        // TODO: jostain syystä ei toimi, kun painaa profiilitabia,
-        // TODO: niin checkatut boksit näyttää siltä että olisivat valittuja
         checkboxes.forEach {
             val name = it.text.toString()
             val value = sharedPref?.getBoolean(name, false)
-            if (value == true) {
+            if (value!!) {
                 it.isChecked = true
+                it.jumpDrawablesToCurrentState()
+            } else {
+                it.isChecked = false
                 it.jumpDrawablesToCurrentState()
             }
         }
@@ -138,6 +139,13 @@ class ProfileFragment : Fragment(), SensorEventListener {
                     checked.add(it)
                     with(sharedPref?.edit()) {
                         this?.putBoolean(name, true)
+                        this?.apply()
+                    }
+                } else {
+                    val name = it.text.toString()
+                    checked.remove(it)
+                    with(sharedPref?.edit()) {
+                        this?.putBoolean(name, false)
                         this?.apply()
                     }
                 }
@@ -217,6 +225,7 @@ class ProfileFragment : Fragment(), SensorEventListener {
     private fun setBoxesChecked(list: MutableList<CheckBox>) {
         list.forEach {
             it.isChecked = true
+            it.jumpDrawablesToCurrentState()
         }
     }
 }

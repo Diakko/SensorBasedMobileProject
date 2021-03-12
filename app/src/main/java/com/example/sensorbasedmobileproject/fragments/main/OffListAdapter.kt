@@ -16,6 +16,8 @@ package com.example.sensorbasedmobileproject.fragments.main
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.graphics.BitmapFactory
 import android.os.Handler
 import android.os.Looper
@@ -71,15 +73,19 @@ class OffListAdapter(private val context: Context) :
                 context.getSharedPreferences(Constants.ALLERGY_PREFERENCES, Context.MODE_PRIVATE)
             val map: Map<String, *> = sharedPref.all
 
+
+
             for ((k) in map) {
                 allergenList.add(k.toLowerCase())
+
             }
         } else {
             Log.d("DBG allergenList", allergenList.toString())
         }
 
         // Set the date for the search
-        val sdf = SimpleDateFormat("dd.MM.yyyy")
+        val ge: Locale = Locale.GERMAN
+        val sdf = SimpleDateFormat("dd.MM.yyyy", ge)
         val currentDate = sdf.format(Date()).toString()
         holder.itemView.date.text =
             holder.itemView.context.getString(R.string.date_of_search, currentDate)
@@ -97,6 +103,8 @@ class OffListAdapter(private val context: Context) :
                 holder.itemView.context.getString(R.string.made_in,
                     currentItem.manufacturing_places)
         }
+
+
 
         // Getting colors according to theme
         val typedValue = TypedValue()
@@ -128,7 +136,9 @@ class OffListAdapter(private val context: Context) :
             allergenList.forEach {
 
                 // If user added allergen is a substring of the allergens from ingredients
-                if (it in (currentItem.allergens_from_ingredients?.toLowerCase())!!) {
+                val locale: Locale = Locale.forLanguageTag("fi-rFI")
+
+                if (it in (currentItem.allergens_from_ingredients?.toLowerCase())!!/* || it in (getLocalizedResources(locale, currentItem.allergens_from_ingredients?.toLowerCase())!!)*/) {
 
                     Log.d("DBG matchaa",
                         it + " = " + currentItem.allergens_from_ingredients?.toLowerCase())
@@ -166,6 +176,14 @@ class OffListAdapter(private val context: Context) :
             }
         }
     }
+
+    /*private fun getLocalizedResources(desiredLocale: Locale, allergen: String) : String {
+        val conf: Configuration = context.resources.configuration
+        conf.setLocale(desiredLocale)
+        val localizedContext = context.createConfigurationContext(conf)
+        val allergenId =
+        return localizedContext.resources.getString(allergen.toInt())
+    }*/
 
     override fun getItemCount(): Int {
         return foodList.size
