@@ -13,7 +13,7 @@ You can check if the product contains any ingredients that aren't good for your 
 Download, open with Android Studio and start in the emulator
 
 ### Where users can get help with your project
-You can contact the developers at `ville.pystynen@metropolia.fi` and `matias.hatonen@metropolia.fi`
+You can contact the developers at `ville.pystynen@metropolia.fi` and `matias.hatonen@metropolia.fi
 
 ### Who maintains and contributes to the project
 Ville Pystynen and Matias Hätönen
@@ -40,7 +40,7 @@ It uses the following Android system's basic components:
 - Views
 
 The app is localized in Finnish, English (US) and in Swedish.
-Accessibility was also considered in the design and development process. 
+Accessibility was also considered in the design and development process. The also app has a light and dark theme.
 
 It gets data from these web services:
 - [Open Food Facts API](https://world.openfoodfacts.org/)
