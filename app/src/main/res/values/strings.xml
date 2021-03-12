@@ -91,6 +91,7 @@
     <string name="made_in">Made in %1$s</string>
     <string name="link">"Link to product website:
         %1$s"</string>
+    <string name="product_image_desc">Product image for scanned item</string>
 
 
     // Home fragment

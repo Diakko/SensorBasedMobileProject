@@ -82,4 +82,5 @@
     <string name="sulfur">sulfiitit</string>
     <string name="set_your_allergies_here">Aseta allergiatietosi tässä</string>
     <string name="allergies_button_text">Aseta allergiat</string>
+    <string name="product_image_desc">Tuotekuva skannatulle tuotteelle</string>
 </resources>
