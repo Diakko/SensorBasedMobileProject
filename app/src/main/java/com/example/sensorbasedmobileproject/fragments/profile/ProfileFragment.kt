@@ -16,6 +16,7 @@ package com.example.sensorbasedmobileproject.fragments.profile
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
+import android.content.res.Configuration
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -31,12 +32,12 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.os.LocaleListCompat
 import androidx.fragment.app.Fragment
 import com.example.sensorbasedmobileproject.R
 import com.example.sensorbasedmobileproject.utils.Constants
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
+import java.util.*
 
 class ProfileFragment : Fragment(), SensorEventListener {
 
@@ -115,9 +116,11 @@ class ProfileFragment : Fragment(), SensorEventListener {
             lupine,
             sulfur)
 
+
         // Get shared preferences and if true, make checkbox status "Checked"
         checkboxes.forEach {
-            val name = it.text.toString()
+            val name = getResId(it.text.toString()).toString()
+            Log.d("DBGIT", name)
             val value = sharedPref?.getBoolean(name, false)
             if (value!!) {
                 it.isChecked = true
@@ -131,18 +134,23 @@ class ProfileFragment : Fragment(), SensorEventListener {
         // Get button reference and set click listener
         val button = view.findViewById<Button>(R.id.button)
         button.setOnClickListener {
+
+            val conf: Configuration = requireContext().resources.configuration
+            val localeOriginal = LocaleListCompat.getDefault()[0]
+            conf.setLocale(Locale.forLanguageTag("en"))
+
             // For each checkbox, check if checked and save state in shared preferences
             checkboxes.forEach {
 
                 if (it.isChecked) {
-                    val name = it.text.toString()
+                    val name = getResId(it.text.toString()).toString()
                     checked.add(it)
                     with(sharedPref?.edit()) {
                         this?.putBoolean(name, true)
                         this?.apply()
                     }
                 } else {
-                    val name = it.text.toString()
+                    val name = getResId(it.text.toString()).toString()
                     checked.remove(it)
                     with(sharedPref?.edit()) {
                         this?.putBoolean(name, false)
@@ -160,13 +168,21 @@ class ProfileFragment : Fragment(), SensorEventListener {
                 ).show()
             }
 
-
+            conf.setLocale(localeOriginal)
         }
 
         setBoxesChecked(checked)
 
     }
 
+    private fun getResId(resName: String): Int {
+        return try {
+            resources.getIdentifier(resName, "string", context?.packageName)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            -1
+        }
+    }
     override fun onResume() {
         super.onResume()
 

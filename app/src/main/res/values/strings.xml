@@ -59,9 +59,9 @@
     <string name="rye">rye</string>
     <string name="barley">barley</string>
     <string name="spelt">spelt</string>
-    <string name="kamutGrain">kamut grain</string>
+    <string name="kamutGrain">kamutGrain</string>
     <string name="oats">oats</string>
-    <string name="otherCerealProducts">other cereal products</string>
+    <string name="otherCerealProducts">otherCerealProducts</string>
     <string name="fish">fish</string>
     <string name="crustacean">crustacean</string>
     <string name="mollusc">mollusc</string>
