@@ -40,7 +40,7 @@ It uses the following Android system's basic components:
 - Views
 
 The app is localized in Finnish, English (US) and in Swedish.
-Accessibility was also considered in the design and development process. The also app has a light and dark theme.
+Accessibility was also considered in the design and development process. The also app has light and dark themes.
 
 It gets data from these web services:
 - [Open Food Facts API](https://world.openfoodfacts.org/)
