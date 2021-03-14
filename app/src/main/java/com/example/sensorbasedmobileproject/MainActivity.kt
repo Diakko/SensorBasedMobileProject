@@ -25,7 +25,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.sensorbasedmobileproject.utils.Constants.Companion.ALLERGY_PREFERENCES
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -38,7 +37,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // Initialize shared preferences for allergy preferences
-        val sharedPref = getSharedPreferences(ALLERGY_PREFERENCES, Context.MODE_PRIVATE)
 
 
 

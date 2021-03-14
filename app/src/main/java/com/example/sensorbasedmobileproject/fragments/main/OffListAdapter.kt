@@ -48,7 +48,6 @@ class OffListAdapter(private val context: Context) :
     private var foodList = emptyList<OffItem>()
     private var allergenList = mutableListOf<String>()
 
-
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -74,14 +73,12 @@ class OffListAdapter(private val context: Context) :
                 context.getSharedPreferences(Constants.ALLERGY_PREFERENCES, Context.MODE_PRIVATE)
             val map: Map<String, *> = sharedPref.all
 
-
-
             for ((k) in map) {
-                allergenList.add(k.toLowerCase())
-
+                allergenList.add(k)
             }
+            Log.d("DBGITallergenList", allergenList.toString())
         } else {
-            Log.d("DBG allergenList", allergenList.toString())
+            Log.d("DBGITallergenListNon0", allergenList.toString())
         }
 
         // Set the date for the search
@@ -104,8 +101,6 @@ class OffListAdapter(private val context: Context) :
                 holder.itemView.context.getString(R.string.made_in,
                     currentItem.manufacturing_places)
         }
-
-
 
         // Getting colors according to theme
         val typedValue = TypedValue()
@@ -133,36 +128,26 @@ class OffListAdapter(private val context: Context) :
         // Except user added allergens
         if (allergenList.size > 0) {
             val conf: Configuration = context.resources.configuration
-            val localeOriginal = LocaleListCompat.getDefault()[0]
-            conf.setLocale(Locale.forLanguageTag("en"))
+            val localeOriginal = Locale.getDefault()
             // Iterate trough the user added allergens
             allergenList.forEach {
                 Log.d("DBGIT", it)
-                val it2 = context.getString(it.toInt())
-                Log.d("DBGIT2", it2)
-                // If user added allergen is a substring of the allergens from ingredients
-                val localeFi: Locale = Locale.forLanguageTag("fi")
-                val it3 = getLocalizedResources(localeFi, it2)
-                Log.d("DBGIT3", it3)
-                val localeSe: Locale = Locale.forLanguageTag("sv")
-                val it4 = getLocalizedResources(localeSe, it2)
-                Log.d("DBGIT4", it4)
-                val localeEn: Locale = Locale.forLanguageTag("en")
-                val it5 = getLocalizedResources(localeEn, it2)
-                Log.d("DBGIT5", it5)
+                if (it != "0" || it.isNotEmpty()) {
+                    // If user added allergen is a substring of the allergens from ingredients
+                    Constants.LIST_OF_LOCALISATIONS.forEach { localisation ->
 
-                if (it5 in (currentItem.allergens_from_ingredients?.toLowerCase())!!  || (it3  in currentItem.allergens_from_ingredients?.toLowerCase())!!  || (it4  in currentItem.allergens_from_ingredients?.toLowerCase())!!){
+                        val locale: Locale = Locale.forLanguageTag(localisation)
+                        val it2 = getLocalizedResources(locale, it).toLowerCase()
+                        Log.d("DBGIT2", it2)
+                        if (it2 in (currentItem.allergens_from_ingredients?.toLowerCase())!!) {
 
-                    /*Log.d("DBG matchaa",
-                        "$it + =  ${currentItem.allergens_from_ingredients?.toLowerCase()} + ${getLocalizedResources(locale, currentItem.allergens_from_ingredients?.toLowerCase())}")*/
-
-                    // If allergens found, set image background color to RED and background light pink
-                    holder.itemView.off_card.product_image.setBackgroundColor(errorColor)
-                    holder.itemView.off_card.setCardBackgroundColor(onErrorColor)
-                    holder.itemView.off_card.radius = radius
+                            // If allergens found, set image background color to RED and background light pink
+                            holder.itemView.off_card.product_image.setBackgroundColor(errorColor)
+                            holder.itemView.off_card.setCardBackgroundColor(onErrorColor)
+                            holder.itemView.off_card.radius = radius
+                        }
+                    }
                 }
-                /*Log.d("DBG matchaB",
-                    "$it + =  ${currentItem.allergens_from_ingredients?.toLowerCase()} + ${getLocalizedResources(locale, currentItem.allergens_from_ingredients?.toLowerCase())}")*/
             }
             conf.setLocale(localeOriginal)
         }
@@ -201,7 +186,6 @@ class OffListAdapter(private val context: Context) :
         conf.setLocale(Locale.forLanguageTag("en"))
         return string
     }
-
 
     override fun getItemCount(): Int {
         return foodList.size
