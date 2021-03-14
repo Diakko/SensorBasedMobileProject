@@ -15,5 +15,8 @@ class Constants {
         const val BASE_URL_OPEN_FOOD_FACTS = "https://world.openfoodfacts.org/"
         const val NOMINATIM_URL = "https://nominatim.openstreetmap.org/"
         const val ALLERGY_PREFERENCES = "SensorBasedAllergyPreferences"
+        const val ALLERGY_PREFERENCES_CHECKBOXES = "SensorBasedAllergyPreferencesCheckBoxes"
+        const val STEPS_PREFERENCES = "SensorBasedStepsPreferences"
+        val LIST_OF_LOCALISATIONS = listOf("en", "fi", "sv")
     }
 }

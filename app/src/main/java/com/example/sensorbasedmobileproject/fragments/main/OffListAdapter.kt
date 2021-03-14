@@ -27,6 +27,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.os.LocaleListCompat
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sensorbasedmobileproject.R
@@ -46,7 +47,6 @@ class OffListAdapter(private val context: Context) :
     private val scope = CoroutineScope(Dispatchers.IO)
     private var foodList = emptyList<OffItem>()
     private var allergenList = mutableListOf<String>()
-
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -73,14 +73,12 @@ class OffListAdapter(private val context: Context) :
                 context.getSharedPreferences(Constants.ALLERGY_PREFERENCES, Context.MODE_PRIVATE)
             val map: Map<String, *> = sharedPref.all
 
-
-
             for ((k) in map) {
-                allergenList.add(k.toLowerCase())
-
+                allergenList.add(k)
             }
+            Log.d("DBGITallergenList", allergenList.toString())
         } else {
-            Log.d("DBG allergenList", allergenList.toString())
+            Log.d("DBGITallergenListNon0", allergenList.toString())
         }
 
         // Set the date for the search
@@ -103,8 +101,6 @@ class OffListAdapter(private val context: Context) :
                 holder.itemView.context.getString(R.string.made_in,
                     currentItem.manufacturing_places)
         }
-
-
 
         // Getting colors according to theme
         val typedValue = TypedValue()
@@ -131,26 +127,30 @@ class OffListAdapter(private val context: Context) :
 
         // Except user added allergens
         if (allergenList.size > 0) {
-
+            val conf: Configuration = context.resources.configuration
+            val localeOriginal = Locale.getDefault()
             // Iterate trough the user added allergens
             allergenList.forEach {
+                Log.d("DBGIT", it)
+                if (it != "0" || it.isNotEmpty()) {
+                    // If user added allergen is a substring of the allergens from ingredients
+                    Constants.LIST_OF_LOCALISATIONS.forEach { localisation ->
 
-                // If user added allergen is a substring of the allergens from ingredients
-                val locale: Locale = Locale.forLanguageTag("fi-rFI")
+                        val locale: Locale = Locale.forLanguageTag(localisation)
+                        val it2 = getLocalizedResources(locale, it).toLowerCase()
+                        Log.d("DBGIT2", it2)
+                        if (it2 in (currentItem.allergens_from_ingredients?.toLowerCase())!!) {
 
-                if (it in (currentItem.allergens_from_ingredients?.toLowerCase())!!/* || it in (getLocalizedResources(locale, currentItem.allergens_from_ingredients?.toLowerCase())!!)*/) {
-
-                    Log.d("DBG matchaa",
-                        it + " = " + currentItem.allergens_from_ingredients?.toLowerCase())
-
-                    // If allergens found, set image background color to RED and background light pink
-                    holder.itemView.off_card.product_image.setBackgroundColor(errorColor)
-                    holder.itemView.off_card.setCardBackgroundColor(onErrorColor)
-                    holder.itemView.off_card.radius = radius
+                            // If allergens found, set image background color to RED and background light pink
+                            holder.itemView.off_card.product_image.setBackgroundColor(errorColor)
+                            holder.itemView.off_card.setCardBackgroundColor(onErrorColor)
+                            holder.itemView.off_card.radius = radius
+                        }
+                    }
                 }
             }
+            conf.setLocale(localeOriginal)
         }
-
         // Display allergens
         holder.itemView.allergens_from_ingredients.text =
             holder.itemView.context.getString(R.string.allergens_found,
@@ -177,13 +177,15 @@ class OffListAdapter(private val context: Context) :
         }
     }
 
-    /*private fun getLocalizedResources(desiredLocale: Locale, allergen: String) : String {
+    private fun getLocalizedResources(desiredLocale: Locale, allergen: String) : String {
         val conf: Configuration = context.resources.configuration
         conf.setLocale(desiredLocale)
         val localizedContext = context.createConfigurationContext(conf)
-        val allergenId =
-        return localizedContext.resources.getString(allergen.toInt())
-    }*/
+        val id = context.resources.getIdentifier(allergen, "string", context.packageName )
+        val string = localizedContext.resources.getString(id)
+        conf.setLocale(Locale.forLanguageTag("en"))
+        return string
+    }
 
     override fun getItemCount(): Int {
         return foodList.size

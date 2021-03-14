@@ -16,6 +16,7 @@ package com.example.sensorbasedmobileproject.fragments.profile
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
+import android.content.res.Configuration
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -31,12 +32,12 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.os.LocaleListCompat
 import androidx.fragment.app.Fragment
 import com.example.sensorbasedmobileproject.R
 import com.example.sensorbasedmobileproject.utils.Constants
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
+import java.util.*
 
 class ProfileFragment : Fragment(), SensorEventListener {
 
@@ -72,6 +73,8 @@ class ProfileFragment : Fragment(), SensorEventListener {
         super.onViewCreated(view, savedInstanceState)
 
         // Get shared preferences reference
+        val sharedPrefCheckboxes =
+            this.activity?.getSharedPreferences(Constants.ALLERGY_PREFERENCES_CHECKBOXES, MODE_PRIVATE)
         val sharedPref =
             this.activity?.getSharedPreferences(Constants.ALLERGY_PREFERENCES, MODE_PRIVATE)
 
@@ -96,7 +99,8 @@ class ProfileFragment : Fragment(), SensorEventListener {
         val sulfur = view.findViewById<CheckBox>(R.id.sulfur)
 
         // Make a list of checkboxes
-        val checkboxes = listOf<CheckBox>(wheat,
+        val checkboxes = listOf<CheckBox>(
+            wheat,
             rye,
             barley,
             spelt,
@@ -104,7 +108,7 @@ class ProfileFragment : Fragment(), SensorEventListener {
             oats,
             otherCerealProducts,
             fish,
-            crustacean,
+            sulfur,
             mollusc,
             egg,
             nuts,
@@ -113,12 +117,34 @@ class ProfileFragment : Fragment(), SensorEventListener {
             celery,
             mustard,
             lupine,
-            sulfur)
+            crustacean
+        )
+        val checkboxesNames = listOf(
+            "wheat",
+            "rye",
+            "barley",
+            "spelt",
+            "kamutGrain",
+            "oats",
+            "otherCerealProducts",
+            "fish",
+            "sulfur",
+            "mollusc",
+            "egg",
+            "nuts",
+            "soy",
+            "milk",
+            "celery",
+            "mustard",
+            "lupine",
+            "crustacean"
+        )
 
+        var i = 0
         // Get shared preferences and if true, make checkbox status "Checked"
         checkboxes.forEach {
             val name = it.text.toString()
-            val value = sharedPref?.getBoolean(name, false)
+            val value = sharedPrefCheckboxes?.getBoolean(name, false)
             if (value!!) {
                 it.isChecked = true
                 it.jumpDrawablesToCurrentState()
@@ -131,24 +157,36 @@ class ProfileFragment : Fragment(), SensorEventListener {
         // Get button reference and set click listener
         val button = view.findViewById<Button>(R.id.button)
         button.setOnClickListener {
+            var i = 0
             // For each checkbox, check if checked and save state in shared preferences
             checkboxes.forEach {
 
                 if (it.isChecked) {
                     val name = it.text.toString()
                     checked.add(it)
-                    with(sharedPref?.edit()) {
+                    with(sharedPrefCheckboxes?.edit()) {
                         this?.putBoolean(name, true)
                         this?.apply()
+                    }
+                    with(sharedPref?.edit()) {
+                        this?.putBoolean(checkboxesNames[i], true)
+                        this?.apply()
+
+                        Log.d("DBGITprofile", checkboxesNames[i])
                     }
                 } else {
                     val name = it.text.toString()
                     checked.remove(it)
-                    with(sharedPref?.edit()) {
+                    with(sharedPrefCheckboxes?.edit()) {
                         this?.putBoolean(name, false)
                         this?.apply()
                     }
+                    with(sharedPref?.edit()) {
+                        this?.remove(checkboxesNames[i])
+                        this?.apply()
+                    }
                 }
+                i++
             }
 
             // Notify user that the allergens are set
@@ -159,14 +197,18 @@ class ProfileFragment : Fragment(), SensorEventListener {
                     Toast.LENGTH_LONG
                 ).show()
             }
-
-
         }
-
         setBoxesChecked(checked)
-
     }
 
+    private fun getResId(resName: String): Int {
+        return try {
+            resources.getIdentifier(resName, "string", context?.packageName)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            -1
+        }
+    }
     override fun onResume() {
         super.onResume()
 
@@ -210,15 +252,15 @@ class ProfileFragment : Fragment(), SensorEventListener {
     }
 
     private fun saveData() {
-        val sharedPreferences = activity?.getSharedPreferences("myPrefs", MODE_PRIVATE)
+        val sharedPreferences = activity?.getSharedPreferences(Constants.STEPS_PREFERENCES, MODE_PRIVATE)
         val editor = sharedPreferences?.edit()
-        editor?.putFloat("Steps", previousTotalSteps)
+        editor?.putFloat(Constants.STEPS_PREFERENCES, previousTotalSteps)
         editor?.apply()
     }
 
     private fun loadData() {
-        val sharedPreferences = activity?.getSharedPreferences("myPrefs", MODE_PRIVATE)
-        val savedStepsNumber = sharedPreferences?.getFloat("Steps", 0f)
+        val sharedPreferences = activity?.getSharedPreferences(Constants.STEPS_PREFERENCES, MODE_PRIVATE)
+        val savedStepsNumber = sharedPreferences?.getFloat(Constants.STEPS_PREFERENCES, 0f)
         previousTotalSteps = savedStepsNumber!!
     }
 

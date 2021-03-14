@@ -160,11 +160,11 @@
                 android:text="@string/fish" />
 
             <CheckBox
-                android:id="@+id/crustacean"
+                android:id="@+id/sulfur"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:text="@string/crustacean" />
+                android:text="@string/sulfur" />
 
         </LinearLayout>
 
@@ -242,11 +242,11 @@
                 android:text="@string/lupine" />
 
             <CheckBox
-                android:id="@+id/sulfur"
+                android:id="@+id/crustacean"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:text="@string/sulfur" />
+                android:text="@string/crustacean" />
         </LinearLayout>
 
 
